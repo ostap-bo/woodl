@@ -27,7 +27,7 @@ const WOODL = {
   calendly: "",                  // посилання на Calendly (15-хв дзвінок) або порожньо
   formEndpoint: "https://script.google.com/macros/s/AKfycbxxJrnudKpqm4yl7FAg1oabQvtwyrX0XcfF4DzH5ZEKmqA0Aw76tROtPfO_t3n06w9HAQ/exec", // Google Apps Script → Gmail + Telegram
   upwork: "https://www.upwork.com/freelancers/~01e0c89dbdc64d0663",
-  fiverr: "",
+  fiverr: "https://www.fiverr.com/ostap_bo",
   linkedin: "https://www.linkedin.com/in/ostap-bodnar-171147275",
   instagram: "",
   photo: "ostap.jpg",
@@ -338,6 +338,14 @@ const WOODL = {
   .foot a{text-decoration:none;}
   .foot ul a{transition:color .35s cubic-bezier(.22,.61,.36,1);}
   .foot ul a:hover{color:var(--blue);}
+  .socials{display:flex;gap:10px;flex-wrap:wrap;}
+  .soc{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;transition:transform .4s cubic-bezier(.22,.61,.36,1),box-shadow .4s cubic-bezier(.22,.61,.36,1);}
+  .soc svg{width:20px;height:20px;}
+  .soc:hover{transform:translateY(-3px);box-shadow:0 12px 22px -10px rgba(14,20,48,.45);}
+  .soc.linkedin{background:#0A66C2;}
+  .soc.upwork{background:#14A800;}
+  .soc.fiverr{background:#1DBF73;}
+  .soc.instagram{background:linear-gradient(45deg,#F58529,#DD2A7B 50%,#8134AF);}
   .clink{display:inline-flex;align-items:center;gap:10px;}
   .clink i{transition:transform .4s cubic-bezier(.22,.61,.36,1);}
   .clink:hover i{transform:translateY(-2px);}
@@ -445,6 +453,10 @@ const WOODL = {
   <symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></g></symbol>
   <symbol id="i-cal" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></g></symbol>
   <symbol id="i-clock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></g></symbol>
+  <symbol id="s-linkedin" viewBox="0 0 24 24"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zm7 0h3.8v1.7h.1a4.2 4.2 0 0 1 3.8-2c4 0 4.8 2.7 4.8 6.1V21h-4v-5.4c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9V21h-4z"/></symbol>
+  <symbol id="s-upwork" viewBox="0 0 24 24"><path fill="currentColor" d="M17.1 13.4c-1 0-2-.4-2.8-1.1l.2-1.1v-.1c.2-1.2.9-3.2 2.6-3.2a2.7 2.7 0 0 1 0 5.5zm0-8.2c-2.2 0-3.9 1.4-4.6 3.8-1-1.6-1.8-3.4-2.3-5H8v6.2a2.2 2.2 0 0 1-4.4 0V4H1.3v6.2a4.5 4.5 0 0 0 9 0v-1c.5 1 1 1.9 1.7 2.8L10.5 20h2.3l1-4.7c.9.6 2 .9 3.2.9a5.5 5.5 0 0 0 0-11z"/></symbol>
+  <symbol id="s-fiverr" viewBox="0 0 24 24"><path fill="currentColor" d="M14.2 6.4V5.6c0-.9.6-1.4 1.5-1.4h1.1V1.5h-1.5c-2.8 0-4.3 1.6-4.3 4.2v.7H9v2.7h2v10.4h3.2V9.1h3.1v10.4h3.2V6.4zM18.9 1.2a1.8 1.8 0 1 0 0 3.6 1.8 1.8 0 0 0 0-3.6z"/></symbol>
+  <symbol id="s-instagram" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></g><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></symbol>
   <symbol id="i-x" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></symbol>
   <symbol id="n-wash" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/><path d="M9.5 14.5a2.5 2.5 0 0 0 2.5 2.5"/></g></symbol>
   <symbol id="n-clean" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></g></symbol>
@@ -706,7 +718,7 @@ const WOODL = {
       </div>
       <div><h4>Explore</h4><ul><li><a href="#work">Recent projects</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#process">How it works</a></li><li><a href="#faq">FAQ</a></li></ul></div>
       <div><h4>Contact</h4><ul id="footContact"></ul></div>
-      <div id="footSocialCol" hidden><h4>Follow</h4><ul id="footSocial"></ul></div>
+      <div id="footSocialCol" hidden><h4>Follow</h4><div class="socials" id="footSocial"></div></div>
     </div>
     <div class="foot-bottom"><span data-copy></span><nav><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Service</a></nav></div>
   </div>
@@ -742,8 +754,8 @@ const WOODL = {
     tgLink ? `<li><a class="clink tg" href="${tgLink}" target="_blank" rel="noopener"><i><svg><use href="#i-tg"/></svg></i>@${esc(tgName)}</a></li>` : '',
     W.email ? `<li><a class="clink em" href="mailto:${esc(W.email)}"><i><svg><use href="#i-mail"/></svg></i>${esc(W.email)}</a></li>` : '',
   ].join('');
-  const soc = [['upwork','Upwork'],['fiverr','Fiverr'],['linkedin','LinkedIn'],['instagram','Instagram']].filter(([k]) => W[k]);
-  if(soc.length){ $('#footSocial').innerHTML = soc.map(([k,l]) => `<li><a href="${esc(W[k])}" target="_blank" rel="noopener">${l}</a></li>`).join(''); $('#footSocialCol').hidden = false; $('#foot').classList.add('has-social'); }
+  const soc = [['linkedin','LinkedIn'],['upwork','Upwork'],['fiverr','Fiverr'],['instagram','Instagram']].filter(([k]) => W[k]);
+  if(soc.length){ $('#footSocial').innerHTML = soc.map(([k,l]) => `<a class="soc ${k}" href="${esc(W[k])}" target="_blank" rel="noopener" aria-label="${l}" title="${l}"><svg><use href="#s-${k}"/></svg></a>`).join(''); $('#footSocialCol').hidden = false; $('#foot').classList.add('has-social'); }
   $('#avatar').innerHTML = W.photo ? `<img class="photo" src="${esc(W.photo)}" alt="Ostap, founder of Woodl">` : '<img class="mark" src="logo.png" alt="">';
 
   /* work: w = render width, chosen so the 3:2 frame shows exactly the first screen */
