@@ -6,6 +6,12 @@
 <title>Woodl | Professional Websites for Local Service Businesses</title>
 <meta name="description" content="Professional, mobile-first websites for local service businesses across the US. Fixed pricing from $250, live in 5 days. Get a free custom preview before you pay.">
 <link rel="icon" type="image/png" href="favicon.png">
+<link rel="canonical" href="https://woodl-site.com/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://woodl-site.com/">
+<meta property="og:title" content="Woodl | Professional Websites for Local Service Businesses">
+<meta property="og:description" content="Fixed pricing from $250, live in 5 days. Get a free custom preview of your new website before you pay.">
+<meta property="og:image" content="https://woodl-site.com/ostap.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..700&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -17,9 +23,9 @@
 const WOODL = {
   whatsapp: "+48 576 101 740",
   telegram: "ostap_bo",          // нік без @
-  email: "hello@woodl.co",       // ШАБЛОН: заміни на свою пошту після реєстрації
+  email: "contact@woodl-site.com",  // пошта на домені (працює після налаштування пересилання)
   calendly: "",                  // посилання на Calendly (15-хв дзвінок) або порожньо
-  formEndpoint: "",              // Formspree: https://formspree.io/f/xxxxxx (порожньо = демо-режим)
+  formEndpoint: "https://script.google.com/macros/s/AKfycbxxJrnudKpqm4yl7FAg1oabQvtwyrX0XcfF4DzH5ZEKmqA0Aw76tROtPfO_t3n06w9HAQ/exec", // Google Apps Script → Gmail + Telegram
   upwork: "",
   fiverr: "",
   linkedin: "",
@@ -823,7 +829,7 @@ const WOODL = {
       </div>
       <p class="hint">Fill in at least one so I can send you the preview.</p>
       <div class="field"><label for="${id}-link">Current website or Google Maps link <span>(optional)</span></label><input id="${id}-link" name="link" inputmode="url" placeholder="https://maps.app.goo.gl/…"></div>
-      <input type="hidden" name="plan" value="">
+      <input type="hidden" name="plan" value=""><input type="hidden" name="source" value="${id === 'fm' ? 'Popup' : 'Bottom form'}"><div style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden" aria-hidden="true"><label>Company website<input name="company_website" tabindex="-1" autocomplete="off"></label></div>
       <button class="btn btn-main" type="submit">Send my request</button>
       <small>Your information stays private. See the <a href="privacy.html">Privacy Policy</a>.</small>
       <div class="done" role="status"><div class="ok"><svg><use href="#i-check"/></svg></div><h3>Request received!</h3><p>Thank you. I'll send your free preview within 1–2 business days. Keep an eye on your inbox or phone.</p></div>
@@ -855,11 +861,16 @@ const WOODL = {
       const eOk = checkEmail(), pOk = checkPhone(), oneOk = checkOne();
       if(!(reqOk && eOk && pOk && oneOk)){ const f = $('.field.err input', form) || em; f.focus(); return; }
       const data = Object.fromEntries(new FormData(form));
+      data.page = location.href;
       btn.disabled = true; btn.textContent = 'Sending…';
       try{
         if(W.formEndpoint){
-          const r = await fetch(W.formEndpoint, {method:'POST', headers:{'Accept':'application/json','Content-Type':'application/json'}, body:JSON.stringify(data)});
-          if(!r.ok) throw new Error('send failed');
+          if(/script\.google\.com/.test(W.formEndpoint)){
+            await fetch(W.formEndpoint, {method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain;charset=utf-8'}, body:JSON.stringify(data)});
+          } else {
+            const r = await fetch(W.formEndpoint, {method:'POST', headers:{'Accept':'application/json','Content-Type':'application/json'}, body:JSON.stringify(data)});
+            if(!r.ok) throw new Error('send failed');
+          }
         } else {
           try{ const k='woodl_leads', a=JSON.parse(localStorage.getItem(k)||'[]'); a.push({...data, at:new Date().toISOString()}); localStorage.setItem(k, JSON.stringify(a)); }catch(_){}
         }

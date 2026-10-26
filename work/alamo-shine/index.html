@@ -1,0 +1,920 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pressure Washing</title>
+<meta name="description" content="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
+<script>
+/* =====================================================================
+   НАЛАШТУВАННЯ — під кожного ліда змінюй тільки цей блок
+   ===================================================================== */
+const SITE = {
+  // КОНЦЕПТ ДЛЯ ПОРТФОЛІО: вигаданий бізнес, всі дані умовні
+  brand: "Alamo Shine",
+  brandSub: "Pressure washing",
+  name: "Alamo Shine Pressure Washing",
+  city: "San Antonio",
+  state: "TX",
+  address: "San Antonio, TX",
+  phone: "(210) 555-0147",
+  email: "hello@alamoshine.co",
+  hours: "Mon–Sat, 8am–7pm",
+  rating: 4.9,
+  reviewCount: 120,
+  googleUrl: "#reviews",
+  social: {
+    facebook: "#",
+    instagram: "#",
+  },
+
+  headline: "Clean driveways, bright houses, zero hassle.",
+  intro: "Driveways, house washing, roofs and patios across San Antonio. Send a photo and get a price the same day.",
+
+  // Цифри під першим екраном — тільки правда про бізнес
+  stats: [
+    {value: "4.9", label: "Google rating"},
+    {value: "120+", label: "Google reviews"},
+    {value: "Same day", label: "quotes"},
+    {value: "10", label: "neighborhoods served"},
+  ],
+
+  // Фото (Unsplash, безкоштовні). Свої фото бізнесу з Google Maps працюють краще — встав посилання.
+  photos: {
+    hero: "https://images.unsplash.com/photo-1721620780493-e905708eba0b",
+    heroFlip: true,                      // дзеркалить фото, щоб людина була праворуч від тексту
+    quote: "https://images.unsplash.com/photo-1610891170442-79392fc76493",
+    why: "https://images.unsplash.com/photo-1777126958347-ed3cabf2667b",
+  },
+
+  services: [
+    {name: "Driveways & sidewalks", note: "Oil, tire marks, mildew and years of grime.", from: "$150",
+     photo: "https://images.unsplash.com/photo-1707897283727-31befe824066"},
+    {name: "House washing", note: "Soft wash for brick, stone, siding and stucco. Safe for paint and plants.", from: "$300",
+     photo: "https://images.unsplash.com/photo-1707872732780-f98cf7592e2c"},
+    {name: "Roof cleaning", note: "Low-pressure wash that removes black streaks and algae.", from: "$350",
+     photo: "https://images.unsplash.com/photo-1593354048605-0e5ad12d39a2"},
+    {name: "Patios & pavers", note: "Stone, pavers and pool decks, ready for sealing.", from: "$120",
+     photo: "https://images.unsplash.com/photo-1762810981576-1b07f76af9d2"},
+  ],
+
+  // До/після: 3 картки. before порожнє — «до» генерується з фото «після».
+  // Реальні пари фото бізнесу (до + після) дають найкращий ефект.
+  results: [
+    {title: "Driveway", place: "Stone Oak", after: "https://images.unsplash.com/photo-1764380748983-1b6b339a432f", before: ""},
+    {title: "Paver patio", place: "Helotes", after: "https://images.unsplash.com/photo-1785088476622-8e4c52ee8b53", before: ""},
+    {title: "Brick house wash", place: "Alamo Heights", after: "https://images.unsplash.com/photo-1605146768851-eda79da39897", before: ""},
+  ],
+
+  // Тільки СПРАВЖНІ відгуки з Google-профілю бізнесу (текст + імʼя автора, як на Google)
+  // Концепт: зразки відгуків. На реальному сайті тут лише справжні відгуки клієнта з Google.
+  reviews: [
+    {name: "Sample review", text: "They cleaned our driveway, back patio and the stone on the front of the house in one morning. The difference in the before and after photos is unreal."},
+    {name: "Sample review", text: "Sent a photo, got a price the same afternoon and they came out two days later. On time, polite and they cleaned up everything."},
+    {name: "Sample review", text: "Our siding had years of green mildew. They used a soft wash so nothing got damaged and the house looks freshly painted."},
+    {name: "Sample review", text: "Fair price, no surprises on the invoice. They even rinsed my flower beds before and after. Booking them again in spring."},
+    {name: "Sample review", text: "Oil stains on the garage floor and driveway are finally gone. Quick, friendly and easy to work with."},
+  ],
+
+  areas: ["Stone Oak", "Alamo Heights", "Helotes", "Leon Valley", "Shavano Park", "Converse", "Schertz", "Boerne", "Live Oak", "Universal City"],
+
+  faq: [
+    {q: "How much does pressure washing cost?", a: "Most driveways run $150–250 and most house washes $300–500, depending on size and how dirty the surface is. Send a photo and we'll give you an exact price."},
+    {q: "Is pressure washing safe for my house and plants?", a: "Yes. For siding, stucco, brick and roofs we use a low-pressure soft wash, and we rinse plants before and after cleaning."},
+    {q: "Do I need to be home?", a: "No. We just need access to an outdoor water spigot. We'll send before and after photos when the job is done."},
+    {q: "How soon can you come out?", a: "Usually within the same week. In spring and summer, book a few days ahead."},
+    {q: "What if it rains?", a: "Light rain doesn't affect most jobs. If the weather is bad, we'll move your appointment to the next free day at no cost."},
+  ],
+
+  formEndpoint: "",                      // Formspree-посилання; порожньо — форма відкриває SMS/email
+};
+</script>
+<style>
+  /* Layout: full-bleed photo hero, then alternating white / ink bands; one yellow accent for every call to action. */
+  :root{
+    --ink:#0F1B26;
+    --ink-2:#4A5866;
+    --ink-3:#7A8794;
+    --mist:#F1F4F7;
+    --paper:#FFFFFF;
+    --line:#DCE2E8;
+    --field:#BFC9D2;
+    --water:#1D6FE0;
+    --sun:#FFC933;
+    --sun-ink:#231B00;
+    --font:"Archivo", "Helvetica Neue", Arial, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;scroll-padding-top:84px;}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} *,*::before,*::after{animation:none !important;transition:none !important;} }
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;}
+  img{display:block;max-width:100%;}
+  a{color:inherit;}
+  button{font:inherit;color:inherit;}
+  :focus-visible{outline:3px solid var(--sun);outline-offset:3px;}
+  .wrap{max-width:1240px;margin:0 auto;padding-left:max(24px, env(safe-area-inset-left));padding-right:max(24px, env(safe-area-inset-right));}
+  .display{font-weight:800;font-variation-settings:"wdth" 118;letter-spacing:-.02em;line-height:.98;}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);}
+
+  /* buttons */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;white-space:nowrap;font-weight:700;font-size:16px;padding:15px 24px;border-radius:999px;text-decoration:none;border:1.5px solid transparent;cursor:pointer;line-height:1;transition:background .15s,color .15s,border-color .15s;}
+  .btn-sun{background:var(--sun);color:var(--sun-ink);}
+  .btn-sun:hover{background:#FFD65E;}
+  .btn-glass{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.5);backdrop-filter:blur(6px);}
+  .btn-glass:hover{background:#fff;color:var(--ink);}
+  .btn-ink{background:var(--ink);color:#fff;}
+  .btn-ink:hover{background:#22364A;}
+  .btn-line{border-color:var(--ink);color:var(--ink);background:transparent;}
+  .btn-line:hover{background:var(--ink);color:#fff;}
+  .btn svg{width:18px;height:18px;flex:none;}
+
+  /* logo */
+  .logo{display:flex;align-items:center;gap:11px;text-decoration:none;flex:none;}
+  .logo-mark{width:40px;height:40px;border-radius:11px;background:var(--sun);display:flex;align-items:center;justify-content:center;flex:none;}
+  .logo-mark svg{width:32px;height:32px;}
+  .logo-word{line-height:1;}
+  .logo-word b{display:block;font-weight:800;font-size:20px;font-variation-settings:"wdth" 120;letter-spacing:-.02em;}
+  .logo-word span{display:block;font-size:12.5px;font-weight:500;opacity:.7;margin-top:3px;}
+
+  /* header */
+  .header{position:fixed;top:0;left:0;right:0;z-index:50;color:#fff;transition:background .25s, color .25s, box-shadow .25s;}
+  .header.solid{background:rgba(255,255,255,.97);color:var(--ink);box-shadow:0 1px 0 var(--line);backdrop-filter:blur(10px);}
+  .header-in{display:flex;align-items:center;gap:28px;height:78px;}
+  .menu{display:flex;gap:26px;margin-left:auto;}
+  .menu a{text-decoration:none;font-weight:600;font-size:15px;opacity:.88;}
+  .menu a:hover{opacity:1;text-decoration:underline;text-underline-offset:5px;}
+  .h-right{display:flex;align-items:center;gap:16px;}
+  .h-phone{text-decoration:none;font-weight:700;font-size:15.5px;white-space:nowrap;display:flex;align-items:center;gap:8px;}
+  .h-phone svg{width:17px;height:17px;}
+  .socials{display:flex;gap:6px;}
+  .socials a{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid currentColor;opacity:.75;transition:opacity .15s;}
+  .socials a:hover{opacity:1;}
+  .socials svg{width:16px;height:16px;}
+  .burger{display:none;margin-left:auto;width:44px;height:44px;border-radius:12px;border:1px solid currentColor;background:transparent;align-items:center;justify-content:center;cursor:pointer;}
+  .burger svg{width:22px;height:22px;}
+  .drawer{position:fixed;inset:0;z-index:60;background:var(--ink);color:#fff;padding:22px max(24px, env(safe-area-inset-left)) 32px;display:flex;flex-direction:column;gap:28px;transform:translateX(100%);transition:transform .3s ease;}
+  .drawer.open{transform:none;}
+  .drawer-top{display:flex;align-items:center;justify-content:space-between;}
+  .drawer nav{display:flex;flex-direction:column;}
+  .drawer nav a{font-size:30px;font-weight:800;font-variation-settings:"wdth" 115;text-decoration:none;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.12);}
+  .drawer .btn{width:100%;}
+
+  /* hero */
+  .hero{position:relative;min-height:min(100vh,900px);min-height:min(100svh,900px);color:#fff;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;background:var(--ink);}
+  .hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:30% 40%;animation:settle 2.4s cubic-bezier(.2,.7,.2,1) both;}
+  .hero-img.flip{transform:scaleX(-1);animation-name:settleFlip;}
+  @keyframes settle{from{transform:scale(1.06);}to{transform:scale(1);}}
+  @keyframes settleFlip{from{transform:scaleX(-1) scale(1.06);}to{transform:scaleX(-1) scale(1);}}
+  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg, rgba(10,20,29,.9) 0%, rgba(10,20,29,.65) 42%, rgba(10,20,29,.1) 80%), linear-gradient(0deg, rgba(10,20,29,.55) 0%, rgba(10,20,29,0) 35%), linear-gradient(180deg, rgba(10,20,29,.55) 0%, rgba(10,20,29,0) 22%);}
+  .hero-body{position:relative;z-index:2;padding-top:130px;padding-bottom:84px;}
+  .rating{display:inline-flex;align-items:center;gap:10px;font-size:15px;font-weight:500;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(6px);padding:7px 14px 7px 7px;border-radius:999px;text-decoration:none;max-width:100%;}
+  .g-dot{width:26px;height:26px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;flex:none;}
+  .g-dot svg{width:14px;height:14px;}
+  .stars{color:var(--sun);letter-spacing:1px;}
+  .hero h1{font-size:clamp(46px,7.2vw,104px);margin:22px 0 22px;max-width:10.5em;text-wrap:balance;}
+  .hero p{font-size:clamp(17px,1.45vw,20px);color:rgba(255,255,255,.86);max-width:31em;margin:0 0 32px;}
+  .hero-ctas{display:flex;gap:12px;flex-wrap:wrap;}
+
+  /* stats */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);}
+  .stat{padding:34px 26px;border-right:1px solid var(--line);}
+  .stat:last-child{border-right:none;}
+  .stat b{display:block;font-size:clamp(28px,3vw,42px);font-weight:800;font-variation-settings:"wdth" 118;letter-spacing:-.02em;line-height:1.05;}
+  .stat span{color:var(--ink-2);font-size:15px;}
+  .stats-band{border-bottom:1px solid var(--line);}
+
+  section{padding-top:104px;padding-bottom:104px;}
+  .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:46px;}
+  h2{font-size:clamp(36px,4.6vw,62px);margin:0;max-width:13em;text-wrap:balance;}
+  .lede{color:var(--ink-2);font-size:18px;max-width:31em;margin:14px 0 0;}
+  .dark{background:var(--ink);color:#fff;}
+  .dark .lede{color:rgba(255,255,255,.72);}
+  .soft{background:var(--mist);}
+
+  /* services */
+  .svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+  .swipe-hint{display:none;align-items:center;gap:8px;margin-top:14px;font-size:14px;font-weight:600;color:var(--ink-3);}
+  .swipe-hint svg{width:16px;height:16px;}
+  .svc{position:relative;border-radius:20px;overflow:hidden;background:var(--ink);color:#fff;aspect-ratio:3/4;display:flex;flex-direction:column;justify-content:flex-end;text-decoration:none;}
+  .svc img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s ease;}
+  .svc::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg, rgba(10,20,29,.94) 0%, rgba(10,20,29,.4) 48%, rgba(10,20,29,0) 72%);}
+  .svc:hover img{transform:scale(1.05);}
+  .svc-body{position:relative;z-index:1;padding:24px;}
+  .svc-price{display:inline-block;background:#fff;color:var(--ink);font-weight:700;font-size:14px;padding:5px 11px;border-radius:999px;margin-bottom:12px;}
+  .svc h3{font-size:25px;line-height:1.06;margin:0 0 8px;font-weight:800;font-variation-settings:"wdth" 112;letter-spacing:-.01em;}
+  .svc p{margin:0;font-size:15px;color:rgba(255,255,255,.8);line-height:1.45;}
+
+  /* results — 3 before/after cards */
+  .res-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .res{margin:0;}
+  .ba{position:relative;aspect-ratio:4/3.3;max-width:100%;border-radius:18px;overflow:hidden;user-select:none;touch-action:pan-y;background:#22303c;}
+  .ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+  .ba-before{position:absolute;inset:0;clip-path:inset(0 calc(100% - var(--pos,50%)) 0 0);}
+  .ba-before.synth img{filter:sepia(.6) saturate(.65) brightness(.58) contrast(1.18) hue-rotate(-10deg);}
+  .ba-before.synth::after{content:"";position:absolute;inset:0;background:
+      radial-gradient(ellipse 26% 16% at 60% 72%, rgba(28,22,12,.6), transparent 70%),
+      radial-gradient(ellipse 16% 10% at 28% 84%, rgba(28,22,12,.5), transparent 70%),
+      radial-gradient(ellipse 70% 45% at 40% 95%, rgba(55,65,28,.4), transparent 70%),
+      radial-gradient(ellipse 40% 30% at 85% 20%, rgba(40,48,30,.35), transparent 70%);
+    mix-blend-mode:multiply;}
+  .ba-line{position:absolute;top:0;bottom:0;left:var(--pos,50%);width:3px;margin-left:-1.5px;background:#fff;pointer-events:none;}
+  .ba-knob{position:absolute;top:50%;left:var(--pos,50%);transform:translate(-50%,-50%);width:48px;height:48px;border-radius:50%;background:var(--sun);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(0,0,0,.35);pointer-events:none;}
+  .ba-knob svg{width:22px;height:22px;color:var(--sun-ink);}
+  .ba-tag{position:absolute;top:14px;font-weight:700;font-size:13px;padding:6px 11px;border-radius:999px;pointer-events:none;}
+  .ba-tag.b{left:14px;background:rgba(10,20,29,.75);color:#fff;}
+  .ba-tag.a{right:14px;background:#fff;color:var(--ink);}
+  .ba input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0;}
+  .res figcaption{display:flex;justify-content:space-between;gap:12px;margin-top:14px;font-weight:700;font-size:17px;}
+  .res figcaption span{font-weight:500;color:rgba(255,255,255,.6);font-size:15px;}
+  @property --pos{syntax:'<percentage>';inherits:true;initial-value:50%;}
+  @keyframes nudge{0%{--pos:50%}35%{--pos:26%}70%{--pos:66%}100%{--pos:50%}}
+  .ba.play{animation:nudge 2s ease-in-out 1;}
+
+  /* why us — photo + features */
+  .why{display:grid;grid-template-columns:1fr 1.1fr;gap:64px;align-items:center;}
+  .why-photo{border-radius:24px;overflow:hidden;aspect-ratio:4/4.6;max-width:100%;position:relative;}
+  .why-photo img{width:100%;height:100%;object-fit:cover;}
+  .why-badge{position:absolute;left:20px;bottom:20px;background:#fff;border-radius:16px;padding:16px 18px;display:flex;align-items:center;gap:14px;box-shadow:0 16px 40px -12px rgba(15,27,38,.45);}
+  .why-badge b{font-size:34px;font-weight:800;font-variation-settings:"wdth" 118;line-height:1;}
+  .why-badge span{font-size:14px;color:var(--ink-2);line-height:1.3;}
+  .feats{display:grid;grid-template-columns:1fr 1fr;gap:30px 28px;margin-top:40px;}
+  .feat-ic{width:48px;height:48px;border-radius:14px;background:var(--mist);color:var(--water);display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
+  .feat-ic svg{width:24px;height:24px;}
+  .feat h3{margin:0 0 6px;font-size:20px;font-weight:800;font-variation-settings:"wdth" 110;}
+  .feat p{margin:0;color:var(--ink-2);font-size:16px;}
+
+  /* steps */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;position:relative;}
+  .step{position:relative;background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:30px 28px 32px;}
+  .step-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:34px;}
+  .step-num{width:56px;height:56px;border-radius:50%;background:var(--sun);color:var(--sun-ink);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:24px;font-variation-settings:"wdth" 118;}
+  .step-ic{width:56px;height:56px;border-radius:16px;background:var(--mist);color:var(--ink);display:flex;align-items:center;justify-content:center;}
+  .step-ic svg{width:26px;height:26px;}
+  .step h3{font-size:25px;margin:0 0 8px;font-weight:800;font-variation-settings:"wdth" 112;letter-spacing:-.01em;}
+  .step p{margin:0;color:var(--ink-2);}
+  .step-time{display:inline-block;margin-top:20px;font-size:14px;font-weight:600;color:var(--water);background:#E8F0FD;padding:5px 11px;border-radius:999px;}
+  .steps::before{content:"";position:absolute;top:58px;left:12%;right:12%;border-top:2px dashed var(--field);z-index:0;}
+  .step{z-index:1;}
+
+  /* reviews slider */
+  .g-summary{display:flex;align-items:center;gap:16px;background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:14px 18px;text-decoration:none;}
+  .g-summary .g-dot{width:44px;height:44px;border:1px solid var(--line);}
+  .g-summary .g-dot svg{width:22px;height:22px;}
+  .g-summary b{font-size:30px;font-weight:800;font-variation-settings:"wdth" 118;line-height:1;}
+  .g-summary small{display:block;color:var(--ink-2);font-size:14px;}
+  .g-summary .stars{color:#F2B300;}
+  .slider{position:relative;}
+  .track{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 40px)/3);gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:4px;}
+  .track::-webkit-scrollbar{display:none;}
+  .rev{scroll-snap-align:start;background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:28px 26px;margin:0;display:flex;flex-direction:column;min-width:0;}
+  .rev-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+  .rev-top .stars{color:#F2B300;letter-spacing:2px;}
+  .rev-top .g-dot{border:1px solid var(--line);}
+  .rev blockquote{margin:0 0 22px;font-size:17px;line-height:1.6;flex:1;}
+  .rev cite{font-style:normal;display:flex;align-items:center;gap:12px;font-weight:700;font-size:15px;}
+  .ava{width:40px;height:40px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;}
+  .rev cite small{display:block;font-weight:500;color:var(--ink-3);font-size:13px;}
+  .slider-nav{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:28px;}
+  .dots{display:flex;gap:8px;}
+  .dots button{width:9px;height:9px;border-radius:999px;border:none;background:var(--field);padding:0;cursor:pointer;transition:width .2s, background .2s;}
+  .dots button.on{width:28px;background:var(--ink);}
+  .arrows{display:flex;gap:10px;}
+  .arrow{width:52px;height:52px;border-radius:50%;border:1.5px solid var(--ink);background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .15s,color .15s;}
+  .arrow:hover{background:var(--ink);color:#fff;}
+  .arrow:disabled{opacity:.3;cursor:default;background:transparent;color:var(--ink);}
+  .arrow svg{width:20px;height:20px;}
+
+  /* areas */
+  .area-wrap{display:grid;grid-template-columns:1fr 1.3fr;gap:56px;align-items:start;}
+  .areas{display:flex;flex-wrap:wrap;gap:10px;list-style:none;padding:0;margin:0;}
+  .areas li{display:flex;align-items:center;gap:8px;padding:11px 18px 11px 14px;border:1px solid var(--line);border-radius:999px;font-weight:600;font-size:15.5px;}
+  .areas li svg{width:16px;height:16px;color:var(--water);}
+
+  /* faq */
+  .faq-wrap{display:grid;grid-template-columns:1fr 1.5fr;gap:56px;align-items:start;}
+  .faq details{border-bottom:1px solid var(--line);}
+  .faq details:first-child{border-top:1px solid var(--line);}
+  .faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:24px 0;font-weight:700;font-size:19px;}
+  .faq summary::-webkit-details-marker{display:none;}
+  .faq summary i{width:34px;height:34px;border-radius:50%;background:var(--mist);flex:none;position:relative;transition:background .15s, transform .2s;}
+  .faq summary i::before,.faq summary i::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:2px;background:var(--ink);transform:translate(-50%,-50%);}
+  .faq summary i::after{transform:translate(-50%,-50%) rotate(90deg);transition:transform .2s;}
+  .faq details[open] summary i{background:var(--sun);}
+  .faq details[open] summary i::after{transform:translate(-50%,-50%) rotate(0deg);}
+  .faq details p{margin:0 0 24px;color:var(--ink-2);max-width:40em;}
+
+  /* quote */
+  .quote{position:relative;color:#fff;overflow:hidden;background:var(--ink);}
+  .quote-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.4;}
+  .quote::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg, rgba(10,20,29,.96) 30%, rgba(10,20,29,.72));}
+  .quote-grid{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
+  .quote .lede{color:rgba(255,255,255,.75);}
+  .q-list{list-style:none;padding:0;margin:28px 0 0;display:grid;gap:12px;}
+  .q-list li{display:flex;gap:12px;align-items:center;color:rgba(255,255,255,.85);}
+  .q-list svg{width:20px;height:20px;color:var(--sun);flex:none;}
+  .q-phone{display:inline-flex;align-items:center;gap:12px;margin-top:30px;font-size:clamp(28px,3.2vw,40px);font-weight:800;font-variation-settings:"wdth" 115;letter-spacing:-.02em;text-decoration:none;color:var(--sun);}
+  form{background:var(--paper);color:var(--ink);border-radius:22px;padding:32px;display:grid;gap:16px;box-shadow:0 30px 60px -24px rgba(0,0,0,.5);}
+  form h3{margin:0 0 4px;font-size:24px;font-weight:800;font-variation-settings:"wdth" 112;}
+  .f2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  label{display:block;font-size:14px;font-weight:600;margin-bottom:7px;}
+  input,select,textarea{width:100%;font:inherit;font-size:16px;color:var(--ink);background:var(--paper);border:1.5px solid var(--field);border-radius:12px;padding:13px 14px;transition:border-color .15s, box-shadow .15s;}
+  input::placeholder,textarea::placeholder{color:var(--ink-3);}
+  input:hover,select:hover,textarea:hover{border-color:var(--ink-3);}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--ink);box-shadow:0 0 0 3px rgba(255,201,51,.55);}
+  form .btn{width:100%;margin-top:4px;padding:17px 24px;}
+  .form-note{font-size:13px;color:var(--ink-3);margin:0;text-align:center;}
+  .form-ok{background:#E8F6EE;color:#14532D;border-radius:12px;padding:13px 15px;font-weight:600;}
+
+  /* footer */
+  footer{background:#0A141D;color:rgba(255,255,255,.72);padding-top:76px;padding-bottom:28px;font-size:15px;}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:40px;}
+  footer .logo{color:#fff;}
+  .foot-about{margin:18px 0 22px;max-width:22em;}
+  footer h4{color:#fff;font-size:15px;margin:4px 0 16px;font-weight:700;}
+  footer ul{list-style:none;padding:0;margin:0;display:grid;gap:10px;}
+  footer a{text-decoration:none;}
+  footer a:hover{color:#fff;text-decoration:underline;text-underline-offset:4px;}
+  .contact li{display:flex;gap:10px;align-items:flex-start;}
+  .contact svg{width:18px;height:18px;flex:none;margin-top:3px;color:var(--sun);}
+  footer .socials a{color:#fff;}
+  .foot-bottom{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:56px;padding-top:24px;border-top:1px solid rgba(255,255,255,.12);font-size:14px;}
+  .foot-bottom nav{display:flex;gap:22px;}
+
+  dialog{border:none;border-radius:20px;padding:0;max-width:640px;width:calc(100% - 32px);color:var(--ink);}
+  dialog::backdrop{background:rgba(10,20,29,.6);}
+  .dlg{padding:32px;}
+  .dlg h3{margin:0 0 14px;font-size:26px;font-weight:800;font-variation-settings:"wdth" 112;}
+  .dlg p{color:var(--ink-2);margin:0 0 12px;font-size:15.5px;}
+
+  .callbar{position:fixed;left:0;right:0;bottom:0;display:none;gap:10px;padding:10px max(12px, env(safe-area-inset-left)) calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);border-top:1px solid var(--line);backdrop-filter:blur(10px);z-index:40;}
+  .callbar .btn{flex:1;padding:15px 10px;}
+
+  @media (max-width:1180px){ .menu{gap:18px;} .h-right .socials{display:none;} }
+  @media (max-width:1020px){
+    .menu,.h-right{display:none;}
+    .burger{display:flex;}
+    .svc-grid{grid-template-columns:1fr 1fr;}
+    .stats{grid-template-columns:1fr 1fr;}
+    .stat:nth-child(2){border-right:none;}
+    .stat:nth-child(-n+2){border-bottom:1px solid var(--line);}
+    .res-grid{grid-template-columns:1fr;max-width:620px;}
+    .why,.faq-wrap,.area-wrap,.quote-grid{grid-template-columns:1fr;gap:40px;}
+    .why-photo{aspect-ratio:16/11;}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+    .track{grid-auto-columns:calc((100% - 20px)/2);}
+  }
+  @media (max-width:760px){
+    section{padding-top:72px;padding-bottom:72px;}
+    .steps{grid-template-columns:1fr;}
+    .steps::before{display:none;}
+    .track{grid-auto-columns:88%;}
+    .callbar{display:flex;}
+    footer{padding-bottom:110px;}
+    .hero-body{padding-bottom:56px;}
+    .hero::after{background:linear-gradient(0deg, rgba(10,20,29,.94) 0%, rgba(10,20,29,.6) 55%, rgba(10,20,29,.4) 100%);}
+    .hero-img{object-position:70% 40%;}
+    .hero-img.flip{object-position:22% 40%;}
+  }
+  @media (max-width:540px){
+    .wrap{padding-left:max(18px, env(safe-area-inset-left));padding-right:max(18px, env(safe-area-inset-right));}
+    .header-in{height:68px;}
+    .svc-grid,.feats{grid-template-columns:1fr;}
+    .svc{aspect-ratio:4/3.4;}
+    .f2{grid-template-columns:1fr;}
+    .hero-ctas{flex-direction:column;}
+    .hero-ctas .btn{width:100%;}
+    .stat{padding:22px 16px;}
+    form{padding:24px 20px;}
+    .foot-grid{grid-template-columns:1fr 1fr;gap:32px 20px;}
+    .foot-grid > div:first-child,.foot-grid > div:last-child{grid-column:1 / -1;}
+    .logo-word span{display:none;}
+  }
+
+  /* ---------- phone polish ---------- */
+  @media (max-width:640px){
+    body{font-size:16px;}
+    section{padding-top:60px;padding-bottom:60px;}
+    h2{font-size:clamp(32px,9vw,40px);}
+    .lede{font-size:16.5px;margin-top:10px;}
+    .sec-head{margin-bottom:28px;gap:18px;}
+    .sec-head .btn{display:none;}
+
+    .hero{min-height:auto;}
+    .hero-body{padding-top:120px;padding-bottom:40px;}
+    .hero h1{font-size:clamp(40px,11.5vw,52px);margin:18px 0 14px;}
+    .hero p{font-size:16.5px;margin-bottom:24px;}
+    .rating{font-size:13.5px;}
+    .hero-ctas{flex-direction:row;}
+    .hero-ctas .btn{flex:1;width:auto;padding:15px 12px;font-size:15px;}
+    .hero-ctas .btn-glass span{display:none;}
+    .hero-ctas .btn-glass::after{content:"Call us";}
+
+    .stat{padding:18px 4px 18px 16px;}
+    .stat:nth-child(odd){padding-left:0;}
+    .stat b{font-size:26px;}
+    .stat span{font-size:13.5px;}
+
+    /* services: swipe row with a peek of the next card */
+    .svc-grid{display:grid;grid-auto-flow:column;grid-auto-columns:78%;grid-template-columns:none;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin-right:calc(-1 * max(18px, env(safe-area-inset-right)));padding-right:max(18px, env(safe-area-inset-right));}
+    .svc-grid::-webkit-scrollbar{display:none;}
+    .svc{aspect-ratio:4/5;scroll-snap-align:start;border-radius:18px;}
+    .svc-body{padding:20px;}
+    .svc h3{font-size:22px;}
+    .svc p{font-size:14.5px;}
+    .swipe-hint{display:flex;}
+
+    .res-grid{gap:26px;}
+    .ba{aspect-ratio:4/3;border-radius:16px;}
+    .ba-knob{width:44px;height:44px;}
+    .res figcaption{margin-top:10px;font-size:16px;}
+
+    .why{gap:28px;}
+    .why-photo{aspect-ratio:4/3;border-radius:18px;}
+    .why-badge{left:14px;bottom:14px;padding:12px 14px;border-radius:14px;}
+    .why-badge b{font-size:28px;}
+    .feats{grid-template-columns:1fr 1fr;gap:12px;margin-top:26px;}
+    .feat{background:var(--mist);border-radius:16px;padding:16px;}
+    .feat-ic{width:38px;height:38px;border-radius:11px;background:var(--paper);margin-bottom:12px;}
+    .feat-ic svg{width:20px;height:20px;}
+    .feat h3{font-size:16.5px;line-height:1.2;}
+    .feat p{font-size:14px;line-height:1.45;}
+
+    .steps{gap:12px;}
+    .step{display:grid;grid-template-columns:auto 1fr;column-gap:16px;padding:20px;border-radius:18px;}
+    .step-top{grid-row:1 / span 3;margin:0;align-items:flex-start;}
+    .step-num{width:44px;height:44px;font-size:20px;}
+    .step-ic{display:none;}
+    .step h3{font-size:20px;margin-bottom:4px;}
+    .step p{font-size:15px;}
+    .step-time{margin-top:12px;justify-self:start;font-size:13px;}
+
+    .g-summary{padding:10px 14px;border-radius:14px;gap:12px;}
+    .g-summary .g-dot{width:36px;height:36px;}
+    .g-summary b{font-size:24px;}
+    .track{grid-auto-columns:86%;gap:12px;margin-right:calc(-1 * max(18px, env(safe-area-inset-right)));padding-right:max(18px, env(safe-area-inset-right));}
+    .rev{padding:22px 20px;border-radius:18px;}
+    .rev blockquote{font-size:15.5px;}
+    .slider-nav{margin-top:20px;}
+    .arrow{width:44px;height:44px;}
+
+    .area-wrap{gap:24px;}
+    .areas{gap:8px;}
+    .areas li{padding:8px 13px 8px 10px;font-size:14px;}
+
+    .faq-wrap{gap:28px;}
+    .faq-wrap .btn{margin-top:20px !important;}
+    .faq summary{font-size:16.5px;padding:18px 0;}
+    .faq summary i{width:30px;height:30px;}
+    .faq details p{font-size:15px;margin-bottom:18px;}
+
+    .quote-grid{gap:32px;}
+    .q-list{margin-top:20px;}
+    .q-phone{margin-top:22px;font-size:28px;}
+    form{padding:22px 18px;border-radius:18px;gap:14px;}
+    form h3{font-size:21px;}
+
+    footer{padding-top:52px;font-size:14.5px;}
+    .foot-about{margin:14px 0 18px;}
+    .foot-bottom{margin-top:36px;flex-direction:column;gap:10px;}
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-phone" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></symbol>
+  <symbol id="i-fb" viewBox="0 0 24 24"><path fill="currentColor" d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.6c0-.9.3-1.5 1.5-1.5h1.5V4.4c-.3 0-1.2-.1-2.2-.1-2.2 0-3.7 1.3-3.7 3.8v2.4H8v3h2.6V21z"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6" fill="currentColor"/></g></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></g></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></g></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></g></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-left" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M19 12H5m6 6-6-6 6-6"/></symbol>
+  <symbol id="i-right" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+  <symbol id="i-g" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.5 12.3c0-.9-.1-1.6-.2-2.4H12v4.5h6.5c-.3 1.5-1.1 2.7-2.4 3.6v3h3.9c2.3-2.1 3.5-5.2 3.5-8.7z"/><path fill="#34A853" d="M12 24c3.2 0 6-1.1 7.9-2.9l-3.9-3c-1.1.7-2.4 1.1-4 1.1-3.1 0-5.7-2.1-6.6-4.9H1.4v3.1C3.3 21.3 7.3 24 12 24z"/><path fill="#FBBC05" d="M5.4 14.3c-.2-.7-.4-1.5-.4-2.3s.1-1.6.4-2.3V6.6H1.4C.5 8.3 0 10.1 0 12s.5 3.7 1.4 5.4z"/><path fill="#EA4335" d="M12 4.8c1.7 0 3.3.6 4.5 1.8l3.4-3.4C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.4 6.6l4 3.1c.9-2.8 3.5-4.9 6.6-4.9z"/></symbol>
+  <symbol id="i-mark" viewBox="0 0 32 32"><g fill="none" stroke="#231B00" stroke-linecap="round"><path d="M6 26 15 17" stroke-width="3.6"/><path d="M18.5 13.5 25 7" stroke-width="2.4"/><path d="M19.5 15.5 27.5 13" stroke-width="2.4"/><path d="M17 12.5 19.5 4.5" stroke-width="2.4"/></g></symbol>
+</svg>
+
+<header class="header" id="header">
+  <div class="wrap header-in">
+    <a class="logo" href="#top" data-logo></a>
+    <nav class="menu" aria-label="Main">
+      <a href="#services">Services</a>
+      <a href="#results">Results</a>
+      <a href="#process">How it works</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="h-right">
+      <a class="h-phone" data-tel><svg><use href="#i-phone"/></svg><span data-t="phone"></span></a>
+      <div class="socials" data-socials></div>
+      <a class="btn btn-sun" href="#quote">Free quote</a>
+    </div>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </div>
+</header>
+
+<div class="drawer" id="drawer" aria-hidden="true">
+  <div class="drawer-top">
+    <a class="logo" href="#top" data-logo></a>
+    <button class="burger" style="display:flex" id="drawerClose" aria-label="Close menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  </div>
+  <nav>
+    <a href="#services">Services</a>
+    <a href="#results">Results</a>
+    <a href="#process">How it works</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#faq">FAQ</a>
+  </nav>
+  <a class="h-phone" style="font-size:20px" data-tel><svg><use href="#i-phone"/></svg><span data-t="phone"></span></a>
+  <div class="socials" data-socials></div>
+  <a class="btn btn-sun" href="#quote" style="margin-top:auto">Get a free quote</a>
+</div>
+
+<main id="top">
+  <section class="hero" style="padding:0">
+    <img class="hero-img" id="heroImg" alt="">
+    <div class="wrap hero-body">
+      <a class="rating" data-google target="_blank" rel="noopener">
+        <span class="g-dot"><svg><use href="#i-g"/></svg></span>
+        <span class="stars" aria-hidden="true">★★★★★</span><span data-t="ratingLine"></span>
+      </a>
+      <h1 class="display" data-t="headline"></h1>
+      <p data-t="intro"></p>
+      <div class="hero-ctas">
+        <a class="btn btn-sun" href="#quote">Get a free quote</a>
+        <a class="btn btn-glass" data-tel><svg><use href="#i-phone"/></svg><span data-t="phone"></span></a>
+      </div>
+    </div>
+  </section>
+
+  <div class="stats-band"><div class="wrap"><div class="stats" id="stats"></div></div></div>
+
+  <section id="services">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><h2 class="display">What we clean</h2><p class="lede">Starting prices. You get an exact quote before any work begins.</p></div>
+        <a class="btn btn-line" href="#quote">Get my price</a>
+      </div>
+      <div class="svc-grid" id="svcGrid"></div>
+      <div class="swipe-hint" aria-hidden="true">Swipe to see all services<svg><use href="#i-right"/></svg></div>
+    </div>
+  </section>
+
+  <section class="dark" id="results">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><h2 class="display">See the difference</h2><p class="lede">Drag the handle on each photo to compare before and after.</p></div>
+      </div>
+      <div class="res-grid" id="resGrid"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap why">
+      <div class="why-photo">
+        <img id="whyImg" alt="" loading="lazy">
+        <div class="why-badge"><b data-t="rating"></b><span>average rating<br>on Google</span></div>
+      </div>
+      <div>
+        <h2 class="display">Why neighbors call us</h2>
+        <p class="lede">A small local crew that shows up on time, protects your property and leaves it spotless.</p>
+        <div class="feats">
+          <div class="feat"><div class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c3 4 6 7.5 6 11a6 6 0 0 1-12 0c0-3.5 3-7 6-11z"/></svg></div><h3>The right pressure</h3><p>Soft wash for siding and roofs, high pressure only where concrete needs it.</p></div>
+          <div class="feat"><div class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-4-3-7-6.5-7-10.5V5l7-2 7 2v5.5C19 14.5 16 18 12 21z"/><path d="m9 12 2 2 4-4"/></svg></div><h3>Plants protected</h3><p>We rinse landscaping before and after, and use cleaners that are safe around pets.</p></div>
+          <div class="feat"><div class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></div><h3>Fixed price</h3><p>The quote you approve is the price you pay. No hidden fees on the invoice.</p></div>
+          <div class="feat"><div class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></svg></div><h3>Quick to book</h3><p>Quotes the same day and most jobs done within the week.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="soft" id="process">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><h2 class="display">Booked in three steps</h2><p class="lede">From the first message to a clean property, usually within a week.</p></div>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-top"><span class="step-num">1</span><span class="step-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg></span></div>
+          <h3>Send a photo</h3><p>Text or call with what needs cleaning. A quick photo of the area is enough for a price.</p>
+          <span class="step-time">Takes 2 minutes</span>
+        </div>
+        <div class="step">
+          <div class="step-top"><span class="step-num">2</span><span class="step-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 9h8M8 13h5"/><path d="m13 17 1.5 1.5L18 15"/></svg></span></div>
+          <h3>Approve your quote</h3><p>You get a fixed price and pick a day that works. Nothing is booked until you say yes.</p>
+          <span class="step-time">Same day</span>
+        </div>
+        <div class="step">
+          <div class="step-top"><span class="step-num">3</span><span class="step-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10l7-6 7 6v11"/><path d="M10 21v-6h4v6"/></svg></span></div>
+          <h3>We wash, you check</h3><p>We clean, rinse and walk the property with you before we pack up and leave.</p>
+          <span class="step-time">Within the week</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><h2 class="display">Neighbors say it best</h2><p class="lede">What customers say after the job.</p></div>
+        <a class="g-summary" data-google target="_blank" rel="noopener">
+          <span class="g-dot"><svg><use href="#i-g"/></svg></span>
+          <div><b data-t="rating"></b> <span class="stars" aria-hidden="true">★★★★★</span><small data-t="reviewLine"></small></div>
+        </a>
+      </div>
+      <div class="slider">
+        <div class="track" id="track" tabindex="0" aria-label="Customer reviews"></div>
+        <div class="slider-nav">
+          <div class="dots" id="dots"></div>
+          <div class="arrows">
+            <button class="arrow" id="prev" aria-label="Previous review"><svg><use href="#i-left"/></svg></button>
+            <button class="arrow" id="next" aria-label="Next review"><svg><use href="#i-right"/></svg></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="soft">
+    <div class="wrap area-wrap">
+      <div><h2 class="display">Where we work</h2><p class="lede" data-t="areaLede"></p></div>
+      <ul class="areas" id="areas"></ul>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap faq-wrap">
+      <div>
+        <h2 class="display">Questions, answered</h2>
+        <p class="lede">Something else on your mind? Call us and we'll explain.</p>
+        <a class="btn btn-ink" data-tel style="margin-top:28px"><svg><use href="#i-phone"/></svg><span data-t="phone"></span></a>
+      </div>
+      <div class="faq" id="faqList"></div>
+    </div>
+  </section>
+
+  <section class="quote" id="quote">
+    <img class="quote-bg" id="quoteImg" alt="" loading="lazy">
+    <div class="wrap quote-grid">
+      <div>
+        <h2 class="display">Get a free quote today</h2>
+        <p class="lede">Tell us what needs cleaning. We reply with a fixed price, usually the same day.</p>
+        <ul class="q-list">
+          <li><svg><use href="#i-check"/></svg>No cost and no obligation</li>
+          <li><svg><use href="#i-check"/></svg>A photo is enough for a price</li>
+          <li><svg><use href="#i-check"/></svg>Most jobs done within the week</li>
+        </ul>
+        <a class="q-phone" data-tel><svg style="width:30px;height:30px"><use href="#i-phone"/></svg><span data-t="phone"></span></a>
+      </div>
+      <form id="quoteForm" novalidate>
+        <h3>Request your quote</h3>
+        <div class="f2">
+          <div><label for="fName">Name</label><input id="fName" name="name" autocomplete="name" placeholder="Your name" required></div>
+          <div><label for="fPhone">Phone</label><input id="fPhone" name="phone" type="tel" autocomplete="tel" placeholder="(210) 000-0000" required></div>
+        </div>
+        <div><label for="fService">What needs cleaning?</label><select id="fService" name="service"></select></div>
+        <div><label for="fAddr">Address or neighborhood</label><input id="fAddr" name="address" autocomplete="street-address" placeholder="e.g. Stone Oak"></div>
+        <div><label for="fMsg">Details (optional)</label><textarea id="fMsg" name="message" rows="3" placeholder="Size of the area, stains, best time to call"></textarea></div>
+        <button class="btn btn-sun" type="submit">Request my quote</button>
+        <p class="form-note">We only use your details to reply to this request.</p>
+        <div class="form-ok" id="formOk" role="status" hidden></div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="logo" href="#top" data-logo></a>
+        <p class="foot-about" data-t="footAbout"></p>
+        <div class="socials" data-socials></div>
+      </div>
+      <div>
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#results">Results</a></li>
+          <li><a href="#process">How it works</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#quote">Free quote</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul id="footSvc"></ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul class="contact">
+          <li><svg><use href="#i-pin"/></svg><span data-t="address"></span></li>
+          <li><svg><use href="#i-phone"/></svg><a data-tel><span data-t="phone"></span></a></li>
+          <li id="footMail"><svg><use href="#i-mail"/></svg><a data-mail><span data-t="email"></span></a></li>
+          <li><svg><use href="#i-clock"/></svg><span data-t="hours"></span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span><span data-t="copy"></span> Concept project.</span>
+      <nav><a href="#" data-dlg="privacy">Privacy policy</a><a href="#" data-dlg="terms">Terms of service</a></nav>
+    </div>
+  </div>
+</footer>
+
+<dialog id="dlg-privacy"><div class="dlg">
+  <h3>Privacy policy</h3>
+  <p>We collect only the details you send through the quote form or by phone: your name, phone number, address and a description of the job.</p>
+  <p>We use them to prepare your quote, schedule the work and contact you about it. We don't sell or share your information with third parties for marketing.</p>
+  <p>To have your details deleted, contact us by phone or email and we'll remove them.</p>
+  <button class="btn btn-ink" data-close>Close</button>
+</div></dialog>
+<dialog id="dlg-terms"><div class="dlg">
+  <h3>Terms of service</h3>
+  <p>Quotes are free and valid for 30 days. The final price is the one you approve before work starts.</p>
+  <p>Please make an outdoor water spigot available and move vehicles and loose items away from the work area.</p>
+  <p>If weather prevents safe work, we reschedule at no cost.</p>
+  <button class="btn btn-ink" data-close>Close</button>
+</div></dialog>
+
+<div class="callbar">
+  <a class="btn btn-ink" data-tel>Call now</a>
+  <a class="btn btn-sun" href="#quote">Free quote</a>
+</div>
+
+<script>
+(function(){
+  const S = SITE;
+  const $ = s => document.querySelector(s), $$ = s => document.querySelectorAll(s);
+  const esc = s => String(s ?? '').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const img = (u, w) => !u ? '' : (u.includes('images.unsplash.com') ? `${u.split('?')[0]}?w=${w}&q=80&auto=format&fit=crop` : u);
+  const tel = 'tel:' + (S.phone||'').replace(/[^\d+]/g,'');
+
+  const T = {
+    phone: S.phone, hours: S.hours, headline: S.headline, intro: S.intro, address: S.address, email: S.email,
+    rating: String(S.rating),
+    ratingLine: `${S.rating} from ${S.reviewCount} Google reviews`,
+    reviewLine: `Based on ${S.reviewCount} Google reviews`,
+    areaLede: `Based in ${S.city} and the neighborhoods around it. Not on the list? Ask anyway.`,
+    footAbout: `${S.name}: driveway, house, roof and patio cleaning in ${S.city}, ${S.state}.`,
+    copy: `© ${new Date().getFullYear()} ${S.name}. All rights reserved.`,
+  };
+  document.title = `${S.name} | Pressure Washing in ${S.city}, ${S.state}`;
+  $('meta[name=description]').content = S.intro;
+  $$('[data-t]').forEach(el => el.textContent = T[el.dataset.t] ?? '');
+  $$('[data-tel]').forEach(a => a.href = tel);
+  $$('[data-mail]').forEach(a => a.href = 'mailto:' + S.email);
+  if(!S.email) $('#footMail').remove();
+  $$('[data-google]').forEach(a => a.href = S.googleUrl || '#reviews');
+
+  const logo = `<span class="logo-mark"><svg><use href="#i-mark"/></svg></span><span class="logo-word"><b>${esc(S.brand)}</b><span>${esc(S.brandSub)}</span></span>`;
+  $$('[data-logo]').forEach(a => { a.innerHTML = logo; a.setAttribute('aria-label', S.name); });
+  const soc = [['facebook','i-fb','Facebook'],['instagram','i-ig','Instagram']].filter(([k])=>S.social && S.social[k])
+    .map(([k,ic,l])=>`<a href="${esc(S.social[k])}" target="_blank" rel="noopener" aria-label="${l}"><svg><use href="#${ic}"/></svg></a>`).join('');
+  $$('[data-socials]').forEach(d => d.innerHTML = soc);
+
+  const hero = $('#heroImg');
+  hero.src = img(S.photos.hero, 2400);
+  hero.srcset = [1200,1800,2400,3200].map(w=>`${img(S.photos.hero, w)} ${w}w`).join(', ');
+  hero.sizes = '100vw';
+  if(S.photos.heroFlip) hero.classList.add('flip');
+  $('#whyImg').src = img(S.photos.why, 1200);
+  $('#quoteImg').src = img(S.photos.quote, 1800);
+
+  $('#stats').innerHTML = (S.stats||[]).map(s=>`<div class="stat"><b>${esc(s.value)}</b><span>${esc(s.label)}</span></div>`).join('');
+  $('#svcGrid').innerHTML = S.services.map(s=>`
+    <a class="svc" href="#quote">
+      <img src="${esc(img(s.photo, 900))}" alt="${esc(s.name)}" loading="lazy">
+      <div class="svc-body"><span class="svc-price">from ${esc(s.from)}</span><h3>${esc(s.name)}</h3><p>${esc(s.note)}</p></div>
+    </a>`).join('');
+  $('#footSvc').innerHTML = S.services.map(s=>`<li><a href="#services">${esc(s.name)}</a></li>`).join('');
+  $('#fService').innerHTML = S.services.map(s=>`<option>${esc(s.name)}</option>`).join('') + '<option>Something else</option>';
+  $('#areas').innerHTML = S.areas.map(a=>`<li><svg><use href="#i-pin"/></svg>${esc(a)}</li>`).join('');
+  $('#faqList').innerHTML = (S.faq||[]).map((f,i)=>`<details ${i===0?'open':''}><summary>${esc(f.q)}<i aria-hidden="true"></i></summary><p>${esc(f.a)}</p></details>`).join('');
+
+  // results: 3 before/after cards
+  $('#resGrid').innerHTML = S.results.map((r,i)=>{
+    const a = img(r.after, 1100), b = r.before ? img(r.before, 1100) : a;
+    return `<figure class="res">
+      <div class="ba" data-ba>
+        <img src="${esc(a)}" alt="${esc(r.title)} after cleaning" loading="lazy">
+        <div class="ba-before ${r.before?'':'synth'}"><img src="${esc(b)}" alt="${esc(r.title)} before cleaning" loading="lazy"></div>
+        <div class="ba-line"></div>
+        <div class="ba-knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6-6 6 6 6M15 6l6 6-6 6"/></svg></div>
+        <span class="ba-tag b">Before</span><span class="ba-tag a">After</span>
+        <input type="range" min="0" max="100" value="50" aria-label="Compare ${esc(r.title)} before and after">
+      </div>
+      <figcaption>${esc(r.title)}<span>${esc(r.place||'')}</span></figcaption>
+    </figure>`;
+  }).join('');
+  const bas = [...$$('[data-ba]')];
+  bas.forEach(ba=>{
+    const range = ba.querySelector('input');
+    range.addEventListener('input', ()=>{ ba.classList.remove('play'); ba.style.setProperty('--pos', range.value+'%'); });
+    ba.addEventListener('animationend', ()=>ba.classList.remove('play'));
+  });
+  if('IntersectionObserver' in window && bas[0]){
+    new IntersectionObserver((es,o)=>{ if(es[0].isIntersecting){ bas.forEach((b,i)=>setTimeout(()=>b.classList.add('play'), i*250)); o.disconnect(); } }, {threshold:.4}).observe(bas[0]);
+  }
+
+  // reviews slider
+  const track = $('#track'), dots = $('#dots'), prev = $('#prev'), next = $('#next');
+  track.innerHTML = S.reviews.map(r=>{
+    const name = r.name || 'Google reviewer';
+    return `<figure class="rev">
+      <div class="rev-top"><span class="stars" aria-label="5 out of 5 stars">★★★★★</span><span class="g-dot"><svg><use href="#i-g"/></svg></span></div>
+      <blockquote>${esc(r.text)}</blockquote>
+      <cite><span class="ava">${esc(name.trim()[0].toUpperCase())}</span><span>${esc(name)}<small>Concept content</small></span></cite>
+    </figure>`;
+  }).join('');
+  const cards = [...track.children];
+  const perView = () => Math.max(1, Math.round(track.clientWidth / cards[0].getBoundingClientRect().width));
+  const pages = () => Math.max(1, cards.length - perView() + 1);
+  const renderDots = () => { dots.innerHTML = Array.from({length:pages()}, (_,i)=>`<button aria-label="Go to review ${i+1}"></button>`).join(''); [...dots.children].forEach((d,i)=>d.onclick=()=>go(i)); update(); };
+  const step = () => cards[1] ? cards[1].offsetLeft - cards[0].offsetLeft : track.clientWidth;
+  const idx = () => Math.round(track.scrollLeft / step());
+  const go = i => track.scrollTo({left: Math.max(0, Math.min(i, pages()-1)) * step(), behavior:'smooth'});
+  const update = () => { const i = idx(); [...dots.children].forEach((d,k)=>d.classList.toggle('on', k===i)); prev.disabled = i<=0; next.disabled = i>=pages()-1; };
+  prev.onclick = () => go(idx()-1); next.onclick = () => go(idx()+1);
+  track.addEventListener('scroll', () => requestAnimationFrame(update), {passive:true});
+  track.addEventListener('keydown', e => { if(e.key==='ArrowRight'){ e.preventDefault(); go(idx()+1);} if(e.key==='ArrowLeft'){ e.preventDefault(); go(idx()-1);} });
+  window.addEventListener('resize', renderDots);
+  renderDots();
+
+  // header: transparent over hero, solid after
+  const header = $('#header');
+  const onScroll = () => header.classList.toggle('solid', window.scrollY > 40);
+  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+  // mobile drawer
+  const drawer = $('#drawer'), burger = $('#burger');
+  const setDrawer = open => { drawer.classList.toggle('open', open); drawer.setAttribute('aria-hidden', !open); burger.setAttribute('aria-expanded', open); document.body.style.overflow = open ? 'hidden' : ''; };
+  burger.onclick = () => setDrawer(true);
+  $('#drawerClose').onclick = () => setDrawer(false);
+  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setDrawer(false)));
+
+  // dialogs
+  $$('[data-dlg]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); $('#dlg-'+a.dataset.dlg).showModal(); }));
+  $$('dialog').forEach(d => { d.querySelector('[data-close]').onclick = () => d.close(); d.addEventListener('click', e => { if(e.target===d) d.close(); }); });
+
+  // form
+  const form = $('#quoteForm'), ok = $('#formOk');
+  const show = m => { ok.textContent = m; ok.hidden = false; };
+  form.addEventListener('submit', async e=>{
+    e.preventDefault();
+    const d = Object.fromEntries(new FormData(form));
+    if(!d.name.trim() || !d.phone.trim()){ show('Add your name and phone number so we can reply.'); (d.name.trim()? $('#fPhone') : $('#fName')).focus(); return; }
+    if(S.formEndpoint){
+      try{
+        const r = await fetch(S.formEndpoint, {method:'POST', headers:{'Accept':'application/json'}, body:new FormData(form)});
+        if(r.ok){ form.querySelector('button').disabled = true; return show(`Thanks, ${d.name}! We'll call you back shortly.`); }
+      }catch(err){}
+      return show(`The form didn't send. Please call ${S.phone}.`);
+    }
+    const body = `Quote request: ${d.service}. ${d.name}, ${d.phone}${d.address ? ', '+d.address : ''}${d.message ? '. '+d.message : ''}`;
+    location.href = S.email
+      ? `mailto:${S.email}?subject=${encodeURIComponent('Quote request')}&body=${encodeURIComponent(body)}`
+      : `sms:${(S.phone||'').replace(/[^\d+]/g,'')}?&body=${encodeURIComponent(body)}`;
+    show(`Thanks, ${d.name}! Your request is ready to send.`);
+  });
+})();
+</script>
+<script>
+/* Embedded preview mode (used on the Woodl portfolio): hide scrollbars, optional slow auto-scroll */
+(function(){
+  if(window.self === window.top) return;
+  var de = document.documentElement;
+  de.classList.add('embedded');
+  var st = document.createElement('style');
+  st.textContent = 'html,body{scrollbar-width:none;-ms-overflow-style:none}html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}';
+  document.head.appendChild(st);
+  if(!/[?&]autoscroll/.test(location.search)) return;
+  if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  de.style.scrollBehavior = 'auto';
+  var m = location.search.match(/[?&]speed=(\d+)/), speed = m ? +m[1] : 45;
+  var d = location.search.match(/[?&]delay=(\d+)/), delay = d ? +d[1] : 1200;
+  var y = 0, dir = 1, wait = 0, last = null;
+  var max = function(){ return Math.max(0, Math.min(de.scrollHeight - innerHeight, 5600)); };
+  function step(t){
+    if(last === null) last = t;
+    var dt = Math.min(t - last, 50); last = t;
+    if(wait > 0){ wait -= dt; }
+    else {
+      y += dir * speed * dt / 1000 * (dir < 0 ? 6 : 1);
+      var mx = max();
+      if(y >= mx){ y = mx; dir = -1; wait = 1600; }
+      else if(y <= 0){ y = 0; dir = 1; wait = 2200; }
+      window.scrollTo(0, y);
+    }
+    requestAnimationFrame(step);
+  }
+  setTimeout(function(){ requestAnimationFrame(step); }, delay);
+})();
+</script>
+</body>
+</html>
