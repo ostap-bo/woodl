@@ -140,6 +140,22 @@ const SITE = {
   .field.invalid .csel-btn,.field.invalid input,.field.invalid textarea{border-color:var(--err);}
 
   /* trust strip */
+  .avail{border-bottom:1px solid var(--line);background:#fff;}
+  .avail .wrap{display:flex;align-items:center;gap:28px;padding-top:22px;padding-bottom:22px;}
+  .av-h{display:flex;gap:12px;align-items:center;flex:none;}
+  .av-h b{display:block;font-size:17px;}
+  .av-h small{color:var(--ink-2, #5B6875);font-size:13.5px;}
+  .live{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:#1A7F43;background:#E6F6EC;border-radius:999px;padding:5px 10px;}
+  .live i{width:8px;height:8px;border-radius:50%;background:#22A55A;animation:livep 1.8s ease-in-out infinite;}
+  @keyframes livep{50%{opacity:.3;}}
+  .av-slots{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0;}
+  .av-slots::-webkit-scrollbar{display:none;}
+  .av-slot{display:flex;flex-direction:column;justify-content:flex-start;flex:none;border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:10px 14px;text-align:left;cursor:pointer;transition:border-color .3s, transform .3s, box-shadow .3s;font:inherit;color:inherit;}
+  .av-slot:hover{border-color:var(--orange, #F26B1D);transform:translateY(-2px);box-shadow:0 12px 22px -16px rgba(0,0,0,.4);}
+  .av-slot b{display:block;font-size:15px;}
+  .av-slot span{font-size:13px;color:#5B6875;}
+  .av-slot em{display:block;font-style:normal;font-size:12px;font-weight:700;color:#C2410C;margin-top:2px;}
+  @media (max-width:900px){ .avail .wrap{flex-direction:column;align-items:stretch;gap:14px;} .av-slots{margin-right:-18px;padding-right:18px;} }
   .strip{border-bottom:1px solid var(--line);}
   .strip .wrap{display:grid;grid-template-columns:repeat(4,1fr);}
   .strip div{padding:30px 22px;border-right:1px solid var(--line);}
@@ -373,7 +389,6 @@ const SITE = {
     .dialog-head,.dialog-body{padding-left:20px;padding-right:20px;}
     .steps-bar{padding-left:20px;padding-right:20px;}
     .dates{grid-template-columns:repeat(4,1fr);}
-    .mbar{display:flex;}
     footer{padding-bottom:100px;}
     .zip{flex-direction:column;}
     .topbar{font-size:13px;}
@@ -451,11 +466,9 @@ const SITE = {
     </div>
   </section>
 
-  <div class="strip"><div class="wrap">
-    <div><b>4.9★</b><span>Google rating</span></div>
-    <div><b>2,400+</b><span>homes cleaned</span></div>
-    <div><b>48 hr</b><span>average wait to book</span></div>
-    <div><b>100%</b><span>satisfaction or we re-wash</span></div>
+  <div class="avail"><div class="wrap">
+    <div class="av-h"><span class="live"><i></i>Live</span><div><b>Open times this week</b><small>Tap a time to book. Confirmation by text in minutes.</small></div></div>
+    <div class="av-slots" id="avSlots"></div>
   </div></div>
 
   <section id="services">
@@ -577,7 +590,6 @@ const SITE = {
   </div>
 </footer>
 
-<div class="mbar"><a class="btn btn-ink" data-tel-short>Call</a><button class="btn btn-orange" data-book>Book online</button></div>
 
 <!-- Booking modal -->
 <div class="modal" id="bookModal" role="dialog" aria-modal="true" aria-labelledby="bookTitle">
@@ -888,6 +900,20 @@ const SITE = {
     updB(); goStep(1); openModal(bModal);
   }
   $$('[data-book]').forEach(b => b.addEventListener('click', () => { if(b.closest('#drawer')) setDrawer(false); openBooking({svc:b.dataset.svc, plan:b.dataset.plan}); }));
+  /* live availability strip */
+  (function(){
+    const box = $('#avSlots'); if(!box) return;
+    const D = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'], times = ['8–10 AM','10–12 PM','1–3 PM','3–5 PM'];
+    const out = []; const d0 = new Date(); d0.setHours(0,0,0,0);
+    for(let i = 1; out.length < 6 && i < 14; i++){
+      const d = new Date(d0); d.setDate(d0.getDate() + i); if(d.getDay() === 0) continue;
+      const t = times[(i * 3) % times.length];
+      out.push({d, t, last: out.length === 1 || out.length === 4});
+    }
+    box.innerHTML = out.map(o => `<button class="av-slot" type="button"><b>${D[o.d.getDay()]} ${o.d.getMonth()+1}/${o.d.getDate()}</b><span>${o.t}</span>${o.last?'<em>Last slot that day</em>':''}</button>`).join('');
+    box.addEventListener('click', e => { if(e.target.closest('.av-slot')) openBooking({}); });
+  })();
+
   $('#bookForm').addEventListener('submit', async e => {
     e.preventDefault();
     let ok = true;

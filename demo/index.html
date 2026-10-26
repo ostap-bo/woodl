@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lead Inbox demo | Woodl</title>
+<meta name="description" content="Try the Lead Inbox: the simple system that keeps every quote request, booking and review request for a pressure washing business in one place.">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/png" href="../favicon.png">
+<link rel="preload" href="../archivo-600-wide.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../figtree.woff2" as="font" type="font/woff2" crossorigin>
+<meta property="og:title" content="Lead Inbox demo | Woodl">
+<meta property="og:description" content="Every quote request, booking and review request in one place. Try the demo.">
+<meta property="og:image" content="https://woodl-site.com/og.png">
+<style>
+  /* Layout: explainer column + phone app on desktop; the app goes full-screen on phones. Brand blue on light. */
+  @font-face{font-family:"Archivo";src:url(../archivo-600-wide.woff2) format("woff2");font-weight:100 900;font-display:swap;}
+  @font-face{font-family:"Figtree";src:url(../figtree.woff2) format("woff2");font-weight:300 900;font-display:swap;}
+  :root{
+    --bg:#F5F6FA; --surface:#fff; --surface-2:#EEF1F8; --tint:#EEF2FF; --line:#DDE1EC;
+    --text:#0E1430; --text-2:#4A5270; --text-3:#677090;
+    --blue:#2A4BD7; --blue-hi:#3A86FF; --grad:linear-gradient(180deg,#2A4BD7 0%,#3A86FF 100%);
+    --green:#12A150; --amber:#C27C0E; --red:#D63B3B;
+    --display:"Archivo","Helvetica Neue",Arial,sans-serif; --body:"Figtree",system-ui,sans-serif;
+    --ease:cubic-bezier(.22,.61,.36,1);
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:var(--body);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;}
+  button,input,select{font:inherit;color:inherit;}
+  button{cursor:pointer;}
+  a{color:inherit;}
+  :focus-visible{outline:2px solid var(--blue-hi);outline-offset:2px;}
+  h1,h2,h3{font-family:var(--display);font-weight:600;letter-spacing:-.03em;line-height:1.05;margin:0;}
+  @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none !important;transition:none !important;}}
+
+  /* page */
+  .top{display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto;padding:18px 24px;}
+  .logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--display);font-size:20px;letter-spacing:-.02em;}
+  .logo img{height:26px;width:auto;}
+  .top .btn{padding:11px 16px;font-size:14.5px;}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1.5px solid transparent;border-radius:12px;padding:13px 18px;font-weight:700;font-size:15px;line-height:1;text-decoration:none;white-space:nowrap;transition:transform .35s var(--ease),box-shadow .35s var(--ease),background-color .35s var(--ease),border-color .35s var(--ease),color .35s var(--ease);}
+  .btn-main{background:var(--grad);color:#fff;box-shadow:0 10px 26px -12px rgba(58,134,255,.7);}
+  .btn-main:hover{transform:translateY(-2px);box-shadow:0 16px 30px -12px rgba(58,134,255,.9);}
+  .btn-line{border-color:var(--line);background:#fff;}
+  .btn-line:hover{border-color:var(--blue);color:var(--blue);}
+  .btn svg{width:17px;height:17px;}
+  .top .btn .sm{display:none;}
+  .stage > *{min-width:0;}
+
+  .stage{max-width:1200px;margin:0 auto;padding:10px 24px 70px;display:grid;grid-template-columns:1fr 400px;gap:56px;align-items:start;}
+  .intro .pill{display:inline-flex;gap:8px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 12px 6px 6px;font-size:14px;font-weight:600;color:var(--text-2);}
+  .intro .pill b{background:var(--grad);color:#fff;border-radius:999px;padding:3px 10px;font-size:12.5px;}
+  .intro h1{font-size:clamp(34px,4.2vw,52px);margin-top:20px;}
+  .intro h1 em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .intro > p{color:var(--text-2);font-size:18px;max-width:34em;margin:16px 0 0;}
+  .tour{list-style:none;padding:0;margin:28px 0 0;display:grid;gap:10px;counter-reset:t;}
+  .tour li{counter-increment:t;display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:start;background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 16px;}
+  .tour li::before{content:counter(t);width:34px;height:34px;border-radius:10px;background:var(--tint);color:var(--blue);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:15px;}
+  .tour b{display:block;font-size:15.5px;}
+  .tour span{font-size:14.5px;color:var(--text-2);}
+  .intro-cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px;}
+  .note{font-size:13.5px;color:var(--text-3);margin-top:14px;}
+
+  /* phone */
+  .phone{position:sticky;top:20px;width:400px;height:820px;border-radius:46px;background:#141826;padding:12px;box-shadow:0 50px 90px -40px rgba(14,20,48,.55);}
+  .screen{position:relative;width:100%;height:100%;border-radius:36px;overflow:hidden;background:var(--bg);display:flex;flex-direction:column;}
+
+  /* app */
+  .app-h{padding:20px 18px 12px;background:#fff;border-bottom:1px solid var(--line);}
+  .app-h .row{display:flex;justify-content:space-between;align-items:center;gap:10px;}
+  .biz{display:flex;align-items:center;gap:10px;}
+  .biz i{width:36px;height:36px;border-radius:11px;background:#0F2A3A;color:#5FE0C3;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-style:normal;font-size:14px;}
+  .biz b{display:block;font-size:15.5px;line-height:1.15;}
+  .biz small{font-size:12.5px;color:var(--text-3);}
+  .icon-btn{width:38px;height:38px;border-radius:11px;border:1px solid var(--line);background:#fff;display:flex;align-items:center;justify-content:center;position:relative;transition:border-color .3s var(--ease);}
+  .icon-btn:hover{border-color:var(--blue);}
+  .icon-btn svg{width:18px;height:18px;}
+  .icon-btn .dot{position:absolute;top:-4px;right:-4px;min-width:18px;height:18px;border-radius:9px;background:var(--red);color:#fff;font-size:11px;font-weight:700;display:none;align-items:center;justify-content:center;padding:0 4px;}
+  .icon-btn .dot.on{display:flex;}
+  .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px;}
+  .kpi{background:var(--surface-2);border-radius:12px;padding:9px 10px;}
+  .kpi b{display:block;font-family:var(--display);font-size:18px;letter-spacing:-.02em;}
+  .kpi span{font-size:11.5px;color:var(--text-3);line-height:1.2;display:block;}
+  .tabs{display:flex;gap:6px;margin-top:14px;overflow-x:auto;scrollbar-width:none;}
+  .tabs::-webkit-scrollbar{display:none;}
+  .tab{flex:none;border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 12px;font-size:13.5px;font-weight:600;color:var(--text-2);transition:all .3s var(--ease);}
+  .tab b{font-weight:700;margin-left:4px;color:var(--text-3);}
+  .tab.on{background:var(--text);border-color:var(--text);color:#fff;}
+  .tab.on b{color:#AEB8D8;}
+
+  .list{flex:1;overflow-y:auto;padding:12px 14px 90px;display:grid;gap:10px;align-content:start;scrollbar-width:none;}
+  .list::-webkit-scrollbar{display:none;}
+  .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:13px 14px;text-align:left;width:100%;display:grid;gap:8px;transition:border-color .3s var(--ease),box-shadow .3s var(--ease),transform .3s var(--ease);}
+  .card:hover{border-color:#C9D3F5;box-shadow:0 14px 28px -22px rgba(42,75,215,.6);}
+  .card.fresh{animation:fresh 1.6s var(--ease);}
+  @keyframes fresh{0%{transform:translateY(-14px);opacity:0;box-shadow:0 0 0 3px rgba(58,134,255,.6);}40%{transform:none;opacity:1;}100%{box-shadow:0 0 0 0 rgba(58,134,255,0);}}
+  .c-top{display:flex;justify-content:space-between;gap:8px;align-items:flex-start;}
+  .c-name{font-weight:700;font-size:15px;}
+  .c-sub{font-size:13px;color:var(--text-3);}
+  .c-price{font-family:var(--display);font-size:16px;white-space:nowrap;}
+  .tags{display:flex;gap:6px;flex-wrap:wrap;}
+  .tag{font-size:11.5px;font-weight:700;padding:3px 8px;border-radius:999px;background:var(--surface-2);color:var(--text-2);}
+  .tag.src-quote{background:#E8F0FF;color:var(--blue);}
+  .tag.src-photo{background:#F3E8FF;color:#7A3BD0;}
+  .tag.src-book{background:#E5F6EC;color:var(--green);}
+  .tag.src-call{background:#FFF3DF;color:var(--amber);}
+  .tag.warn{background:#FDECEC;color:var(--red);}
+  .thumbs{display:flex;gap:6px;}
+  .thumbs i{width:46px;height:34px;border-radius:7px;background:linear-gradient(135deg,#6B7A88,#A9B4BE);display:block;position:relative;overflow:hidden;}
+  .thumbs i::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(0,0,0,.12) 0 4px,transparent 4px 9px);}
+  .reply{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--green);font-weight:600;}
+  .reply svg{width:14px;height:14px;}
+  .empty{text-align:center;color:var(--text-3);font-size:14px;padding:40px 10px;}
+  .day{font-size:12px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.08em;margin:6px 2px 0;display:flex;align-items:center;gap:8px;}
+  .day .wx{font-weight:600;text-transform:none;letter-spacing:0;font-size:12.5px;}
+
+  .fab{position:absolute;left:14px;right:14px;bottom:14px;display:flex;gap:8px;}
+  .fab .btn{flex:1;padding:14px;font-size:14.5px;}
+
+  /* sheet */
+  .sheet-bg{position:absolute;inset:0;background:rgba(14,20,48,.38);opacity:0;visibility:hidden;transition:opacity .3s var(--ease),visibility .3s;}
+  .sheet{position:absolute;left:0;right:0;bottom:0;max-height:88%;overflow-y:auto;background:#fff;border-radius:24px 24px 0 0;padding:10px 18px 22px;transform:translateY(100%);transition:transform .45s var(--ease);}
+  .open .sheet-bg{opacity:1;visibility:visible;}
+  .open .sheet{transform:none;}
+  .grab{width:44px;height:5px;border-radius:3px;background:var(--line);margin:0 auto 12px;}
+  .sheet h3{font-size:22px;}
+  .kv{display:grid;grid-template-columns:96px 1fr;gap:6px 10px;margin-top:14px;font-size:14px;}
+  .kv dt{color:var(--text-3);}
+  .kv dd{margin:0;font-weight:600;}
+  .msg{margin-top:14px;background:var(--surface-2);border-radius:14px;padding:12px 14px;font-size:13.5px;color:var(--text-2);}
+  .msg b{display:block;color:var(--text);font-size:12.5px;margin-bottom:4px;}
+  .acts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px;}
+  .acts .btn{padding:13px 10px;font-size:14px;}
+  .acts .wide{grid-column:1 / -1;}
+  .slots{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;}
+  .slot{border:1.5px solid var(--line);background:#fff;border-radius:10px;padding:8px 10px;font-size:13px;font-weight:600;transition:all .3s var(--ease);}
+  .slot.on{border-color:var(--blue);background:var(--tint);color:var(--blue);}
+  .flow{display:flex;gap:4px;margin-top:14px;}
+  .flow i{flex:1;height:5px;border-radius:3px;background:var(--line);transition:background .4s var(--ease);}
+  .flow i.on{background:var(--blue-hi);}
+  .flow-l{display:flex;justify-content:space-between;font-size:11px;color:var(--text-3);margin-top:5px;}
+
+  /* toast + notification */
+  .toast{position:absolute;left:14px;right:14px;top:14px;z-index:5;background:var(--text);color:#fff;border-radius:14px;padding:12px 14px;font-size:13.5px;display:flex;gap:10px;align-items:center;transform:translateY(-140%);transition:transform .45s var(--ease);box-shadow:0 18px 30px -16px rgba(0,0,0,.6);}
+  .toast.show{transform:none;}
+  .toast i{width:28px;height:28px;border-radius:8px;background:var(--grad);display:flex;align-items:center;justify-content:center;flex:none;}
+  .toast i svg{width:15px;height:15px;color:#fff;}
+  .toast b{display:block;font-size:13px;}
+
+  .banner{margin:4px 0 0;background:var(--grad);color:#fff;border-radius:16px;padding:14px;display:grid;gap:8px;}
+  .banner b{font-size:15px;}
+  .banner span{font-size:13px;opacity:.9;}
+  .banner a{justify-self:start;background:#fff;color:var(--blue);border-radius:10px;padding:9px 12px;font-weight:700;font-size:13.5px;text-decoration:none;}
+
+  @media (max-width:980px){
+    .stage{grid-template-columns:1fr;gap:28px;}
+    .phone{position:relative;top:0;margin:0 auto;}
+  }
+  @media (max-width:520px){
+    .top{padding:14px 16px;}
+    .top .btn .lg{display:none;}
+    .top .btn .sm{display:inline;}
+    .stage{padding:4px 0 0;gap:18px;}
+    .intro{padding:0 16px;}
+    .intro h1{font-size:32px;}
+    .intro > p{font-size:16.5px;}
+    .tour{display:none;}
+    .intro-cta{display:none;}
+    .note{display:none;}
+    .phone{width:100%;height:calc(100dvh - 70px);min-height:640px;border-radius:0;padding:0;background:none;box-shadow:none;}
+    .screen{border-radius:22px 22px 0 0;border-top:1px solid var(--line);}
+  }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-bell" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.9 1.9 0 0 0 3.4 0"/></symbol>
+  <symbol id="i-reset" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></symbol>
+  <symbol id="i-msg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2-5.5A8.4 8.4 0 1 1 21 11.5z"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.5l2.9 6.2 6.6.7-5 4.5 1.4 6.6L12 17.2l-5.9 3.3 1.4-6.6-5-4.5 6.6-.7z"/></symbol>
+</svg>
+
+<header class="top">
+  <a class="logo" href="../"><img src="../logo.png" alt="" width="227" height="160">WOODL</a>
+  <a class="btn btn-main" href="../?ref=demo#contact"><span class="lg">Get this for my business</span><span class="sm">Get yours</span></a>
+</header>
+
+<main class="stage">
+  <section class="intro">
+    <span class="pill"><b>Live demo</b>Built for pressure washing companies</span>
+    <h1>Every lead, quote and booking. <em>One simple inbox.</em></h1>
+    <p>This is the Lead Inbox that comes with the Booked Jobs System. Tap around: it's a working demo with sample data, nothing is sent anywhere.</p>
+    <ol class="tour">
+      <li><div><b>Get a new lead</b><span>Press “Simulate new lead”. Notice the instant auto-reply sent to the customer.</span></div></li>
+      <li><div><b>Send a quote in one tap</b><span>Open a lead, check the photos and the estimate the customer already saw on your site.</span></div></li>
+      <li><div><b>Book the job</b><span>Pick a time slot. Rain coming? The Booked tab flags it so you can reschedule early.</span></div></li>
+      <li><div><b>Mark it done, get a review</b><span>A Google review request goes out automatically, and a reminder is set for next year's wash.</span></div></li>
+    </ol>
+    <div class="intro-cta">
+      <a class="btn btn-main" href="../?ref=demo#contact">Get a free preview for my business</a>
+      <a class="btn btn-line" href="../#pricing">See pricing</a>
+    </div>
+    <p class="note">Demo data only. Your real inbox works on any phone, no app to install.</p>
+  </section>
+
+  <div class="phone">
+    <div class="screen" id="screen">
+      <div class="toast" id="toast" role="status"><i><svg><use href="#i-check"/></svg></i><div id="toastTxt"></div></div>
+      <div class="app-h">
+        <div class="row">
+          <div class="biz"><i>SP</i><div><b>Shine Pro Wash</b><small>Lead Inbox · San Antonio</small></div></div>
+          <div style="display:flex;gap:8px">
+            <button class="icon-btn" id="resetBtn" aria-label="Reset demo" title="Reset demo"><svg><use href="#i-reset"/></svg></button>
+            <button class="icon-btn" id="bellBtn" aria-label="Notifications"><svg><use href="#i-bell"/></svg><span class="dot" id="dot">0</span></button>
+          </div>
+        </div>
+        <div class="kpis">
+          <div class="kpi"><b id="kLeads">0</b><span>leads this week</span></div>
+          <div class="kpi"><b id="kBooked">$0</b><span>booked revenue</span></div>
+          <div class="kpi"><b id="kReviews">0</b><span>review requests</span></div>
+        </div>
+        <div class="tabs" role="tablist" id="tabs"></div>
+      </div>
+      <div class="list" id="list"></div>
+      <div class="fab"><button class="btn btn-main" id="simBtn"><svg><use href="#i-plus"/></svg>Simulate new lead</button></div>
+      <div class="sheet-bg" id="sheetBg"></div>
+      <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="shTitle"></div>
+    </div>
+  </div>
+</main>
+
+<script>
+(function(){
+  const $ = (s, r=document) => r.querySelector(s), $$ = (s, r=document) => [...r.querySelectorAll(s)];
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const SRC = {quote:['Instant quote','src-quote'], photo:['Photo quote','src-photo'], book:['Online booking','src-book'], call:['Missed call','src-call']};
+  const STAGES = [['new','New'],['quoted','Quoted'],['booked','Booked'],['done','Done'],['reminders','Reminders']];
+
+  const seed = () => ([
+    {id:1, name:'Maria Lopez', area:'Stone Oak', service:'Driveway + sidewalk', size:'2-car driveway', src:'quote', est:[180,220], stage:'new', ago:'4 min ago', photos:0},
+    {id:2, name:'James Carter', area:'Alamo Heights', service:'House wash (soft wash)', size:'2,400 sq ft, 2 stories', src:'photo', est:[380,450], stage:'new', ago:'38 min ago', photos:3},
+    {id:3, name:'Linda Nguyen', area:'Helotes', service:'Paver patio + sealing', size:'~600 sq ft', src:'photo', est:[420,520], stage:'quoted', ago:'Yesterday', photos:2, quote:470},
+    {id:4, name:'Robert Kim', area:'Leon Valley', service:'Roof soft wash', size:'Single story', src:'quote', est:[450,600], stage:'quoted', ago:'Yesterday', quote:520},
+    {id:5, name:'Patricia Brown', area:'Stone Oak', service:'House wash + driveway', size:'2,000 sq ft', src:'book', est:[390,460], stage:'booked', when:'Thu · 8–10 AM', day:'Thu', rain:false, quote:430},
+    {id:6, name:'Daniel Wilson', area:'Shavano Park', service:'Fence + deck', size:'120 ft fence', src:'call', est:[260,320], stage:'booked', when:'Fri · 1–3 PM', day:'Fri', rain:true, quote:300},
+    {id:7, name:'Susan Miller', area:'Converse', service:'Driveway cleaning', size:'3-car driveway', src:'quote', est:[220,260], stage:'done', when:'Mon', quote:240, reviewSent:true},
+  ]);
+  const remindersSeed = () => ([
+    {name:'Karen Davis', area:'Alamo Heights', service:'Annual house wash', last:'Oct 2025', sent:false},
+    {name:'Mark Thompson', area:'Stone Oak', service:'Driveway + roof', last:'Nov 2025', sent:false},
+  ]);
+  const NEW_POOL = [
+    {name:'Emily Garcia', area:'Schertz', service:'Driveway + patio', size:'2-car + patio', src:'quote', est:[240,290], photos:0},
+    {name:'Chris Martinez', area:'Boerne', service:'House wash', size:'3,100 sq ft, 2 stories', src:'photo', est:[420,520], photos:4},
+    {name:'Ashley Johnson', area:'Cibolo', service:'Gutter brightening', size:'Single story', src:'book', est:[150,190], photos:0},
+    {name:'Brian Lee', area:'Alamo Heights', service:'Commercial sidewalk', size:'Storefront, 80 ft', src:'call', est:[200,260], photos:0},
+  ];
+
+  let leads, reminders, tab = 'new', unread = 0, poolIdx = 0, reviews = 1, nextId = 100;
+  const reset = () => { leads = seed(); reminders = remindersSeed(); tab = 'new'; unread = 0; poolIdx = 0; reviews = 1; render(); };
+
+  /* toast */
+  let tTimer;
+  const toast = (title, txt) => { $('#toastTxt').innerHTML = `<b>${esc(title)}</b>${esc(txt||'')}`; $('#toast').classList.add('show'); clearTimeout(tTimer); tTimer = setTimeout(() => $('#toast').classList.remove('show'), 2800); };
+
+  /* render */
+  const money = n => '$' + n.toLocaleString('en-US');
+  const range = e => `${money(e[0])}–${money(e[1])}`;
+  function render(freshId){
+    const count = s => s === 'reminders' ? reminders.filter(r => !r.sent).length : leads.filter(l => l.stage === s).length;
+    $('#tabs').innerHTML = STAGES.map(([k,l]) => `<button class="tab ${tab===k?'on':''}" role="tab" aria-selected="${tab===k}" data-tab="${k}">${l}<b>${count(k)}</b></button>`).join('');
+    $('#kLeads').textContent = leads.length + 5;
+    $('#kBooked').textContent = money(leads.filter(l => l.stage==='booked' || l.stage==='done').reduce((a,l) => a + (l.quote||l.est[1]), 0) + 1860);
+    $('#kReviews').textContent = reviews + 3;
+    const dot = $('#dot'); dot.textContent = unread; dot.classList.toggle('on', unread > 0);
+
+    const L = $('#list');
+    if(tab === 'reminders'){
+      L.innerHTML = `<div class="msg" style="margin:0"><b>Repeat business on autopilot</b>Customers from last year get a friendly “time for your annual wash” message. One tap to send.</div>` +
+        reminders.map((r,i) => `<div class="card"><div class="c-top"><div><div class="c-name">${esc(r.name)}</div><div class="c-sub">${esc(r.area)} · last job ${esc(r.last)}</div></div><span class="tag ${r.sent?'src-book':''}">${r.sent?'Sent':'Due now'}</span></div><div class="c-sub">${esc(r.service)}</div>${r.sent?'':`<button class="btn btn-line" data-remind="${i}" style="justify-self:start;padding:9px 12px;font-size:13.5px">Send reminder</button>`}</div>`).join('');
+      return;
+    }
+    const items = leads.filter(l => l.stage === tab);
+    if(!items.length){ L.innerHTML = `<div class="empty">Nothing here right now.</div>${tab==='new'?banner():''}`; return; }
+    let html = '';
+    if(tab === 'booked'){
+      ['Thu','Fri'].forEach(d => {
+        const dayItems = items.filter(l => l.day === d);
+        if(!dayItems.length) return;
+        const rain = dayItems.some(l => l.rain);
+        html += `<div class="day">${d==='Thu'?'Thursday':'Friday'} <span class="wx">${rain?'🌧 70% rain':'☀️ Clear'}</span></div>` + dayItems.map(card).join('');
+      });
+      const other = items.filter(l => !['Thu','Fri'].includes(l.day));
+      if(other.length) html += `<div class="day">Next week <span class="wx">☀️ Clear</span></div>` + other.map(card).join('');
+    } else html = items.map(card).join('');
+    if(tab === 'done') html += banner();
+    L.innerHTML = html;
+    if(freshId){ const el = L.querySelector(`[data-id="${freshId}"]`); if(el) el.classList.add('fresh'); }
+  }
+  function card(l){
+    const [srcLabel, srcCls] = SRC[l.src];
+    const priceTxt = l.quote ? money(l.quote) : range(l.est);
+    return `<button class="card" data-id="${l.id}">
+      <div class="c-top"><div><div class="c-name">${esc(l.name)}</div><div class="c-sub">${esc(l.area)} · ${esc((l.stage==='booked'||l.stage==='done') ? (l.when||l.ago||'') : (l.ago||l.when||''))}</div></div><div class="c-price">${priceTxt}</div></div>
+      <div class="tags"><span class="tag ${srcCls}">${srcLabel}</span><span class="tag">${esc(l.service)}</span>${l.rain?'<span class="tag warn">Rain risk</span>':''}${l.stage==='done'&&l.reviewSent?'<span class="tag src-book">★ Review requested</span>':''}</div>
+      ${l.photos?`<div class="thumbs">${'<i></i>'.repeat(Math.min(l.photos,4))}</div>`:''}
+      ${l.stage==='new'?`<div class="reply"><svg><use href="#i-check"/></svg>Auto-reply sent in 12 sec</div>`:''}
+    </button>`;
+  }
+  const banner = () => `<div class="banner"><b>Want this for your business?</b><span>Your Lead Inbox comes with the Booked Jobs System. See your website preview first, free.</span><a href="../?ref=demo#contact" target="_top">Get a free preview →</a></div>`;
+
+  /* sheet */
+  let cur = null, slot = null;
+  function openSheet(id){
+    cur = leads.find(l => l.id === id); if(!cur) return; slot = null;
+    const st = ['new','quoted','booked','done'].indexOf(cur.stage);
+    const autoMsg = `Hi ${cur.name.split(' ')[0]}, thanks for reaching out to Shine Pro Wash! Your estimate for ${cur.service.toLowerCase()} is ${range(cur.est)}. We'll confirm the exact price shortly.`;
+    let acts = '';
+    if(cur.stage === 'new') acts = `<button class="btn btn-main wide" data-act="quote">Send quote: ${money(Math.round((cur.est[0]+cur.est[1])/2/10)*10)}</button>`;
+    if(cur.stage === 'quoted') acts = `<div class="wide" style="font-size:13.5px;font-weight:700;margin-top:4px">Pick a time slot</div><div class="slots wide">${['Thu 8–10 AM','Thu 1–3 PM','Fri 8–10 AM','Mon 10–12 AM'].map(s => `<button class="slot" data-slot="${s}">${s}</button>`).join('')}</div><button class="btn btn-main wide" data-act="book">Book job</button>`;
+    if(cur.stage === 'booked') acts = `${cur.rain?`<div class="msg wide" style="margin-top:0;background:#FDECEC;color:#8A2626"><b style="color:#8A2626">Rain expected on ${esc(cur.day)}</b>Send a one-tap reschedule offer to the customer.</div><button class="btn btn-line" data-act="reschedule">Offer new time</button>`:''}<button class="btn btn-main ${cur.rain?'':'wide'}" data-act="done">Mark job done</button>`;
+    if(cur.stage === 'done') acts = `<div class="msg wide" style="margin-top:0"><b>All set</b>Review request sent and a reminder is scheduled for next year's wash.</div>`;
+    $('#sheet').innerHTML = `<div class="grab"></div>
+      <div class="c-top"><div><h3 id="shTitle">${esc(cur.name)}</h3><div class="c-sub">${esc(cur.area)}, San Antonio</div></div><span class="tag ${SRC[cur.src][1]}">${SRC[cur.src][0]}</span></div>
+      <div class="flow">${[0,1,2,3].map(i => `<i class="${i<=st?'on':''}"></i>`).join('')}</div>
+      <div class="flow-l"><span>New</span><span>Quoted</span><span>Booked</span><span>Done</span></div>
+      <dl class="kv"><dt>Service</dt><dd>${esc(cur.service)}</dd><dt>Size</dt><dd>${esc(cur.size||'')}</dd><dt>Estimate</dt><dd>${range(cur.est)}</dd>${cur.quote?`<dt>Quoted</dt><dd>${money(cur.quote)}</dd>`:''}${cur.when?`<dt>Scheduled</dt><dd>${esc(cur.when)}</dd>`:''}<dt>Phone</dt><dd>(210) 555-01${String(cur.id).padStart(2,'0').slice(-2)}</dd></dl>
+      ${cur.photos?`<div class="thumbs" style="margin-top:12px">${'<i style="width:68px;height:52px"></i>'.repeat(Math.min(cur.photos,4))}</div>`:''}
+      <div class="msg"><b>Auto-reply the customer got</b>${esc(autoMsg)}</div>
+      <div class="acts"><button class="btn btn-line" data-act="call"><svg><use href="#i-phone"/></svg>Call</button><button class="btn btn-line" data-act="text"><svg><use href="#i-msg"/></svg>Text</button>${acts}</div>`;
+    $('#screen').classList.add('open');
+  }
+  const closeSheet = () => $('#screen').classList.remove('open');
+
+  $('#sheet').addEventListener('click', e => {
+    const s = e.target.closest('[data-slot]');
+    if(s){ slot = s.dataset.slot; $$('.slot', $('#sheet')).forEach(b => b.classList.toggle('on', b === s)); return; }
+    const a = e.target.closest('[data-act]'); if(!a || !cur) return;
+    const act = a.dataset.act;
+    if(act === 'call'){ toast('Calling…', ' (demo)'); return; }
+    if(act === 'text'){ toast('Text thread opened', ' (demo)'); return; }
+    if(act === 'quote'){ cur.quote = Math.round((cur.est[0]+cur.est[1])/2/10)*10; cur.stage = 'quoted'; cur.ago = 'Just now'; closeSheet(); tab = 'quoted'; render(cur.id); toast('Quote sent', ` ${money(cur.quote)} to ${cur.name.split(' ')[0]} by text and email`); return; }
+    if(act === 'book'){
+      if(!slot){ toast('Pick a time slot first', ''); return; }
+      cur.when = slot.replace(' ', ' · '); cur.day = slot.startsWith('Thu') ? 'Thu' : slot.startsWith('Fri') ? 'Fri' : 'Mon'; cur.rain = cur.day === 'Fri'; cur.stage = 'booked'; closeSheet(); tab = 'booked'; render(cur.id);
+      toast('Job booked', ` ${cur.when}. Confirmation sent to the customer.`); return;
+    }
+    if(act === 'reschedule'){ cur.day = 'Mon'; cur.when = 'Mon · 8–10 AM'; cur.rain = false; closeSheet(); render(cur.id); toast('Reschedule sent', ' Customer picked Monday 8–10 AM'); return; }
+    if(act === 'done'){ cur.stage = 'done'; cur.reviewSent = true; reviews++; closeSheet(); tab = 'done'; render(cur.id); toast('Review request sent ★', ' Reminder set for next year'); return; }
+  });
+  $('#sheetBg').addEventListener('click', closeSheet);
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') closeSheet(); });
+
+  $('#tabs').addEventListener('click', e => { const t = e.target.closest('[data-tab]'); if(!t) return; tab = t.dataset.tab; render(); });
+  $('#list').addEventListener('click', e => {
+    const r = e.target.closest('[data-remind]');
+    if(r){ reminders[+r.dataset.remind].sent = true; render(); toast('Reminder sent', ' “Time for your annual house wash?”'); return; }
+    const c = e.target.closest('[data-id]'); if(c) openSheet(+c.dataset.id);
+  });
+  $('#simBtn').addEventListener('click', () => {
+    const p = NEW_POOL[poolIdx % NEW_POOL.length]; poolIdx++;
+    const l = {...p, id: nextId++, stage:'new', ago:'Just now'};
+    leads.unshift(l); unread++; tab = 'new'; render(l.id);
+    toast(`New ${SRC[l.src][0].toLowerCase()}: ${l.name}`, ` ${l.service}, ${range(l.est)}. Auto-reply sent.`);
+  });
+  $('#bellBtn').addEventListener('click', () => { unread = 0; tab = 'new'; render(); });
+  $('#resetBtn').addEventListener('click', () => { reset(); toast('Demo reset', ''); });
+
+  reset();
+})();
+</script>
+</body>
+</html>

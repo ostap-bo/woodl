@@ -147,6 +147,15 @@ const SITE = {
   .cal-grid span{font-size:12px;color:var(--ink-3);font-weight:700;padding:4px 0;}
   .cal-grid button{aspect-ratio:1;border:none;border-radius:8px;background:transparent;cursor:pointer;font-weight:600;font-size:14.5px;}
   .cal-grid button:hover:not(:disabled){background:var(--mist);}
+  .cal-grid button.rain{position:relative;color:#1F5E8C;background:#EAF4FB;}
+  .cal-grid button.rain::after{content:"";position:absolute;left:50%;bottom:5px;width:5px;height:5px;margin-left:-2.5px;border-radius:50%;background:#3E9BD6;}
+  .cal-grid button.rain[aria-pressed="true"]{background:var(--navy);color:#fff;}
+  .cal-note .rd{display:inline-block;width:8px;height:8px;border-radius:50%;background:#3E9BD6;margin-right:6px;vertical-align:1px;}
+  .rainline{margin-top:22px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;border:1px solid rgba(255,255,255,.16);border-radius:18px;padding:18px 22px;background:rgba(255,255,255,.04);}
+  .rainline .rl-ic{font-size:30px;line-height:1;color:inherit;}
+  .rainline > div{flex:1;min-width:220px;}
+  .rainline b{display:block;font-size:17px;}
+  .rainline span{color:rgba(255,255,255,.75);font-size:15px;}
   .cal-grid button:disabled{color:#C3CCD5;cursor:not-allowed;}
   .cal-grid button.today{box-shadow:inset 0 0 0 1.5px var(--line);}
   .cal-grid button[aria-pressed="true"]{background:var(--navy);color:#fff;}
@@ -385,7 +394,6 @@ const SITE = {
     .d-head,.d-body{padding-left:20px;padding-right:20px;}
     .d-head h3{font-size:32px;}
     .promo-img b{font-size:84px;}
-    .mbar{display:flex;}
     footer{padding-bottom:100px;}
     .thumb small{display:none;}
   }
@@ -455,6 +463,17 @@ const SITE = {
     <div><b>24 hr</b><span>quote turnaround</span></div>
   </div></div>
 
+  <section class="dark" id="plans">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><h2>Stay clean plans</h2><p class="lede">Houston mold comes back. A plan keeps it from taking hold.</p></div>
+        <div class="toggle"><span>Per visit</span><button class="switch" id="billing" role="switch" aria-checked="false" aria-label="Switch to annual billing"></button><span>Annual</span><span class="save">Save 15%</span></div>
+      </div>
+      <div class="plans" id="planGrid"></div>
+      <div class="rainline"><span class="rl-ic">🌧</span><div><b>Rain-day guarantee</b><span>Rain in the forecast on your wash day? We text you the day before with new times. Rescheduling is always free.</span></div><button class="btn btn-aqua" data-quote>Book a wash</button></div>
+    </div>
+  </section>
+
   <section id="services">
     <div class="wrap">
       <div class="sec-head">
@@ -491,22 +510,13 @@ const SITE = {
       <div class="sec-head"><div><h2>How it works</h2><p class="lede">Four steps, usually done within the same week.</p></div></div>
       <div class="tl">
         <div class="tl-step"><h3>Quote</h3><p>Send photos or book a free on-site check. Price in 24 hours.</p></div>
-        <div class="tl-step"><h3>Schedule</h3><p>Pick a date that works. We text a reminder the day before.</p></div>
+        <div class="tl-step"><h3>Book online</h3><p>Pick a date in 30 seconds. Rain in the forecast? We text you new times the day before.</p></div>
         <div class="tl-step"><h3>Wash</h3><p>Soft wash for siding and roofs, hot water for oil and grease.</p></div>
         <div class="tl-step"><h3>Walkthrough</h3><p>We check every surface with you. Not happy? We re-wash free.</p></div>
       </div>
     </div>
   </section>
 
-  <section class="dark" id="plans">
-    <div class="wrap">
-      <div class="sec-head">
-        <div><h2>Stay clean plans</h2><p class="lede">Houston mold comes back. A plan keeps it from taking hold.</p></div>
-        <div class="toggle"><span>Per visit</span><button class="switch" id="billing" role="switch" aria-checked="false" aria-label="Switch to annual billing"></button><span>Annual</span><span class="save">Save 15%</span></div>
-      </div>
-      <div class="plans" id="planGrid"></div>
-    </div>
-  </section>
 
   <section class="mist" id="reviews">
     <div class="wrap">
@@ -571,7 +581,6 @@ const SITE = {
   </div>
 </footer>
 
-<div class="mbar"><a class="btn btn-ghost" data-tel>Call</a><button class="btn btn-aqua" data-quote>Free quote</button></div>
 
 <!-- quote modal -->
 <div class="modal" id="qModal" role="dialog" aria-modal="true" aria-labelledby="qTitle">
@@ -729,9 +738,10 @@ const SITE = {
       for(let d=1; d<=days; d++){
         const dt = new Date(y, m, d), dis = dt < min || dt > max || dt.getDay()===0;
         const sel = api.value && +api.value === +dt;
-        cells += `<button type="button" data-d="${+dt}" ${dis?'disabled':''} aria-pressed="${!!sel}" class="${+dt===+today?'today':''}" aria-label="${MON[m]} ${d}">${d}</button>`;
+        const diff = Math.round((dt - today) / 864e5), rain = !dis && diff >= 1 && diff <= 10 && (dt.getDate() % 4 === 1);
+        cells += `<button type="button" data-d="${+dt}" ${dis?'disabled':''} aria-pressed="${!!sel}" class="${+dt===+today?'today':''}${rain?' rain':''}" aria-label="${MON[m]} ${d}${rain?', rain in the forecast':''}">${d}</button>`;
       }
-      pop.innerHTML = `<div class="cal-head"><button type="button" data-nav="-1" ${prevOk?'':'disabled'} aria-label="Previous month"><svg><use href="#i-left"/></svg></button><span>${MON[m]} ${y}</span><button type="button" data-nav="1" ${nextOk?'':'disabled'} aria-label="Next month"><svg><use href="#i-right"/></svg></button></div><div class="cal-grid">${cells}</div><div class="cal-note">Sundays closed. Booking up to 60 days ahead.</div>`;
+      pop.innerHTML = `<div class="cal-head"><button type="button" data-nav="-1" ${prevOk?'':'disabled'} aria-label="Previous month"><svg><use href="#i-left"/></svg></button><span>${MON[m]} ${y}</span><button type="button" data-nav="1" ${nextOk?'':'disabled'} aria-label="Next month"><svg><use href="#i-right"/></svg></button></div><div class="cal-grid">${cells}</div><div class="cal-note"><i class="rd"></i>Rain in the forecast: book anyway, rescheduling is free. Sundays closed.</div>`;
     }
     pop.addEventListener('click', e => {
       e.stopPropagation();

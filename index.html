@@ -3,21 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Woodl | Professional Websites for Local Service Businesses</title>
-<meta name="description" content="Professional, mobile-first websites for local service businesses across the US. Fixed pricing from $250, live in 5 days. Get a free custom preview before you pay.">
+<title>Woodl | Websites & Booking Systems for Pressure Washing Companies</title>
+<meta name="description" content="Websites with instant quotes, online booking and automatic Google review requests for pressure washing companies in the US. From $400, live in 7 days. Free preview first.">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="canonical" href="https://woodl-site.com/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://woodl-site.com/">
-<meta property="og:title" content="Woodl | Professional Websites for Local Service Businesses">
-<meta property="og:description" content="Fixed pricing from $250, live in 5 days. Get a free custom preview of your new website before you pay.">
+<meta property="og:title" content="Woodl | Websites & Booking Systems for Pressure Washing Companies">
+<meta property="og:description" content="Instant quotes, online booking and Google reviews on autopilot. From $400, live in 7 days. Free preview first.">
 <meta property="og:image" content="https://woodl-site.com/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#2A4BD7">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Woodl","url":"https://woodl-site.com/","image":"https://woodl-site.com/og.png","logo":"https://woodl-site.com/logo.png","description":"Professional, mobile-first websites, lead systems and AI automation for local service businesses in the US.","email":"contact@woodl-site.com","founder":{"@type":"Person","name":"Ostap Bodnar"},"areaServed":"US","priceRange":"$250–$600","sameAs":["https://www.linkedin.com/in/ostap-bodnar-171147275","https://www.upwork.com/freelancers/~01e0c89dbdc64d0663","https://www.fiverr.com/ostap_bo"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Woodl","url":"https://woodl-site.com/","image":"https://woodl-site.com/og.png","logo":"https://woodl-site.com/logo.png","description":"Websites with instant quotes, online booking, a lead inbox and automatic Google review requests for pressure washing companies in the US.","email":"contact@woodl-site.com","founder":{"@type":"Person","name":"Ostap Bodnar"},"areaServed":"US","priceRange":"$400–$750","sameAs":["https://www.linkedin.com/in/ostap-bodnar-171147275","https://www.upwork.com/freelancers/~01e0c89dbdc64d0663","https://www.fiverr.com/ostap_bo"]}</script>
 <link rel="preload" href="archivo-600-wide.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="figtree.woff2" as="font" type="font/woff2" crossorigin>
 <script>document.documentElement.classList.add('js');</script>
@@ -201,7 +201,7 @@ const WOODL = {
   .leadin p span{display:block;font-size:15px;font-weight:500;color:var(--text-2);margin-top:2px;}
 
   /* 5. work */
-  .work-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+  .work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
   .wcard{display:flex;flex-direction:column;text-decoration:none;color:inherit;background:var(--surface);border:1px solid var(--line);border-radius:20px;overflow:hidden;transition:transform .5s cubic-bezier(.22,.61,.36,1),box-shadow .5s cubic-bezier(.22,.61,.36,1),border-color .5s cubic-bezier(.22,.61,.36,1);will-change:transform;}
   .wcard:hover{transform:translateY(-6px);box-shadow:0 34px 60px -34px rgba(42,75,215,.5);border-color:#C9D3F5;}
   .wcard .frame{aspect-ratio:3/2;border-bottom:1px solid var(--line);}
@@ -219,6 +219,37 @@ const WOODL = {
   .wcard:hover .go{background-color:var(--blue);border-color:var(--blue);color:#fff;transform:rotate(45deg);}
   .go svg{width:16px;height:16px;}
 
+  /* the system */
+  .sys-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+  .mod{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:22px 20px;display:flex;flex-direction:column;}
+  .mod i{width:44px;height:44px;border-radius:13px;background:var(--tint);color:var(--blue);display:flex;align-items:center;justify-content:center;}
+  .mod i svg{width:22px;height:22px;}
+  .mod .lvl{align-self:flex-start;margin-top:14px;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-3);background:var(--surface-2);padding:3px 8px;border-radius:999px;}
+  .mod .lvl.sys{background:var(--grad);color:#fff;}
+  .mod h3{font-size:18px;margin:12px 0 6px;}
+  .mod p{margin:0;color:var(--text-2);font-size:15px;}
+  .demo-card{margin-top:18px;display:grid;grid-template-columns:1.1fr 1fr;gap:32px;align-items:center;background:radial-gradient(ellipse 70% 120% at 0% 0%, #2A4BD7 0%, transparent 60%), #0B1230;color:#fff;border-radius:26px;padding:40px 44px;overflow:hidden;}
+  .demo-tag{display:inline-block;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;background:rgba(255,255,255,.14);padding:5px 10px;border-radius:999px;}
+  .demo-txt h3{font-size:clamp(26px,3vw,36px);margin:14px 0 10px;}
+  .demo-txt p{margin:0;color:rgba(255,255,255,.8);font-size:17px;max-width:30em;}
+  .demo-btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px;}
+  .btn-white{background:#fff;color:#0A1240;}
+  .btn-white:hover{transform:translateY(-2px);box-shadow:0 14px 28px -14px rgba(0,0,0,.6);}
+  .demo-mock{display:grid;gap:10px;text-decoration:none;color:var(--text);background:#F5F6FA;border-radius:22px;padding:16px;box-shadow:0 30px 60px -30px rgba(0,0,0,.6);transform:rotate(-2deg);transition:transform .5s var(--ease, cubic-bezier(.22,.61,.36,1));}
+  .demo-mock:hover{transform:rotate(0deg) translateY(-4px);}
+  .dm-bar{display:flex;justify-content:space-between;align-items:center;padding:2px 4px 4px;}
+  .dm-bar b{font-family:var(--display);font-size:17px;}
+  .dm-bar span{font-size:12px;font-weight:700;background:#FDECEC;color:#D63B3B;padding:3px 9px;border-radius:999px;}
+  .dm-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:11px 13px;display:grid;grid-template-columns:1fr auto;gap:6px 10px;align-items:center;}
+  .dm-card b{display:block;font-size:14.5px;}
+  .dm-card small{font-size:12.5px;color:var(--text-3);}
+  .dm-card em{font-style:normal;font-family:var(--display);font-size:15px;}
+  .dm-tag{justify-self:start;font-size:11.5px;font-weight:700;padding:3px 8px;border-radius:999px;grid-column:1 / -1;}
+  .dm-tag.q{background:#E8F0FF;color:#2A4BD7;}
+  .dm-tag.p{background:#F3E8FF;color:#7A3BD0;}
+  .dm-tag.b{background:#E5F6EC;color:#12A150;}
+  .dm-ok{grid-column:1 / -1;font-size:12px;color:#12A150;font-weight:600;}
+  .price .per{font-family:var(--body);font-size:18px;font-weight:500;opacity:.6;letter-spacing:0;margin-left:2px;}
   /* 6. pricing */
   .pricing{--surface:#18203F;--surface-2:#1E2850;--line:#273156;--text:#FFFFFF;--text-2:#A7B1CF;background:#0E1430;color:#fff;overflow:hidden;}
   .pricing::before{content:"";position:absolute;inset:0;background-image:url("logo.png");background-size:150px auto;background-repeat:repeat;opacity:.05;pointer-events:none;}
@@ -229,7 +260,7 @@ const WOODL = {
   .plan-top{display:flex;justify-content:space-between;align-items:center;gap:12px;}
   .plan h3{font-size:22px;}
   .plan-desc{font-size:15px;color:var(--text-2);margin:6px 0 0;min-height:3em;}
-  .badge{font-size:12.5px;font-weight:700;background:#fff;color:#0A1240;padding:5px 11px;border-radius:999px;}
+  .badge{white-space:nowrap;flex:none;font-size:12.5px;font-weight:700;background:#fff;color:#0A1240;padding:5px 11px;border-radius:999px;}
   .price{font-family:var(--display);font-variation-settings:"wdth" 125;font-weight:600;font-size:58px;letter-spacing:-.04em;line-height:1;margin:22px 0 4px;}
   .days{font-size:15px;color:var(--text-2);margin-bottom:24px;}
   .plan ul{list-style:none;padding:0;margin:0 0 30px;display:grid;gap:11px;flex:1;align-content:start;}
@@ -428,6 +459,9 @@ const WOODL = {
     .plans{grid-template-columns:1fr;max-width:640px;margin:0 auto;}
     .care{max-width:640px;margin-left:auto;margin-right:auto;}
     .t-grid{grid-template-columns:1fr 1fr;}
+    .sys-grid{grid-template-columns:1fr 1fr;}
+    .demo-card{grid-template-columns:1fr;padding:32px 28px;}
+    .demo-mock{transform:none;max-width:460px;}
     .steps{grid-template-columns:1fr 1fr;}
     .about,.cta,.faq-wrap{grid-template-columns:1fr;gap:40px;}
     .avatar{max-width:440px;}
@@ -464,6 +498,13 @@ const WOODL = {
     .wcard{scroll-snap-align:start;}
     .wcard:hover{transform:none;}
     .t-grid,.steps{grid-template-columns:1fr;}
+    .sys-grid{grid-template-columns:1fr 1fr;gap:10px;}
+    .mod{padding:16px 14px;border-radius:16px;}
+    .mod i{width:38px;height:38px;}
+    .mod h3{font-size:16px;}
+    .mod p{font-size:14px;}
+    .demo-card{padding:26px 20px;border-radius:22px;}
+    .demo-btns .btn{flex:1;}
     .ps-h{padding:22px 22px 0;}
     .ps-p{padding:12px 22px 20px;}
     .ps-fix{padding:18px 22px 20px;}
@@ -500,6 +541,14 @@ const WOODL = {
   <symbol id="s-upwork" viewBox="0 0 24 24"><path fill="currentColor" d="M17.1 13.4c-1 0-2-.4-2.8-1.1l.2-1.1v-.1c.2-1.2.9-3.2 2.6-3.2a2.7 2.7 0 0 1 0 5.5zm0-8.2c-2.2 0-3.9 1.4-4.6 3.8-1-1.6-1.8-3.4-2.3-5H8v6.2a2.2 2.2 0 0 1-4.4 0V4H1.3v6.2a4.5 4.5 0 0 0 9 0v-1c.5 1 1 1.9 1.7 2.8L10.5 20h2.3l1-4.7c.9.6 2 .9 3.2.9a5.5 5.5 0 0 0 0-11z"/></symbol>
   <symbol id="s-fiverr" viewBox="0 0 24 24"><path fill="currentColor" d="M14.2 6.4V5.6c0-.9.6-1.4 1.5-1.4h1.1V1.5h-1.5c-2.8 0-4.3 1.6-4.3 4.2v.7H9v2.7h2v10.4h3.2V9.1h3.1v10.4h3.2V6.4zM18.9 1.2a1.8 1.8 0 1 0 0 3.6 1.8 1.8 0 0 0 0-3.6z"/></symbol>
   <symbol id="s-instagram" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></g><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></symbol>
+  <symbol id="m-web" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 8h18M8 21h8M12 18v3"/></g></symbol>
+  <symbol id="m-quote" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M8 6h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15v3M8 18h4"/></g></symbol>
+  <symbol id="m-photo" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h3l2-3h6l2 3h3a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="4"/></g></symbol>
+  <symbol id="m-book" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M9 15l2 2 4-4"/></g></symbol>
+  <symbol id="m-inbox" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.5 5h13L22 12v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-6z"/></g></symbol>
+  <symbol id="m-reply" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2-5.5A8.4 8.4 0 1 1 21 11.5z"/><path d="M12.5 7 10 12h4l-2.5 5"/></g></symbol>
+  <symbol id="m-star" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.1l-5.7 3.2 1.2-6.4-4.7-4.4 6.4-.8z"/></symbol>
+  <symbol id="m-repeat" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a3 3 0 0 1 3-3h15M7 22l-4-4 4-4"/><path d="M21 13v2a3 3 0 0 1-3 3H3"/></g></symbol>
   <symbol id="i-x" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></symbol>
   <symbol id="n-wash" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/><path d="M9.5 14.5a2.5 2.5 0 0 0 2.5 2.5"/></g></symbol>
   <symbol id="n-clean" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></g></symbol>
@@ -513,7 +562,7 @@ const WOODL = {
   <div class="wrap header-in">
     <a class="logo" href="#top" data-logo aria-label="Woodl home"></a>
     <nav class="menu" aria-label="Main">
-      <a href="#work">Work</a><a href="#pricing">Pricing</a><a href="#process">Process</a><a href="#faq">FAQ</a>
+      <a href="#system">System</a><a href="#work">Work</a><a href="#pricing">Pricing</a><a href="demo/">Live demo</a><a href="#faq">FAQ</a>
     </nav>
     <button class="btn btn-main" type="button" data-open-form>Get a free preview</button>
     <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
@@ -525,7 +574,7 @@ const WOODL = {
     <a class="logo" href="#top" data-logo></a>
     <button class="burger" id="drawerClose" aria-label="Close menu"><svg><use href="#i-x"/></svg></button>
   </div>
-  <nav><a href="#work">Work</a><a href="#pricing">Pricing</a><a href="#process">Process</a><a href="#faq">FAQ</a></nav>
+  <nav><a href="#system">System</a><a href="#work">Work</a><a href="#pricing">Pricing</a><a href="demo/">Live demo</a><a href="#faq">FAQ</a></nav>
   <button class="btn btn-main" type="button" data-open-form>Get a free preview</button>
 </div>
 
@@ -534,12 +583,12 @@ const WOODL = {
   <section class="hero">
     <div class="wrap">
       <div class="hero-in">
-        <span class="pill"><b>Free preview</b>See your new site before you pay</span>
-        <h1>Professional websites for local service businesses. <em>Live in 5 days.</em></h1>
-        <p class="lede"><b>Fixed pricing from $250.</b> I design a free, custom preview of your new homepage first, so you know exactly what you're getting before you spend a dollar.</p>
+        <span class="pill"><b>For pressure washing companies</b>Website + booking system</span>
+        <h1>Turn your website into a booking machine. <em>Live in 7 days.</em></h1>
+        <p class="lede"><b>From $400, fixed.</b> A fast website with instant quotes, online booking and Google review requests on autopilot. See a free preview of yours before you pay a dollar.</p>
         <div class="hero-ctas">
           <button class="btn btn-main" type="button" data-open-form>Get my free preview</button>
-          <a class="btn btn-line" href="#pricing">View pricing</a>
+          <a class="btn btn-line" href="demo/">Try the live demo</a>
         </div>
         <a class="upw" href="https://www.upwork.com/freelancers/~01e0c89dbdc64d0663" target="_blank" rel="noopener"><i><svg><use href="#s-upwork"/></svg></i><span><b>Top Rated</b> on Upwork</span><span class="sep"></span><span><b>100%</b> Job Success</span><span class="stars" aria-hidden="true">★★★★★</span></a>
         <div class="micro"><span><svg><use href="#i-check"/></svg>No upfront payment</span><span><svg><use href="#i-check"/></svg>No obligation</span><span><svg><use href="#i-check"/></svg>Reply within 24 hours</span></div>
@@ -552,19 +601,18 @@ const WOODL = {
     </div>
   </section>
 
-  <!-- 3. BUILT FOR -->
-  <section class="trust" aria-label="Who I work with">
+  <!-- 3. WHAT'S INSIDE (strip) -->
+  <section class="trust" aria-label="What's included">
     <div class="wrap">
       <div class="trust-in">
-        <span class="trust-lbl">Built for</span>
+        <span class="trust-lbl">Inside the system</span>
         <div class="niches">
-          <span class="niche"><i><svg><use href="#n-wash"/></svg></i>Pressure washing</span>
-          <span class="niche"><i><svg><use href="#n-clean"/></svg></i>House cleaning</span>
-          <span class="niche"><i><svg><use href="#n-lawn"/></svg></i>Lawn care</span>
-          <span class="niche"><i><svg><use href="#n-roof"/></svg></i>Roofing</span>
-          <span class="niche"><i><svg><use href="#n-hvac"/></svg></i>HVAC</span>
+          <span class="niche"><i><svg><use href="#m-quote"/></svg></i>Instant quotes</span>
+          <span class="niche"><i><svg><use href="#m-photo"/></svg></i>Photo quotes</span>
+          <span class="niche"><i><svg><use href="#m-book"/></svg></i>Online booking</span>
+          <span class="niche"><i><svg><use href="#m-inbox"/></svg></i>Lead Inbox</span>
+          <span class="niche"><i><svg><use href="#m-star"/></svg></i>Review requests</span>
         </div>
-        <div class="terms"><span><svg><use href="#i-check"/></svg>Fixed price</span><span><svg><use href="#i-check"/></svg>50% to start</span></div>
       </div>
     </div>
   </section>
@@ -573,35 +621,69 @@ const WOODL = {
   <section>
     <div class="wrap">
       <div class="sec-head">
-        <h2>Your next customer is searching right now. Can they find you?</h2>
-        <p>Homeowners look for local services on their phones and decide in seconds. If your business is hard to find or hard to contact, the job goes to the next company on the list.</p>
+        <h2>You're great at washing. The office work is what loses jobs.</h2>
+        <p>Most pressure washing companies don't lose customers to a better crew. They lose them to slow replies, endless “how much?” questions and customers who forget to call back.</p>
       </div>
       <div class="ps-grid">
         <div class="ps">
-          <div class="ps-h"><span class="n">01</span><h3>Invisible on Google</h3></div>
-          <p class="ps-p">Without a real website, Google has little reason to show your business. Competitors who have one get the calls.</p>
-          <div class="ps-fix"><b><svg><use href="#i-check"/></svg>How I fix it</b><p>A fast, search-ready site built around your services, service area and reviews, linked to your Google Business Profile.</p></div>
+          <div class="ps-h"><span class="n">01</span><h3>Missed calls, lost jobs</h3></div>
+          <p class="ps-p">You're on a ladder with a wand in your hand when the phone rings. By the time you call back, they've booked someone else.</p>
+          <div class="ps-fix"><b><svg><use href="#i-check"/></svg>How I fix it</b><p>Every request lands in your Lead Inbox, and the customer gets an instant reply with their estimate in seconds.</p></div>
         </div>
         <div class="ps">
-          <div class="ps-h"><span class="n">02</span><h3>Losing mobile visitors</h3></div>
-          <p class="ps-p">Tiny text, slow pages and a phone number buried at the bottom. Most visitors leave before they ever reach out.</p>
-          <div class="ps-fix"><b><svg><use href="#i-check"/></svg>How I fix it</b><p>Mobile-first design with tap-to-call, clear pricing and a quote form that takes less than a minute.</p></div>
+          <div class="ps-h"><span class="n">02</span><h3>“How much?” all day</h3></div>
+          <p class="ps-p">Every customer wants a price, and driving out to quote small jobs eats your afternoons and your gas.</p>
+          <div class="ps-fix"><b><svg><use href="#i-check"/></svg>How I fix it</b><p>An instant quote calculator and photo quotes, so customers see a price range and you can quote without leaving the job.</p></div>
         </div>
         <div class="ps">
-          <div class="ps-h"><span class="n">03</span><h3>No time for a website</h3></div>
-          <p class="ps-p">You're on jobs all day. Writing copy, picking photos and managing a designer shouldn't be on your plate.</p>
-          <div class="ps-fix"><b><svg><use href="#i-check"/></svg>How I fix it</b><p>I write the copy, prepare the visuals and handle the entire build. You just review the preview and approve.</p></div>
+          <div class="ps-h"><span class="n">03</span><h3>Few reviews, no repeat jobs</h3></div>
+          <p class="ps-p">Happy customers forget to leave reviews, and last year's house washes never call to book again.</p>
+          <div class="ps-fix"><b><svg><use href="#i-check"/></svg>How I fix it</b><p>Automatic Google review requests after every job and friendly reminders when it's time for the next wash.</p></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 5. WORK -->
+  <!-- 5. THE SYSTEM -->
+  <section id="system" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Not just a website. The Booked Jobs System.</h2>
+        <p>Everything a pressure washing company needs to turn searches into booked, paid and reviewed jobs, set up for you and ready on day one.</p>
+      </div>
+      <div class="sys-grid">
+        <div class="mod"><i><svg><use href="#m-web"/></svg></i><span class="lvl">Launch</span><h3>A website that sells</h3><p>Fast, mobile-first site with your services, before and after photos, service areas and Google reviews.</p></div>
+        <div class="mod"><i><svg><use href="#m-quote"/></svg></i><span class="lvl">Launch</span><h3>Instant quote calculator</h3><p>Customers pick a service and size and see a price range in seconds. Fewer “how much?” calls.</p></div>
+        <div class="mod"><i><svg><use href="#m-photo"/></svg></i><span class="lvl">Launch</span><h3>Photo quotes</h3><p>Customers snap a photo of the driveway or siding, so you can quote without driving out.</p></div>
+        <div class="mod"><i><svg><use href="#m-inbox"/></svg></i><span class="lvl">Launch</span><h3>Lead Inbox</h3><p>Every request in one simple list on your phone, from new to quoted, booked and done.</p></div>
+        <div class="mod"><i><svg><use href="#m-book"/></svg></i><span class="lvl sys">System</span><h3>Online booking</h3><p>Customers choose a time window. Rain in the forecast? Reschedule with one tap.</p></div>
+        <div class="mod"><i><svg><use href="#m-reply"/></svg></i><span class="lvl sys">System</span><h3>Instant auto-replies</h3><p>Every lead gets a reply with their estimate in seconds, even when you're on a job.</p></div>
+        <div class="mod"><i><svg><use href="#m-star"/></svg></i><span class="lvl sys">System</span><h3>Google review requests</h3><p>Mark a job done and the customer gets a friendly review request. More stars, higher on Maps.</p></div>
+        <div class="mod"><i><svg><use href="#m-repeat"/></svg></i><span class="lvl sys">System</span><h3>Repeat-job reminders</h3><p>Last year's customers get a “time for your annual wash?” message. Repeat work without ads.</p></div>
+      </div>
+      <div class="demo-card">
+        <div class="demo-txt">
+          <span class="demo-tag">Live demo</span>
+          <h3>See the Lead Inbox in action</h3>
+          <p>Get a new lead, send a quote, book the job and request a review. It takes 60 seconds and works right in your browser.</p>
+          <div class="demo-btns"><a class="btn btn-white" href="demo/">Try the live demo</a><button class="btn btn-ghost" type="button" data-open-form>Get my free preview</button></div>
+        </div>
+        <a class="demo-mock" href="demo/" aria-label="Open the Lead Inbox demo">
+          <div class="dm-bar"><b>Lead Inbox</b><span>3 new</span></div>
+          <div class="dm-card"><div><b>Maria Lopez</b><small>Driveway + sidewalk · Stone Oak</small></div><em>$180–220</em><span class="dm-tag q">Instant quote</span><span class="dm-ok">✓ Auto-reply sent in 12 sec</span></div>
+          <div class="dm-card"><div><b>James Carter</b><small>House wash · Alamo Heights</small></div><em>$380–450</em><span class="dm-tag p">Photo quote · 3 photos</span></div>
+          <div class="dm-card"><div><b>Patricia Brown</b><small>Thu · 8–10 AM</small></div><em>$430</em><span class="dm-tag b">Booked online</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. WORK -->
   <section id="work" style="padding-top:0">
     <div class="wrap">
       <div class="sec-head">
         <h2>Recent projects</h2>
-        <p>Every site is built around one goal,<br>turning visitors into calls and booked jobs.</p>
+        <p>Three pressure washing sites,<br>each built around a different way to win jobs.</p>
       </div>
       <div class="work-grid" id="workGrid"></div>
       <div class="leadin">
@@ -611,61 +693,60 @@ const WOODL = {
     </div>
   </section>
 
-  <!-- 6. PRICING -->
+  <!-- 7. PRICING -->
   <section class="pricing" id="pricing">
     <div class="wrap">
       <div class="sec-head">
         <h2>Simple, fixed pricing. No surprises.</h2>
-        <p>One flat project fee. Pay 50% once you approve your preview and the remaining 50% at launch. No hidden costs, no long-term contracts.</p>
+        <p>Pay 50% once you approve your preview and the rest at launch. The monthly Care plan is optional and month to month.</p>
       </div>
       <div class="plans">
         <div class="plan">
-          <div class="plan-top"><h3>Start</h3></div>
-          <p class="plan-desc">For new businesses that need a professional online presence, fast.</p>
-          <div class="price">$250</div><div class="days">Launch in 5 days</div>
+          <div class="plan-top"><h3>Launch</h3></div>
+          <p class="plan-desc">A website that turns visitors into quote requests.</p>
+          <div class="price">$400</div><div class="days">One-time · live in 7 days</div>
           <ul>
-            <li><svg><use href="#i-check"/></svg>Single-page website</li>
-            <li><svg><use href="#i-check"/></svg>Tap-to-call button, map and quote form</li>
-            <li><svg><use href="#i-check"/></svg>Mobile-first design</li>
-            <li><svg><use href="#i-check"/></svg>2 rounds of revisions</li>
+            <li><svg><use href="#i-check"/></svg>Mobile-first website, up to 5 pages</li>
+            <li><svg><use href="#i-check"/></svg>Instant quote calculator</li>
+            <li><svg><use href="#i-check"/></svg>Photo quote requests</li>
+            <li><svg><use href="#i-check"/></svg>Lead Inbox with email alerts</li>
+            <li><svg><use href="#i-check"/></svg>Before and after gallery, Google reviews, service areas</li>
+            <li><svg><use href="#i-check"/></svg>Local SEO setup and domain connection</li>
           </ul>
-          <button class="btn" type="button" data-open-form="Start">Get started with Start</button>
+          <button class="btn" type="button" data-open-form="Launch">Get started with Launch</button>
         </div>
         <div class="plan pop">
-          <div class="plan-top"><h3>Business</h3><span class="badge">Most popular</span></div>
-          <p class="plan-desc">For established crews ready to win more local jobs.</p>
-          <div class="price">$400</div><div class="days">Launch in 7 days</div>
+          <div class="plan-top"><h3>Booked Jobs System</h3><span class="badge">Most popular</span></div>
+          <p class="plan-desc">Everything that turns requests into booked, reviewed and repeat jobs.</p>
+          <div class="price">$750</div><div class="days">One-time · live in 10–14 days</div>
           <ul>
-            <li><svg><use href="#i-check"/></svg>Up to 5 pages</li>
-            <li><svg><use href="#i-check"/></svg>Project gallery with before and after photos</li>
-            <li><svg><use href="#i-check"/></svg>Google reviews showcase</li>
-            <li><svg><use href="#i-check"/></svg>Local SEO setup and domain connection</li>
-            <li><svg><use href="#i-check"/></svg>2 rounds of revisions</li>
+            <li><svg><use href="#i-check"/></svg>Everything in Launch</li>
+            <li><svg><use href="#i-check"/></svg>Online booking with time windows</li>
+            <li><svg><use href="#i-check"/></svg>Instant auto-replies to every lead</li>
+            <li><svg><use href="#i-check"/></svg>Automatic Google review requests</li>
+            <li><svg><use href="#i-check"/></svg>Repeat-job reminders for past customers</li>
+            <li><svg><use href="#i-check"/></svg>Rain-day rescheduling in one tap</li>
           </ul>
-          <button class="btn btn-main" type="button" data-open-form="Business">Get started with Business</button>
+          <button class="btn btn-main" type="button" data-open-form="Booked Jobs System">Get the System</button>
         </div>
         <div class="plan">
-          <div class="plan-top"><h3>Pro</h3></div>
-          <p class="plan-desc">For businesses that want every lead captured and answered automatically.</p>
-          <div class="price">$600</div><div class="days">Launch in 15 days</div>
+          <div class="plan-top"><h3>Care</h3></div>
+          <p class="plan-desc">Keeps everything running while you run the crew.</p>
+          <div class="price">$79<small class="per">/mo</small></div><div class="days">Optional · cancel anytime</div>
           <ul>
-            <li><svg><use href="#i-check"/></svg>Everything in Business</li>
-            <li><svg><use href="#i-check"/></svg>Leads delivered straight to your CRM</li>
-            <li><svg><use href="#i-check"/></svg>Instant text or email reply to every inquiry</li>
-            <li><svg><use href="#i-check"/></svg>AI chat that answers common questions 24/7</li>
-            <li><svg><use href="#i-check"/></svg>Online booking and Google Business Profile optimization</li>
+            <li><svg><use href="#i-check"/></svg>Hosting, backups and security updates</li>
+            <li><svg><use href="#i-check"/></svg>Text alerts for new leads</li>
+            <li><svg><use href="#i-check"/></svg>Review requests and reminders on autopilot</li>
+            <li><svg><use href="#i-check"/></svg>Text and photo updates whenever you need</li>
+            <li><svg><use href="#i-check"/></svg>Monthly report: leads, bookings, reviews</li>
           </ul>
-          <button class="btn" type="button" data-open-form="Pro">Get started with Pro</button>
+          <button class="btn" type="button" data-open-form="Care">Add Care</button>
         </div>
-      </div>
-      <div class="care">
-        <div><h3>Care plan</h3><p>Hosting, content updates, backups and priority fixes, so your site stays fast, secure and up to date. Month to month, cancel anytime.</p></div>
-        <div class="care-r"><b>$50<small> / month</small></b><button class="btn" type="button" data-open-form="Care plan">Add Care</button></div>
       </div>
     </div>
   </section>
 
-  <!-- 7. PROCESS -->
+  <!-- 8. PROCESS -->
   <section id="process">
     <div class="wrap">
       <div class="sec-head">
@@ -673,10 +754,10 @@ const WOODL = {
         <p>A simple four-step process, handled entirely over WhatsApp or email. No long meetings, no complicated briefs.</p>
       </div>
       <div class="steps">
-        <div class="step"><h3>Free preview</h3><p>Share your business name or Google Maps link. I design a custom homepage preview using your services and reviews.</p><span class="when">1–2 business days · Free</span></div>
-        <div class="step"><h3>Approve and kick off</h3><p>Love it? Choose a plan and pay 50% to get started. Send any photos or branding you'd like included.</p><span class="when">Same day</span></div>
-        <div class="step"><h3>Build and refine</h3><p>I build out every page and fine-tune the details with two rounds of revisions.</p><span class="when">5–15 days</span></div>
-        <div class="step"><h3>Launch</h3><p>Your site goes live on your own domain. Pay the remaining 50%, and it's 100% yours.</p><span class="when">Launch day</span></div>
+        <div class="step"><h3>Free preview</h3><p>Share your business name or Google Maps link. I design a custom homepage preview using your services, prices and reviews.</p><span class="when">1–2 business days · Free</span></div>
+        <div class="step"><h3>Approve and kick off</h3><p>Love it? Choose Launch or the full System and pay 50% to get started. Send any photos you'd like included.</p><span class="when">Same day</span></div>
+        <div class="step"><h3>Build and set up</h3><p>I build the site, set up your quotes, booking and Lead Inbox, and fine-tune everything with two rounds of revisions.</p><span class="when">7–14 days</span></div>
+        <div class="step"><h3>Launch</h3><p>Your site goes live on your own domain and I show you the Lead Inbox. Pay the remaining 50%, and it's yours.</p><span class="when">Launch day</span></div>
       </div>
       <div class="leadin">
         <p>Step one is free.<span>Tell me about your business and I'll get to work on your preview.</span></p>
@@ -685,7 +766,7 @@ const WOODL = {
     </div>
   </section>
 
-  <!-- 8. TESTIMONIALS (hidden until WOODL.testimonials has entries) -->
+  <!-- 9. TESTIMONIALS (hidden until WOODL.testimonials has entries) -->
   <section id="reviews" style="padding-top:0" hidden>
     <div class="wrap">
       <div class="sec-head"><h2>What clients say</h2><p>Real feedback from business owners I've worked with.</p></div>
@@ -693,25 +774,25 @@ const WOODL = {
     </div>
   </section>
 
-  <!-- 9. ABOUT -->
+  <!-- 10. ABOUT -->
   <section style="padding-top:0">
     <div class="wrap about">
       <div class="avatar" id="avatar"></div>
       <div>
         <span class="eyebrow">Meet the founder</span>
         <h2>Hi, I'm Ostap.</h2>
-        <p>I started Woodl to give local service businesses the kind of website usually reserved for companies with big marketing budgets. You work with me directly, from the first message to launch day. No account managers, no handoffs.</p>
-        <p>I use modern AI tools to handle the repetitive parts of design and development. That frees my time for what actually drives results: clear messaging, fast performance and a site built to generate calls. You get agency-quality work, delivered in days, at a price that makes sense for a small business.</p>
+        <p>I build websites and booking systems for pressure washing companies. I'm also a Top Rated Google Ads and Local Service Ads specialist on Upwork, so I know what makes a local customer pick up the phone.</p>
+        <p>I use modern AI tools for the repetitive parts of design and development. That frees my time for what actually drives results: clear pricing, fast pages and a system that answers every lead. You work with me directly, from the first message to launch day.</p>
         <div class="about-stats">
-          <div><b><span data-count="5">5</span>–<span data-count="15">15</span></b><span>days to launch</span></div>
-          <div><b>$<span data-count="0" data-from="250">0</span></b><span>for your preview</span></div>
+          <div><b><span data-count="7">7</span>–<span data-count="14">14</span></b><span>days to launch</span></div>
+          <div><b>$<span data-count="0" data-from="400">0</span></b><span>for your preview</span></div>
           <div><b><span data-count="100">100</span>%</b><span>ownership after launch</span></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 10. FAQ -->
+  <!-- 11. FAQ -->
   <section id="faq" style="padding-top:0">
     <div class="wrap faq-wrap">
       <div>
@@ -719,12 +800,13 @@ const WOODL = {
         <p class="lede">Don't see your question here? Send me a message and I'll get back to you within one business day.</p>
       </div>
       <div class="faq" id="faqList">
-        <details name="faq" open><summary>Who owns the website and the domain?<i aria-hidden="true"></i></summary><div class="ans"><p>You do. Your domain is registered in your name, and once the final payment is made, the website and all of its files belong to you. No lock-in, no strings attached.</p></div></details>
-        <details name="faq"><summary>What do you need from me to get started?<i aria-hidden="true"></i></summary><div class="ans"><p>Just your business name or Google Maps link. I write the copy based on your services and customer reviews. If you have photos of your work or a logo, send them over and I'll put them to good use.</p></div></details>
+        <details name="faq" open><summary>What's the difference between Launch and the System?<i aria-hidden="true"></i></summary><div class="ans"><p>Launch gets you a website that collects quote requests, with an instant price calculator, photo quotes and a Lead Inbox. The Booked Jobs System adds what happens next: online booking, instant replies, Google review requests and reminders that bring customers back every year.</p></div></details>
+        <details name="faq"><summary>Who owns the website and the domain?<i aria-hidden="true"></i></summary><div class="ans"><p>You do. Your domain is registered in your name, and once the final payment is made, the website and all of its files belong to you. No lock-in, no strings attached.</p></div></details>
+        <details name="faq"><summary>Do I need the monthly Care plan?<i aria-hidden="true"></i></summary><div class="ans"><p>No, your site works without it. Care covers hosting, updates and the things that run in the background, like text alerts, review requests and repeat-job reminders. It's $79 a month, billed month to month, and you can cancel anytime.</p></div></details>
+        <details name="faq"><summary>Will the quote calculator show the right prices?<i aria-hidden="true"></i></summary><div class="ans"><p>Yes. We set it up with your real starting prices and size ranges, and it always shows a range, not a fixed price. You confirm the final quote, so you're never locked into a number.</p></div></details>
+        <details name="faq"><summary>What do you need from me to get started?<i aria-hidden="true"></i></summary><div class="ans"><p>Just your business name or Google Maps link. I write the copy from your services and reviews. If you have before and after photos or a logo, send them over and I'll put them to good use.</p></div></details>
         <details name="faq"><summary>How does payment work?<i aria-hidden="true"></i></summary><div class="ans"><p>You pay by card or bank transfer through a secure invoice: 50% after you approve your preview and the remaining 50% on launch day. No payment is required for the preview.</p></div></details>
         <details name="faq"><summary>What if I don't like the preview?<i aria-hidden="true"></i></summary><div class="ans"><p>Then you don't owe me anything. The preview is completely free and comes with no obligation. If you move forward, two rounds of revisions make sure every detail is right.</p></div></details>
-        <details name="faq"><summary>Can I make changes after launch?<i aria-hidden="true"></i></summary><div class="ans"><p>Absolutely. Small updates are included in the Care plan. Larger changes, such as new pages or features, are quoted upfront at a fixed price before any work begins.</p></div></details>
-        <details name="faq"><summary>What's included in the Care plan?<i aria-hidden="true"></i></summary><div class="ans"><p>Reliable hosting, text and photo updates, regular backups and priority fixes if anything goes wrong. It's $50 per month, billed month to month, and you can cancel anytime.</p></div></details>
       </div>
     </div>
   </section>
@@ -734,9 +816,9 @@ const WOODL = {
     <div class="wrap">
       <div class="cta">
         <div class="cta-l">
-          <h2>Ready to see your new website?</h2>
-          <p>Tell me about your business and I'll send you a free, custom homepage preview within 1–2 business days.</p>
-          <ul class="cta-points"><li><i><svg><use href="#i-check"/></svg></i>Custom design, not a template</li><li><i><svg><use href="#i-check"/></svg></i>No payment, no obligation</li><li><i><svg><use href="#i-check"/></svg></i>Built on your real services</li><li><i><svg><use href="#i-check"/></svg></i>Personal reply within 24 hours</li><li><i><svg><use href="#i-check"/></svg></i>Mobile-first and fast</li><li><i><svg><use href="#i-check"/></svg></i>You own the site and domain</li></ul>
+          <h2>Ready to book more jobs?</h2>
+          <p>Tell me about your pressure washing business and I'll send you a free, custom homepage preview within 1–2 business days.</p>
+          <ul class="cta-points"><li><i><svg><use href="#i-check"/></svg></i>Custom design, not a template</li><li><i><svg><use href="#i-check"/></svg></i>No payment, no obligation</li><li><i><svg><use href="#i-check"/></svg></i>Built on your real services</li><li><i><svg><use href="#i-check"/></svg></i>Personal reply within 24 hours</li><li><i><svg><use href="#i-check"/></svg></i>Quotes and booking built in</li><li><i><svg><use href="#i-check"/></svg></i>You own the site and domain</li></ul>
           <div class="cta-alt">
             <span class="lbl">Prefer to talk first?</span>
             <div class="row">
@@ -758,9 +840,9 @@ const WOODL = {
     <div class="foot" id="foot">
       <div class="foot-brand">
         <a class="logo" href="#top" data-logo aria-label="Woodl home"></a>
-        <p>Professional websites for local<br>service businesses across the US.</p>
+        <p>Websites and booking systems for<br>pressure washing companies across the US.</p>
       </div>
-      <div><h4>Explore</h4><ul><li><a href="#work">Recent projects</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#process">How it works</a></li><li><a href="#faq">FAQ</a></li></ul></div>
+      <div><h4>Explore</h4><ul><li><a href="#system">The system</a></li><li><a href="demo/">Live demo</a></li><li><a href="#work">Recent projects</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#process">How it works</a></li><li><a href="#faq">FAQ</a></li></ul></div>
       <div><h4>Contact</h4><ul id="footContact"></ul></div>
       <div id="footSocialCol" hidden><h4>Follow</h4><ul id="footSocial"></ul></div>
     </div>
@@ -808,14 +890,12 @@ const WOODL = {
 
   /* work: w = render width, chosen so the 3:2 frame shows exactly the first screen */
   const WORK = [
-    {href:'work/sonoran-wash/index.html', w:1280, name:'Sonoran Wash Co.', niche:'Pressure washing', city:'Phoenix, AZ', days:6, price:300,
-      res:'Visitors get an instant price and book a time online, without picking up the phone.'},
-    {href:'work/bayou-pro-wash/index.html', w:1440, name:'Bayou Pro Wash', niche:'Pressure washing', city:'Houston, TX', days:7, price:300,
-      res:'A booking bar on the first screen and service plans that turn one-time jobs into repeat work.'},
-    {href:'work/alamo-shine/index.html', w:1280, name:'Alamo Shine', niche:'Pressure washing', city:'San Antonio, TX', days:5, price:300,
-      res:'Photo-based quote requests and tap-to-call that make it easy to reach out from a phone.'},
-    {href:'https://noir-self.vercel.app/?lang=en', w:1280, name:'NOIR Estates', niche:'Real estate', city:'Kyiv', days:12, price:600,
-      res:'A premium property catalog with viewing requests that matches a high-end brand.'},
+    {href:'work/sonoran-wash/index.html', w:1280, name:'Sonoran Wash Co.', niche:'Pressure washing', city:'Phoenix, AZ', days:7, price:400,
+      res:'Instant price calculator and 3-step online booking, so customers see a price and pick a time without calling.'},
+    {href:'work/bayou-pro-wash/index.html', w:1440, name:'Bayou Pro Wash', niche:'Pressure washing', city:'Houston, TX', days:7, price:400,
+      res:'Maintenance plans and a booking calendar that flags rainy days, so repeat customers book themselves.'},
+    {href:'work/alamo-shine/index.html', w:1280, name:'Alamo Shine', niche:'Pressure washing', city:'San Antonio, TX', days:7, price:400,
+      res:'Photo quote requests and a review booster that turns happy customers into new Google reviews.'},
   ];
   $('#workGrid').innerHTML = WORK.map(p => `
     <a class="wcard" href="${p.href}" target="_blank" rel="noopener">
@@ -966,7 +1046,7 @@ fit(); addEventListener('resize', fit);
   /* scroll reveal */
   const groups = [
     ['.trust-in', 'rv-s'], ['.sec-head > *', ''], ['.ps', ''], ['.wcard', ''], ['.plan', ''], ['.care', ''],
-    ['.step', ''], ['.tcard', ''], ['.avatar', 'rv-l'], ['.about > div:last-child > *', ''], ['.faq-wrap > div:first-child > *', ''],
+    ['.step', ''], ['.mod', ''], ['.demo-card', 'rv-s'], ['.tcard', ''], ['.avatar', 'rv-l'], ['.about > div:last-child > *', ''], ['.faq-wrap > div:first-child > *', ''],
     ['.faq details', ''], ['.cta', 'rv-s'], ['.cta-points li', ''], ['.leadin', ''], ['.foot > *', ''], ['.niche', 'rv-s']
   ];
   const rvEls = [];

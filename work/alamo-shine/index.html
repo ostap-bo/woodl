@@ -85,6 +85,7 @@ const SITE = {
   faq: [
     {q: "How much does pressure washing cost?", a: "Most driveways run $150–250 and most house washes $300–500, depending on size and how dirty the surface is. Send a photo and we'll give you an exact price."},
     {q: "Is pressure washing safe for my house and plants?", a: "Yes. For siding, stucco, brick and roofs we use a low-pressure soft wash, and we rinse plants before and after cleaning."},
+    {q: "Can I get a price without you coming out?", a: "Yes. Add a couple of photos in the quote form and we'll text you a fixed price, usually within a few hours. We only visit for very large or unusual jobs."},
     {q: "Do I need to be home?", a: "No. We just need access to an outdoor water spigot. We'll send before and after photos when the job is done."},
     {q: "How soon can you come out?", a: "Usually within the same week. In spring and summer, book a few days ahead."},
     {q: "What if it rains?", a: "Light rain doesn't affect most jobs. If the weather is bad, we'll move your appointment to the next free day at no cost."},
@@ -175,7 +176,7 @@ const SITE = {
   .g-dot{width:26px;height:26px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;flex:none;}
   .g-dot svg{width:14px;height:14px;}
   .stars{color:var(--sun);letter-spacing:1px;}
-  .hero h1{font-size:clamp(46px,7.2vw,104px);margin:22px 0 22px;max-width:10.5em;text-wrap:balance;}
+  .hero h1{font-size:clamp(44px,5.8vw,84px);margin:22px 0 22px;max-width:10.5em;text-wrap:balance;}
   .hero p{font-size:clamp(17px,1.45vw,20px);color:rgba(255,255,255,.86);max-width:31em;margin:0 0 32px;}
   .hero-ctas{display:flex;gap:12px;flex-wrap:wrap;}
 
@@ -308,6 +309,55 @@ const SITE = {
   .faq details p{margin:0 0 24px;color:var(--ink-2);max-width:40em;}
 
   /* quote */
+  /* photo quote card (hero) */
+  .hero-body{display:grid;grid-template-columns:minmax(0,1fr) 370px;gap:48px;align-items:end;}
+  .pq{background:rgba(255,255,255,.97);color:var(--ink);border-radius:22px;padding:20px;display:grid;gap:12px;box-shadow:0 30px 60px -30px rgba(0,0,0,.6);}
+  .pq-h{display:flex;gap:12px;align-items:center;}
+  .pq-ic{width:44px;height:44px;border-radius:13px;background:var(--sun);color:var(--sun-ink);display:flex;align-items:center;justify-content:center;flex:none;}
+  .pq-ic svg{width:22px;height:22px;}
+  .pq-h b{display:block;font-size:18px;line-height:1.2;}
+  .pq-h small{font-size:13.5px;color:#5B6875;}
+  .drop{display:flex;align-items:center;gap:12px;border:2px dashed #C9D2DA;border-radius:16px;padding:16px;cursor:pointer;transition:border-color .3s, background-color .3s;font-weight:600;font-size:15px;}
+  .drop:hover{border-color:var(--ink);background:#F6F8FA;}
+  .drop input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;}
+  .drop svg{width:26px;height:26px;flex:none;color:var(--ink);}
+  .drop small{display:block;font-weight:500;font-size:13px;color:#5B6875;}
+  .drop-sm{padding:12px 14px;font-size:14.5px;background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.3);color:#fff;}
+  .drop-sm svg{color:#fff;}
+  .drop-sm:hover{background:rgba(255,255,255,.1);border-color:#fff;}
+  .pq-thumbs{display:flex;gap:8px;flex-wrap:wrap;}
+  .pq-thumbs:empty{display:none;}
+  .pq-thumbs img{width:58px;height:58px;object-fit:cover;border-radius:10px;}
+  .pq select,.pq input[type=tel]{width:100%;height:50px;border:1.5px solid #C9D2DA;border-radius:12px;padding:0 14px;font:inherit;font-size:15.5px;background:#fff;color:var(--ink);}
+  .pq select:focus,.pq input:focus{outline:none;border-color:var(--ink);}
+  .pq .btn{width:100%;}
+  .pq-ok{margin:0;font-size:14px;font-weight:600;color:#1A7F43;}
+  /* review booster */
+  .rb{margin-top:44px;display:grid;grid-template-columns:.9fr 1.1fr;gap:20px;}
+  .rb-bars,.rb-cta{border-radius:22px;padding:26px;}
+  .rb-bars{background:#fff;border:1px solid var(--line);display:grid;gap:10px;align-content:start;}
+  .rb-score{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px;}
+  .rb-score b{font-size:44px;line-height:1;font-weight:800;}
+  .rb-score .stars{color:#F5A524;}
+  .rb-score small{width:100%;color:#5B6875;}
+  .rb-row{display:grid;grid-template-columns:30px 1fr 40px;gap:10px;align-items:center;font-size:14px;font-weight:600;}
+  .rb-row i{height:9px;border-radius:5px;background:#EDF1F4;overflow:hidden;}
+  .rb-row i b{display:block;height:100%;background:var(--sun);border-radius:5px;}
+  .rb-row em{font-style:normal;color:#5B6875;text-align:right;}
+  .rb-cta{background:var(--ink);color:#fff;display:flex;flex-direction:column;justify-content:center;}
+  .rb-tag{align-self:flex-start;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;background:rgba(255,255,255,.12);padding:5px 10px;border-radius:999px;}
+  .rb-cta h3{font-size:clamp(24px,2.4vw,32px);margin:14px 0 8px;line-height:1.1;}
+  .rb-cta p{margin:0;color:rgba(255,255,255,.78);}
+  .rb-btns{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:22px;}
+  .rb-priv{color:rgba(255,255,255,.8);font-size:14.5px;text-underline-offset:3px;}
+  .rb-priv:hover{color:#fff;}
+  .fb{display:grid;gap:10px;margin:14px 0;}
+  .fb textarea,.fb input{width:100%;border:1.5px solid #C9D2DA;border-radius:12px;padding:12px 14px;font:inherit;font-size:15px;}
+  @media (max-width:1060px){
+    .hero-body{grid-template-columns:1fr;gap:32px;}
+    .pq{max-width:460px;}
+    .rb{grid-template-columns:1fr;}
+  }
   .quote{position:relative;color:#fff;overflow:hidden;background:var(--ink);}
   .quote-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.4;}
   .quote::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg, rgba(10,20,29,.96) 30%, rgba(10,20,29,.72));}
@@ -372,7 +422,6 @@ const SITE = {
     .steps{grid-template-columns:1fr;}
     .steps::before{display:none;}
     .track{grid-auto-columns:88%;}
-    .callbar{display:flex;}
     footer{padding-bottom:110px;}
     .hero-body{padding-bottom:56px;}
     .hero::after{background:linear-gradient(0deg, rgba(10,20,29,.94) 0%, rgba(10,20,29,.6) 55%, rgba(10,20,29,.4) 100%);}
@@ -497,6 +546,8 @@ const SITE = {
   <symbol id="i-right" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6"/></symbol>
   <symbol id="i-g" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.5 12.3c0-.9-.1-1.6-.2-2.4H12v4.5h6.5c-.3 1.5-1.1 2.7-2.4 3.6v3h3.9c2.3-2.1 3.5-5.2 3.5-8.7z"/><path fill="#34A853" d="M12 24c3.2 0 6-1.1 7.9-2.9l-3.9-3c-1.1.7-2.4 1.1-4 1.1-3.1 0-5.7-2.1-6.6-4.9H1.4v3.1C3.3 21.3 7.3 24 12 24z"/><path fill="#FBBC05" d="M5.4 14.3c-.2-.7-.4-1.5-.4-2.3s.1-1.6.4-2.3V6.6H1.4C.5 8.3 0 10.1 0 12s.5 3.7 1.4 5.4z"/><path fill="#EA4335" d="M12 4.8c1.7 0 3.3.6 4.5 1.8l3.4-3.4C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.4 6.6l4 3.1c.9-2.8 3.5-4.9 6.6-4.9z"/></symbol>
   <symbol id="i-mark" viewBox="0 0 32 32"><g fill="none" stroke="#231B00" stroke-linecap="round"><path d="M6 26 15 17" stroke-width="3.6"/><path d="M18.5 13.5 25 7" stroke-width="2.4"/><path d="M19.5 15.5 27.5 13" stroke-width="2.4"/><path d="M17 12.5 19.5 4.5" stroke-width="2.4"/></g></symbol>
+<symbol id="i-cam" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h3l2-3h6l2 3h3a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="4"/></g></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" d="M12 5v14M5 12h14"/></symbol>
 </svg>
 
 <header class="header" id="header">
@@ -539,6 +590,7 @@ const SITE = {
   <section class="hero" style="padding:0">
     <img class="hero-img" id="heroImg" alt="">
     <div class="wrap hero-body">
+      <div class="hero-l">
       <a class="rating" data-google target="_blank" rel="noopener">
         <span class="g-dot"><svg><use href="#i-g"/></svg></span>
         <span class="stars" aria-hidden="true">★★★★★</span><span data-t="ratingLine"></span>
@@ -546,13 +598,71 @@ const SITE = {
       <h1 class="display" data-t="headline"></h1>
       <p data-t="intro"></p>
       <div class="hero-ctas">
-        <a class="btn btn-sun" href="#quote">Get a free quote</a>
+        <a class="btn btn-sun" href="#pqForm">Get a photo quote</a>
         <a class="btn btn-glass" data-tel><svg><use href="#i-phone"/></svg><span data-t="phone"></span></a>
       </div>
+      </div>
+      <form class="pq" id="pqForm" novalidate>
+        <div class="pq-h"><span class="pq-ic"><svg><use href="#i-cam"/></svg></span><div><b>Price from a photo</b><small>Snap it, send it, get your price today</small></div></div>
+        <label class="drop" for="pqFiles"><input id="pqFiles" type="file" accept="image/*" multiple><svg><use href="#i-plus"/></svg><span>Add photos of the area<small>Driveway, siding, roof or patio</small></span></label>
+        <div class="pq-thumbs" id="pqThumbs" aria-live="polite"></div>
+        <select id="pqService" name="service" aria-label="What needs cleaning?"></select>
+        <input id="pqPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Mobile number for your price" aria-label="Mobile number">
+        <button class="btn btn-sun" type="submit">Text me my price</button>
+        <p class="pq-ok" id="pqOk" role="status" hidden></p>
+      </form>
     </div>
   </section>
 
   <div class="stats-band"><div class="wrap"><div class="stats" id="stats"></div></div></div>
+
+
+  <section class="dark" id="results">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><h2 class="display">See the difference</h2><p class="lede">Drag the handle on each photo to compare before and after.</p></div>
+      </div>
+      <div class="res-grid" id="resGrid"></div>
+    </div>
+  </section>
+
+  <section id="reviews">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><h2 class="display">Neighbors say it best</h2><p class="lede">What customers say after the job.</p></div>
+        <a class="g-summary" data-google target="_blank" rel="noopener">
+          <span class="g-dot"><svg><use href="#i-g"/></svg></span>
+          <div><b data-t="rating"></b> <span class="stars" aria-hidden="true">★★★★★</span><small data-t="reviewLine"></small></div>
+        </a>
+      </div>
+      <div class="slider">
+        <div class="track" id="track" tabindex="0" aria-label="Customer reviews"></div>
+        <div class="slider-nav">
+          <div class="dots" id="dots"></div>
+          <div class="arrows">
+            <button class="arrow" id="prev" aria-label="Previous review"><svg><use href="#i-left"/></svg></button>
+            <button class="arrow" id="next" aria-label="Next review"><svg><use href="#i-right"/></svg></button>
+          </div>
+        </div>
+      </div>
+      <div class="rb">
+        <div class="rb-bars" aria-label="Rating breakdown">
+          <div class="rb-score"><b data-t="rating"></b><span class="stars" aria-hidden="true">★★★★★</span><small data-t="reviewLine"></small></div>
+          <div class="rb-row"><span>5★</span><i><b style="width:92%"></b></i><em>92%</em></div>
+          <div class="rb-row"><span>4★</span><i><b style="width:6%"></b></i><em>6%</em></div>
+          <div class="rb-row"><span>3★</span><i><b style="width:1%"></b></i><em>1%</em></div>
+          <div class="rb-row"><span>2★</span><i><b style="width:1%"></b></i><em>1%</em></div>
+          <div class="rb-row"><span>1★</span><i><b style="width:0%"></b></i><em>0%</em></div>
+        </div>
+        <div class="rb-cta">
+          <span class="rb-tag">Recently cleaned by us?</span>
+          <h3>Tell your neighbors how it went</h3>
+          <p>Your review helps other San Antonio homeowners find a crew they can trust. It takes about 30 seconds.</p>
+          <div class="rb-btns"><a class="btn btn-sun" data-google target="_blank" rel="noopener">Write a Google review</a><a class="rb-priv" href="#" data-dlg="feedback">Something not right? Tell us privately</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <section id="services">
     <div class="wrap">
@@ -562,15 +672,6 @@ const SITE = {
       </div>
       <div class="svc-grid" id="svcGrid"></div>
       <div class="swipe-hint" aria-hidden="true">Swipe to see all services<svg><use href="#i-right"/></svg></div>
-    </div>
-  </section>
-
-  <section class="dark" id="results">
-    <div class="wrap">
-      <div class="sec-head">
-        <div><h2 class="display">See the difference</h2><p class="lede">Drag the handle on each photo to compare before and after.</p></div>
-      </div>
-      <div class="res-grid" id="resGrid"></div>
     </div>
   </section>
 
@@ -618,27 +719,6 @@ const SITE = {
     </div>
   </section>
 
-  <section id="reviews">
-    <div class="wrap">
-      <div class="sec-head">
-        <div><h2 class="display">Neighbors say it best</h2><p class="lede">What customers say after the job.</p></div>
-        <a class="g-summary" data-google target="_blank" rel="noopener">
-          <span class="g-dot"><svg><use href="#i-g"/></svg></span>
-          <div><b data-t="rating"></b> <span class="stars" aria-hidden="true">★★★★★</span><small data-t="reviewLine"></small></div>
-        </a>
-      </div>
-      <div class="slider">
-        <div class="track" id="track" tabindex="0" aria-label="Customer reviews"></div>
-        <div class="slider-nav">
-          <div class="dots" id="dots"></div>
-          <div class="arrows">
-            <button class="arrow" id="prev" aria-label="Previous review"><svg><use href="#i-left"/></svg></button>
-            <button class="arrow" id="next" aria-label="Next review"><svg><use href="#i-right"/></svg></button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <section class="soft">
     <div class="wrap area-wrap">
@@ -679,6 +759,7 @@ const SITE = {
         </div>
         <div><label for="fService">What needs cleaning?</label><select id="fService" name="service"></select></div>
         <div><label for="fAddr">Address or neighborhood</label><input id="fAddr" name="address" autocomplete="street-address" placeholder="e.g. Stone Oak"></div>
+        <div><label>Photos (optional)</label><label class="drop drop-sm" for="fFiles"><input id="fFiles" name="photos" type="file" accept="image/*" multiple><svg><use href="#i-cam"/></svg><span>Add photos for a faster price</span></label><div class="pq-thumbs" id="fThumbs"></div></div>
         <div><label for="fMsg">Details (optional)</label><textarea id="fMsg" name="message" rows="3" placeholder="Size of the area, stains, best time to call"></textarea></div>
         <button class="btn btn-sun" type="submit">Request my quote</button>
         <p class="form-note">We only use your details to reply to this request.</p>
@@ -735,6 +816,12 @@ const SITE = {
   <p>To have your details deleted, contact us by phone or email and we'll remove them.</p>
   <button class="btn btn-ink" data-close>Close</button>
 </div></dialog>
+<dialog id="dlg-feedback"><div class="dlg">
+  <h3>Tell us what went wrong</h3>
+  <p>We read every message and will make it right. This goes straight to the owner, not to Google.</p>
+  <form id="fbForm" class="fb"><textarea rows="4" placeholder="What could we have done better?" required></textarea><input type="tel" placeholder="Phone (optional)"><button class="btn btn-sun" type="submit">Send to the owner</button><p class="pq-ok" id="fbOk" hidden></p></form>
+  <button class="btn btn-ink" data-close>Close</button>
+</div></dialog>
 <dialog id="dlg-terms"><div class="dlg">
   <h3>Terms of service</h3>
   <p>Quotes are free and valid for 30 days. The final price is the one you approve before work starts.</p>
@@ -743,10 +830,6 @@ const SITE = {
   <button class="btn btn-ink" data-close>Close</button>
 </div></dialog>
 
-<div class="callbar">
-  <a class="btn btn-ink" data-tel>Call now</a>
-  <a class="btn btn-sun" href="#quote">Free quote</a>
-</div>
 
 <script>
 (function(){
@@ -862,6 +945,26 @@ const SITE = {
   // dialogs
   $$('[data-dlg]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); $('#dlg-'+a.dataset.dlg).showModal(); }));
   $$('dialog').forEach(d => { d.querySelector('[data-close]').onclick = () => d.close(); d.addEventListener('click', e => { if(e.target===d) d.close(); }); });
+
+  // photo quote (hero + bottom form)
+  const svcOpts = S.services.map(x => `<option>${esc(x.name)}</option>`).join('') + '<option>Something else</option>';
+  if($('#pqService')) $('#pqService').innerHTML = '<option value="" disabled selected>What needs cleaning?</option>' + svcOpts;
+  const thumbs = (input, box) => input && input.addEventListener('change', () => {
+    box.innerHTML = '';
+    [...input.files].slice(0, 6).forEach(f => { const im = document.createElement('img'); im.alt = ''; im.src = URL.createObjectURL(f); box.appendChild(im); });
+    const lbl = input.closest('.drop').querySelector('span'); if(lbl && input.files.length) lbl.firstChild.textContent = `${input.files.length} photo${input.files.length>1?'s':''} added `;
+  });
+  thumbs($('#pqFiles'), $('#pqThumbs')); thumbs($('#fFiles'), $('#fThumbs'));
+  const pq = $('#pqForm');
+  if(pq) pq.addEventListener('submit', e => {
+    e.preventDefault();
+    const ok = $('#pqOk'), ph = $('#pqPhone').value.replace(/\D/g,'');
+    if(ph.length < 10){ ok.style.color = '#B42318'; ok.textContent = 'Add a mobile number so we can text your price.'; ok.hidden = false; $('#pqPhone').focus(); return; }
+    ok.style.color = ''; ok.textContent = `Got it! We'll text your price to (${ph.slice(-10,-7)}) ${ph.slice(-7,-4)}-${ph.slice(-4)} within 2 hours.`; ok.hidden = false;
+    pq.querySelector('button').disabled = true;
+  });
+  const fb = $('#fbForm');
+  if(fb) fb.addEventListener('submit', e => { e.preventDefault(); const ok = $('#fbOk'); ok.textContent = 'Thank you. The owner will reach out today.'; ok.hidden = false; fb.querySelector('button').disabled = true; });
 
   // form
   const form = $('#quoteForm'), ok = $('#formOk');
