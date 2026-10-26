@@ -354,6 +354,10 @@ const WOODL = {
   .clink.wa i{background:#25D366;}
   .clink.tg i{background:#2AABEE;}
   .clink.em i{background:var(--grad);}
+  .clink.linkedin i{background:#0A66C2;}
+  .clink.upwork i{background:#14A800;}
+  .clink.fiverr i{background:#1DBF73;}
+  .clink.instagram i{background:linear-gradient(45deg,#F58529,#DD2A7B 50%,#8134AF);}
   .foot-bottom{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:22px;font-size:14px;color:var(--text-3);}
   .foot-bottom nav{display:flex;gap:20px;}
   .foot-bottom a{text-decoration:none;transition:color .35s cubic-bezier(.22,.61,.36,1);}
@@ -718,7 +722,7 @@ const WOODL = {
       </div>
       <div><h4>Explore</h4><ul><li><a href="#work">Recent projects</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#process">How it works</a></li><li><a href="#faq">FAQ</a></li></ul></div>
       <div><h4>Contact</h4><ul id="footContact"></ul></div>
-      <div id="footSocialCol" hidden><h4>Follow</h4><div class="socials" id="footSocial"></div></div>
+      <div id="footSocialCol" hidden><h4>Follow</h4><ul id="footSocial"></ul></div>
     </div>
     <div class="foot-bottom"><span data-copy></span><nav><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Service</a></nav></div>
   </div>
@@ -755,7 +759,7 @@ const WOODL = {
     W.email ? `<li><a class="clink em" href="mailto:${esc(W.email)}"><i><svg><use href="#i-mail"/></svg></i>${esc(W.email)}</a></li>` : '',
   ].join('');
   const soc = [['linkedin','LinkedIn'],['upwork','Upwork'],['fiverr','Fiverr'],['instagram','Instagram']].filter(([k]) => W[k]);
-  if(soc.length){ $('#footSocial').innerHTML = soc.map(([k,l]) => `<a class="soc ${k}" href="${esc(W[k])}" target="_blank" rel="noopener" aria-label="${l}" title="${l}"><svg><use href="#s-${k}"/></svg></a>`).join(''); $('#footSocialCol').hidden = false; $('#foot').classList.add('has-social'); }
+  if(soc.length){ $('#footSocial').innerHTML = soc.map(([k,l]) => `<li><a class="clink ${k}" href="${esc(W[k])}" target="_blank" rel="noopener"><i><svg><use href="#s-${k}"/></svg></i>${l}</a></li>`).join(''); $('#footSocialCol').hidden = false; $('#foot').classList.add('has-social'); }
   $('#avatar').innerHTML = W.photo ? `<img class="photo" src="${esc(W.photo)}" alt="Ostap, founder of Woodl">` : '<img class="mark" src="logo.png" alt="">';
 
   /* work: w = render width, chosen so the 3:2 frame shows exactly the first screen */
