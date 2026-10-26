@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="robots" content="noindex">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#1E5BBF">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Sonoran Wash Co. | Pressure Washing in Phoenix, AZ</title>
 <meta name="description" content="Driveway, house, roof, paver and solar panel cleaning across Phoenix, Scottsdale, Mesa and Chandler. Instant online estimate.">
@@ -394,6 +397,8 @@ const SITE = {
     .zip{flex-direction:column;}
     .topbar{font-size:13px;}
   }
+  .foot-bottom .fl{display:flex;gap:18px;flex-wrap:wrap;}
+  .foot-bottom a{color:inherit;}
 </style>
 <link rel="stylesheet" href="../kit.css">
 </head>
@@ -526,7 +531,7 @@ const SITE = {
       <div class="rev-score">
         <span class="stars" style="font-size:20px">★★★★★</span>
         <div><b>4.9</b></div>
-        <p>Average rating from 300+ reviews on Google. Sample reviews shown for this concept.</p>
+        <p>Average rating from 300+ reviews on Google.</p>
         <button class="btn btn-orange" data-book>Book like they did</button>
       </div>
       <div class="rev-stage">
@@ -588,7 +593,7 @@ const SITE = {
       <div><h4>Company</h4><ul><li><a href="#work">Our work</a></li><li><a href="#plans">Plans</a></li><li><a href="#reviews">Reviews</a></li><li><a href="#faq">FAQ</a></li><li><button class="link-btn" data-quote>Contact us</button></li></ul></div>
       <div><h4>Contact</h4><ul><li data-city></li><li><a data-tel></a></li><li><a data-mail></a></li><li>Mon–Sun, 7am–7pm</li></ul></div>
     </div>
-    <div class="foot-bottom"><span>© <span id="yr"></span> Sonoran Wash Co. Concept project by Woodl.</span><span><button class="link-btn" data-policy>Privacy policy</button></span></div>
+    <div class="foot-bottom"><span>© <span id="yr"></span> Sonoran Wash Co. · <a href="https://woodl-site.com" target="_blank" rel="noopener">Sample website by Woodl</a></span><span class="fl"><a class="link-btn" href="privacy.html">Privacy policy</a><a class="link-btn" href="terms.html">Terms of service</a></span></div>
   </div>
 </footer>
 
@@ -619,7 +624,7 @@ const SITE = {
         <div class="field"><label for="bAddr">Address</label><input id="bAddr" autocomplete="street-address" placeholder="Street, city"><span class="err"></span></div>
         <div class="field"><label for="bNote">Notes (optional)</label><textarea id="bNote" rows="2" placeholder="Gate code, pets, problem areas"></textarea></div>
         <div class="summary" id="bSummary"></div>
-        <label class="check"><input type="checkbox" id="bAgree"><span class="box"><svg><use href="#i-check"/></svg></span><span>I agree to be contacted about this booking and accept the <button type="button" class="link-btn" data-policy style="font-size:14px">privacy policy</button>.</span></label>
+        <label class="check"><input type="checkbox" id="bAgree"><span class="box"><svg><use href="#i-check"/></svg></span><span>I agree to be contacted about this booking and accept the <a class="link-btn" href="privacy.html" target="_blank" style="font-size:14px">privacy policy</a>.</span></label>
         <span class="err" id="errAgree"></span>
         <div class="nav-row"><button type="button" class="btn btn-line" data-back>Back</button><button type="submit" class="btn btn-orange">Confirm booking</button></div>
       </div>
@@ -650,18 +655,6 @@ const SITE = {
       <div class="ok-ic"><svg><use href="#i-check"/></svg></div>
       <h3>Message sent</h3>
       <p>Thanks! We'll get back to you within an hour during business hours.</p>
-      <button class="btn btn-ink" data-close>Close</button>
-    </div>
-  </div>
-</div>
-
-<!-- Policy modal -->
-<div class="modal" id="policyModal" role="dialog" aria-modal="true" aria-labelledby="policyTitle">
-  <div class="dialog">
-    <div class="dialog-head"><div><h3 id="policyTitle">Privacy policy</h3></div><button class="x" data-close aria-label="Close"><svg><use href="#i-x"/></svg></button></div>
-    <div class="dialog-body" style="color:var(--ink-2);font-size:15.5px">
-      <p style="margin:0">We collect only what you send us: your name, phone, address and details about the job. We use it to schedule and complete your service and to contact you about it.</p>
-      <p style="margin:0">We never sell your information. To have your data deleted, call or email us and we will remove it.</p>
       <button class="btn btn-ink" data-close>Close</button>
     </div>
   </div>
@@ -798,7 +791,7 @@ const SITE = {
   lb.addEventListener('click', e => { if(e.target===lb) closeModal(lb); });
 
   /* ---------- reviews ---------- */
-  $('#revCards').innerHTML = REVIEWS.map((r,i)=>`<figure class="rev-card ${i===0?'on':''}" style="margin:0"><span class="stars">★★★★★</span><blockquote>${r.t}</blockquote><cite><span class="ava" style="background:${r.c}">S</span><span>${r.n}<small>Concept content</small></span></cite></figure>`).join('');
+  $('#revCards').innerHTML = REVIEWS.map((r,i)=>`<figure class="rev-card ${i===0?'on':''}" style="margin:0"><span class="stars">★★★★★</span><blockquote>${r.t}</blockquote><cite><span class="ava" style="background:${r.c}">S</span><span>${r.n}</span></cite></figure>`).join('');
   let rv = 0;
   const showRv = i => { rv = (i + REVIEWS.length) % REVIEWS.length; $$('.rev-card').forEach((c,k)=>c.classList.toggle('on', k===rv)); $('#revCount').textContent = `${rv+1} / ${REVIEWS.length}`; };
   $('#revPrev').onclick = () => showRv(rv-1); $('#revNext').onclick = () => showRv(rv+1); showRv(0);
@@ -829,7 +822,7 @@ const SITE = {
     if(open===lb && e.key==='ArrowLeft') showLb(lbI-1);
     if(e.key==='Tab'){ const f = $$('button, input, textarea, a[href]', open).filter(x=>x.offsetParent); if(!f.length) return; const first=f[0], last=f[f.length-1]; if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); } else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); } }
   });
-  $$('[data-policy]').forEach(b => b.addEventListener('click', () => openModal($('#policyModal'))));
+  
 
   /* ---------- form validation + sending ---------- */
   const setErr = (input, msg) => { const f = input.closest('.field'); f.classList.toggle('invalid', !!msg); const e = f.querySelector('.err'); if(e) e.textContent = msg||''; return !msg; };
@@ -966,7 +959,8 @@ const SITE = {
   var de = document.documentElement;
   de.classList.add('embedded');
   var st = document.createElement('style');
-  st.textContent = 'html,body{scrollbar-width:none;-ms-overflow-style:none}html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}';
+  st.textContent = 'html,body{scrollbar-width:none;-ms-overflow-style:none}html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}html.embedded *,html.embedded *::before,html.embedded *::after{transition:none!important;animation:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;scroll-behavior:auto!important}';
+  document.querySelectorAll('img[loading=lazy]').forEach(function(i){ i.loading = 'eager'; });
   document.head.appendChild(st);
   if(!/[?&]autoscroll/.test(location.search)) return;
   if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -980,11 +974,11 @@ const SITE = {
     var dt = Math.min(t - last, 50); last = t;
     if(wait > 0){ wait -= dt; }
     else {
-      y += dir * speed * dt / 1000 * (dir < 0 ? 6 : 1);
+      y += dir * speed * dt / 1000 * (dir < 0 ? 4 : 1);
       var mx = max();
       if(y >= mx){ y = mx; dir = -1; wait = 1600; }
       else if(y <= 0){ y = 0; dir = 1; wait = 2200; }
-      window.scrollTo(0, y);
+      window.scrollTo(0, Math.round(y));
     }
     requestAnimationFrame(step);
   }

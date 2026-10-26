@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="robots" content="noindex">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#0B1A2C">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Bayou Pro Wash | Pressure Washing in Houston, TX</title>
 <meta name="description" content="Residential and commercial pressure washing in Houston, Katy, Sugar Land and The Woodlands. Mold, mildew and algae removal. Book online.">
@@ -259,7 +262,8 @@ const SITE = {
   .rnd svg{width:20px;height:20px;}
 
   /* faq */
-  .faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 28px;}
+  .faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 28px;align-items:start;}
+  .faq-col{display:flex;flex-direction:column;gap:12px;}
   .faq details{border-bottom:1.5px solid var(--line);}
   .faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:18px;padding:20px 0;font-weight:700;font-size:17px;}
   .faq summary::-webkit-details-marker{display:none;}
@@ -368,7 +372,7 @@ const SITE = {
     .tl::before{display:none;}
     .plans{grid-template-columns:1fr;max-width:560px;}
     .rtrack{grid-auto-columns:calc((100% - 18px)/2);}
-    .faq-grid{grid-template-columns:1fr;}
+    .faq-grid{grid-template-columns:1fr;gap:12px;}
     .foot{grid-template-columns:1fr 1fr;}
     .trust .wrap{grid-template-columns:1fr 1fr;}
     .promo{grid-template-columns:1fr;}
@@ -403,6 +407,8 @@ const SITE = {
     footer{padding-bottom:100px;}
     .thumb small{display:none;}
   }
+  .foot-bottom .fl{display:flex;gap:18px;flex-wrap:wrap;}
+  .foot-bottom a{color:inherit;}
 </style>
 <link rel="stylesheet" href="../kit.css">
 </head>
@@ -524,7 +530,7 @@ const SITE = {
 
   <section class="mist" id="reviews">
     <div class="wrap">
-      <div class="sec-head"><div><h2>What clients say</h2><p class="lede">Sample reviews shown for this concept.</p></div>
+      <div class="sec-head"><div><h2>What clients say</h2><p class="lede">Homeowners and property managers across Greater Houston.</p></div>
         <div class="rnav"><button class="rnd" id="rPrev" aria-label="Previous reviews"><svg><use href="#i-left"/></svg></button><button class="rnd" id="rNext" aria-label="Next reviews"><svg><use href="#i-right"/></svg></button></div>
       </div>
       <div class="rtrack" id="rtrack" tabindex="0" aria-label="Client reviews"></div>
@@ -563,7 +569,7 @@ const SITE = {
           <label class="drop" id="drop"><svg><use href="#i-up"/></svg><span><b>Add photos of the area</b><small>Drag and drop or tap to choose. Up to 5 images, 10 MB each.</small></span><input type="file" id="cFiles" accept="image/*" multiple hidden></label>
           <div class="files" id="fileList"></div><span class="err" id="errFiles"></span>
         </div>
-        <label class="check"><input type="checkbox" id="cAgree"><span class="box"><svg><use href="#i-check"/></svg></span><span>I agree to be contacted and accept the <button type="button" class="linkish" data-policy>privacy policy</button>.</span></label>
+        <label class="check"><input type="checkbox" id="cAgree"><span class="box"><svg><use href="#i-check"/></svg></span><span>I agree to be contacted and accept the <a class="linkish" href="privacy.html" target="_blank">privacy policy</a>.</span></label>
         <span class="err" id="errAgree"></span>
         <button class="btn btn-aqua btn-block" type="submit">Send my request</button>
       </form>
@@ -581,7 +587,7 @@ const SITE = {
       <div><h4>Commercial</h4><ul id="fCom"></ul></div>
       <div><h4>Contact</h4><ul><li><a data-tel><span data-tel-text></span></a></li><li><a data-mail></a></li><li>Mon–Sat, 7am–6pm</li><li><button class="fbtn" data-quote>Request a quote</button></li></ul></div>
     </div>
-    <div class="foot-bottom"><span>© <span id="yr"></span> Bayou Pro Wash. Concept project by Woodl.</span><span><button class="fbtn" data-policy>Privacy policy</button></span></div>
+    <div class="foot-bottom"><span>© <span id="yr"></span> Bayou Pro Wash · <a href="https://woodl-site.com" target="_blank" rel="noopener">Sample website by Woodl</a></span><span class="fl"><a class="fbtn" href="privacy.html">Privacy policy</a><a class="fbtn" href="terms.html">Terms of service</a></span></div>
   </div>
 </footer>
 
@@ -811,7 +817,7 @@ const SITE = {
   sw.onclick = () => { sw.setAttribute('aria-checked', sw.getAttribute('aria-checked')!=='true'); sw.setAttribute('aria-label', sw.getAttribute('aria-checked')==='true' ? 'Switch to per-visit pricing' : 'Switch to annual billing'); renderPlans(); };
 
   /* reviews */
-  $('#rtrack').innerHTML = REVIEWS.map(r=>`<figure class="rcard"><span class="stars">★★★★★</span><blockquote>${r.t}</blockquote><cite><span class="ava">S</span><span>${r.n}<small>Concept content</small></span></cite></figure>`).join('');
+  $('#rtrack').innerHTML = REVIEWS.map(r=>`<figure class="rcard"><span class="stars">★★★★★</span><blockquote>${r.t}</blockquote><cite><span class="ava">S</span><span>${r.n}</span></cite></figure>`).join('');
   const tr = $('#rtrack');
   const stepW = () => { const c = tr.children; return c[1] ? c[1].offsetLeft - c[0].offsetLeft : tr.clientWidth; };
   const updR = () => { $('#rPrev').disabled = tr.scrollLeft < 5; $('#rNext').disabled = tr.scrollLeft + tr.clientWidth >= tr.scrollWidth - 5; };
@@ -820,7 +826,7 @@ const SITE = {
   tr.addEventListener('scroll', () => requestAnimationFrame(updR), {passive:true}); addEventListener('resize', updR); updR();
 
   /* faq */
-  $('#faqGrid').innerHTML = FAQ.map(([q,a])=>`<details><summary>${q}<i aria-hidden="true"></i></summary><p>${a}</p></details>`).join('');
+  { const item = ([q,a]) => `<details><summary>${q}<i aria-hidden="true"></i></summary><p>${a}</p></details>`; const h = Math.ceil(FAQ.length/2); $('#faqGrid').innerHTML = `<div class="faq-col">${FAQ.slice(0,h).map(item).join('')}</div><div class="faq-col">${FAQ.slice(h).map(item).join('')}</div>`; }
 
   /* modals */
   let last = null;
@@ -833,7 +839,7 @@ const SITE = {
     if(e.key==='Escape' && !$('.csel.open', m)) closeM(m);
     if(e.key==='Tab'){ const f = $$('button:not(:disabled), input, textarea, a[href]', m).filter(x=>x.offsetParent); if(!f.length) return; if(e.shiftKey && document.activeElement===f[0]){ e.preventDefault(); f[f.length-1].focus(); } else if(!e.shiftKey && document.activeElement===f[f.length-1]){ e.preventDefault(); f[0].focus(); } }
   });
-  $$('[data-policy]').forEach(b => b.addEventListener('click', () => openM($('#policy'))));
+  
 
   /* quote modal */
   const qM = $('#qModal'); let qPlan = null;
@@ -917,7 +923,8 @@ const SITE = {
   var de = document.documentElement;
   de.classList.add('embedded');
   var st = document.createElement('style');
-  st.textContent = 'html,body{scrollbar-width:none;-ms-overflow-style:none}html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}';
+  st.textContent = 'html,body{scrollbar-width:none;-ms-overflow-style:none}html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}html.embedded *,html.embedded *::before,html.embedded *::after{transition:none!important;animation:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;scroll-behavior:auto!important}';
+  document.querySelectorAll('img[loading=lazy]').forEach(function(i){ i.loading = 'eager'; });
   document.head.appendChild(st);
   if(!/[?&]autoscroll/.test(location.search)) return;
   if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -931,11 +938,11 @@ const SITE = {
     var dt = Math.min(t - last, 50); last = t;
     if(wait > 0){ wait -= dt; }
     else {
-      y += dir * speed * dt / 1000 * (dir < 0 ? 6 : 1);
+      y += dir * speed * dt / 1000 * (dir < 0 ? 4 : 1);
       var mx = max();
       if(y >= mx){ y = mx; dir = -1; wait = 1600; }
       else if(y <= 0){ y = 0; dir = 1; wait = 2200; }
-      window.scrollTo(0, y);
+      window.scrollTo(0, Math.round(y));
     }
     requestAnimationFrame(step);
   }

@@ -79,6 +79,9 @@ const WOODL = {
   /* section head: title left, description right */
   .sec-head{display:grid;grid-template-columns:1.15fr 1fr;gap:24px 64px;align-items:end;margin-bottom:36px;}
   .sec-head p{margin:0;color:var(--text-2);font-size:18px;max-width:30em;justify-self:end;}
+  .sec-head{grid-template-columns:minmax(0,1fr) minmax(0,25em);}
+  .sec-head h2{text-wrap:balance;}
+  @media (max-width:1100px){.br-d{display:none;}}
 
   .btn{position:relative;overflow:hidden;isolation:isolate;display:inline-flex;align-items:center;justify-content:center;gap:10px;white-space:nowrap;font-family:var(--body);font-weight:700;font-size:16px;padding:16px 26px;border-radius:14px;text-decoration:none;border:1.5px solid transparent;cursor:pointer;line-height:1;transition:transform .4s cubic-bezier(.22,.61,.36,1),background-color .4s cubic-bezier(.22,.61,.36,1),color .4s cubic-bezier(.22,.61,.36,1),border-color .4s cubic-bezier(.22,.61,.36,1),box-shadow .4s cubic-bezier(.22,.61,.36,1);}
   .btn:active{transform:scale(.97);}
@@ -165,7 +168,8 @@ const WOODL = {
   @keyframes floatA{0%,100%{transform:rotate(-6deg) translateY(0);}50%{transform:rotate(-5deg) translateY(-12px);}}
   @keyframes floatB{0%,100%{transform:translateY(0);}50%{transform:translateY(-14px);}}
   @keyframes floatC{0%,100%{transform:rotate(6deg) translateY(0);}50%{transform:rotate(5deg) translateY(-10px);}}
-  .frame{position:relative;overflow:hidden;background:var(--surface-2);}
+  .frame{position:relative;overflow:hidden;background:var(--surface-2);contain:paint;isolation:isolate;}
+  .phone .frame iframe{will-change:transform;backface-visibility:hidden;}
   .frame iframe{position:absolute;top:0;left:0;border:0;transform-origin:0 0;pointer-events:none;opacity:0;transition:opacity .6s ease;}
   .frame iframe.ready{opacity:1;}
   .frame::before{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.55) 50%,transparent 70%);transform:translateX(-100%);animation:skel 1.6s ease-in-out infinite;}
@@ -454,7 +458,7 @@ const WOODL = {
     .drawer .btn{margin-top:auto;width:100%;}
     .hero .wrap{grid-template-columns:1fr;}
     .phones{height:500px;max-width:640px;width:100%;margin:0 auto;}
-    .sec-head{grid-template-columns:1fr;gap:14px;}
+    .sec-head,.pricing .sec-head{grid-template-columns:1fr;gap:14px;}
     .sec-head p{justify-self:start;}
     .ps-grid{grid-template-columns:1fr;grid-template-rows:none;gap:14px;}
     .ps{grid-row:auto;grid-template-rows:auto;}
@@ -626,8 +630,8 @@ const WOODL = {
   <section>
     <div class="wrap">
       <div class="sec-head">
-        <h2>You're great at washing. The office work is what loses jobs.</h2>
-        <p>Most pressure washing companies don't lose customers to a better crew. They lose them to slow replies, endless “how much?” questions and customers who forget to call back.</p>
+        <h2>Great crews lose jobs in the office.</h2>
+        <p>Customers rarely leave for a better crew. They leave because of slow replies, endless “how much?” questions and no follow-up.</p>
       </div>
       <div class="ps-grid">
         <div class="ps">
@@ -653,7 +657,7 @@ const WOODL = {
   <section id="system" style="padding-top:0">
     <div class="wrap">
       <div class="sec-head">
-        <h2>Not just a website. The Booked Jobs System.</h2>
+        <h2>Not just a website.<br class="br-d"> A booking system.</h2>
         <p>Everything a pressure washing company needs to turn searches into booked, paid and reviewed jobs, set up for you and ready on day one.</p>
       </div>
       <div class="sys-grid">
@@ -702,7 +706,7 @@ const WOODL = {
   <section class="pricing" id="pricing">
     <div class="wrap">
       <div class="sec-head">
-        <h2>Simple, fixed pricing. No surprises.</h2>
+        <h2>Simple, fixed pricing.<br class="br-d"> No surprises.</h2>
         <p>Pay 50% once you approve your preview and the rest at launch. The monthly Care plan is optional and month to month.</p>
       </div>
       <div class="plans">

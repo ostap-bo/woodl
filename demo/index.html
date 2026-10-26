@@ -63,7 +63,7 @@
   .note{font-size:13.5px;color:var(--text-3);margin-top:14px;}
 
   /* phone */
-  .phone{position:sticky;top:20px;width:400px;height:820px;border-radius:46px;background:#141826;padding:12px;box-shadow:0 50px 90px -40px rgba(14,20,48,.55);}
+  .phone{position:sticky;top:16px;width:400px;height:min(820px,calc(100vh - 32px));min-height:600px;border-radius:46px;background:#141826;padding:12px;box-shadow:0 50px 90px -40px rgba(14,20,48,.55);}
   .screen{position:relative;width:100%;height:100%;border-radius:36px;overflow:hidden;background:var(--bg);display:flex;flex-direction:column;}
 
   /* app */
@@ -89,7 +89,7 @@
   .tab.on{background:var(--text);border-color:var(--text);color:#fff;}
   .tab.on b{color:#AEB8D8;}
 
-  .list{flex:1;overflow-y:auto;padding:12px 14px 90px;display:grid;gap:10px;align-content:start;scrollbar-width:none;}
+  .list{flex:1;min-height:0;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;overflow-y:auto;padding:12px 14px 90px;display:grid;gap:10px;align-content:start;scrollbar-width:none;}
   .list::-webkit-scrollbar{display:none;}
   .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:13px 14px;text-align:left;width:100%;display:grid;gap:8px;transition:border-color .3s var(--ease),box-shadow .3s var(--ease),transform .3s var(--ease);}
   .card:hover{border-color:#C9D3F5;box-shadow:0 14px 28px -22px rgba(42,75,215,.6);}
@@ -107,8 +107,8 @@
   .tag.src-call{background:#FFF3DF;color:var(--amber);}
   .tag.warn{background:#FDECEC;color:var(--red);}
   .thumbs{display:flex;gap:6px;}
-  .thumbs i{width:46px;height:34px;border-radius:7px;background:linear-gradient(135deg,#6B7A88,#A9B4BE);display:block;position:relative;overflow:hidden;}
-  .thumbs i::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(0,0,0,.12) 0 4px,transparent 4px 9px);}
+  .thumbs img{width:46px;height:34px;border-radius:7px;object-fit:cover;display:block;background:#C9D1DA;}
+  .sheet .thumbs img{width:76px;height:56px;border-radius:9px;}
   .reply{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--green);font-weight:600;}
   .reply svg{width:14px;height:14px;}
   .empty{text-align:center;color:var(--text-3);font-size:14px;padding:40px 10px;}
@@ -119,10 +119,13 @@
   .fab .btn{flex:1;padding:14px;font-size:14.5px;}
 
   /* sheet */
-  .sheet-bg{position:absolute;inset:0;background:rgba(14,20,48,.38);opacity:0;visibility:hidden;transition:opacity .3s var(--ease),visibility .3s;}
-  .sheet{position:absolute;left:0;right:0;bottom:0;max-height:88%;overflow-y:auto;background:#fff;border-radius:24px 24px 0 0;padding:10px 18px 22px;transform:translateY(100%);transition:transform .45s var(--ease);}
+  .sheet-bg{position:absolute;z-index:3;inset:0;background:rgba(14,20,48,.38);opacity:0;visibility:hidden;transition:opacity .3s var(--ease),visibility .3s;}
+  .sheet{position:absolute;z-index:4;left:0;right:0;bottom:0;max-height:88%;overflow-y:auto;overscroll-behavior:contain;background:#fff;border-radius:24px 24px 0 0;padding:10px 18px 22px;transform:translateY(100%);transition:transform .45s var(--ease);}
   .open .sheet-bg{opacity:1;visibility:visible;}
   .open .sheet{transform:none;}
+  .sh-x{position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:10px;border:1px solid var(--line);background:#fff;display:flex;align-items:center;justify-content:center;transition:border-color .3s var(--ease);}
+  .sh-x:hover{border-color:var(--blue);}
+  .sheet .c-top{padding-right:44px;}
   .grab{width:44px;height:5px;border-radius:3px;background:var(--line);margin:0 auto 12px;}
   .sheet h3{font-size:22px;}
   .kv{display:grid;grid-template-columns:96px 1fr;gap:6px 10px;margin-top:14px;font-size:14px;}
@@ -163,12 +166,12 @@
     .top .btn .sm{display:inline;}
     .stage{padding:4px 0 0;gap:18px;}
     .intro{padding:0 16px;}
-    .intro h1{font-size:32px;}
-    .intro > p{font-size:16.5px;}
+    .intro h1{font-size:28px;margin-top:14px;}
+    .intro > p{font-size:15.5px;margin-top:10px;}
     .tour{display:none;}
     .intro-cta{display:none;}
     .note{display:none;}
-    .phone{width:100%;height:calc(100dvh - 70px);min-height:640px;border-radius:0;padding:0;background:none;box-shadow:none;}
+    .phone{width:100%;height:100dvh;min-height:560px;position:sticky;top:0;border-radius:0;padding:0;background:none;box-shadow:none;}
     .screen{border-radius:22px 22px 0 0;border-top:1px solid var(--line);}
   }
 </style>
@@ -238,6 +241,8 @@
   const $ = (s, r=document) => r.querySelector(s), $$ = (s, r=document) => [...r.querySelectorAll(s)];
   const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const SRC = {quote:['Instant quote','src-quote'], photo:['Photo quote','src-photo'], book:['Online booking','src-book'], call:['Missed call','src-call']};
+  const PH = ['house','driveway','patio','roof','brick','pool'];
+  const pics = (l,n) => { const k = /house/i.test(l.service)?'house':/patio|paver/i.test(l.service)?'patio':/roof/i.test(l.service)?'roof':/drive/i.test(l.service)?'driveway':'brick'; const list = [k, ...PH.filter(x => x !== k)]; return Array.from({length:Math.min(l.photos,n)},(_,i)=>`<img src="../work/img/${list[i]}-sm.webp" alt="Customer photo" loading="lazy">`).join(''); };
   const STAGES = [['new','New'],['quoted','Quoted'],['booked','Booked'],['done','Done'],['reminders','Reminders']];
 
   const seed = () => ([
@@ -307,7 +312,7 @@
     return `<button class="card" data-id="${l.id}">
       <div class="c-top"><div><div class="c-name">${esc(l.name)}</div><div class="c-sub">${esc(l.area)} · ${esc((l.stage==='booked'||l.stage==='done') ? (l.when||l.ago||'') : (l.ago||l.when||''))}</div></div><div class="c-price">${priceTxt}</div></div>
       <div class="tags"><span class="tag ${srcCls}">${srcLabel}</span><span class="tag">${esc(l.service)}</span>${l.rain?'<span class="tag warn">Rain risk</span>':''}${l.stage==='done'&&l.reviewSent?'<span class="tag src-book">★ Review requested</span>':''}</div>
-      ${l.photos?`<div class="thumbs">${'<i></i>'.repeat(Math.min(l.photos,4))}</div>`:''}
+      ${l.photos?`<div class="thumbs">${pics(l,4)}</div>`:''}
       ${l.stage==='new'?`<div class="reply"><svg><use href="#i-check"/></svg>Auto-reply sent in 12 sec</div>`:''}
     </button>`;
   }
@@ -324,15 +329,16 @@
     if(cur.stage === 'quoted') acts = `<div class="wide" style="font-size:13.5px;font-weight:700;margin-top:4px">Pick a time slot</div><div class="slots wide">${['Thu 8–10 AM','Thu 1–3 PM','Fri 8–10 AM','Mon 10–12 AM'].map(s => `<button class="slot" data-slot="${s}">${s}</button>`).join('')}</div><button class="btn btn-main wide" data-act="book">Book job</button>`;
     if(cur.stage === 'booked') acts = `${cur.rain?`<div class="msg wide" style="margin-top:0;background:#FDECEC;color:#8A2626"><b style="color:#8A2626">Rain expected on ${esc(cur.day)}</b>Send a one-tap reschedule offer to the customer.</div><button class="btn btn-line" data-act="reschedule">Offer new time</button>`:''}<button class="btn btn-main ${cur.rain?'':'wide'}" data-act="done">Mark job done</button>`;
     if(cur.stage === 'done') acts = `<div class="msg wide" style="margin-top:0"><b>All set</b>Review request sent and a reminder is scheduled for next year's wash.</div>`;
-    $('#sheet').innerHTML = `<div class="grab"></div>
+    $('#sheet').innerHTML = `<div class="grab"></div><button class="sh-x" data-act="close" aria-label="Close"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
       <div class="c-top"><div><h3 id="shTitle">${esc(cur.name)}</h3><div class="c-sub">${esc(cur.area)}, San Antonio</div></div><span class="tag ${SRC[cur.src][1]}">${SRC[cur.src][0]}</span></div>
       <div class="flow">${[0,1,2,3].map(i => `<i class="${i<=st?'on':''}"></i>`).join('')}</div>
       <div class="flow-l"><span>New</span><span>Quoted</span><span>Booked</span><span>Done</span></div>
       <dl class="kv"><dt>Service</dt><dd>${esc(cur.service)}</dd><dt>Size</dt><dd>${esc(cur.size||'')}</dd><dt>Estimate</dt><dd>${range(cur.est)}</dd>${cur.quote?`<dt>Quoted</dt><dd>${money(cur.quote)}</dd>`:''}${cur.when?`<dt>Scheduled</dt><dd>${esc(cur.when)}</dd>`:''}<dt>Phone</dt><dd>(210) 555-01${String(cur.id).padStart(2,'0').slice(-2)}</dd></dl>
-      ${cur.photos?`<div class="thumbs" style="margin-top:12px">${'<i style="width:68px;height:52px"></i>'.repeat(Math.min(cur.photos,4))}</div>`:''}
+      ${cur.photos?`<div class="thumbs" style="margin-top:12px">${pics(cur,4)}</div>`:''}
       <div class="msg"><b>Auto-reply the customer got</b>${esc(autoMsg)}</div>
       <div class="acts"><button class="btn btn-line" data-act="call"><svg><use href="#i-phone"/></svg>Call</button><button class="btn btn-line" data-act="text"><svg><use href="#i-msg"/></svg>Text</button>${acts}</div>`;
-    $('#screen').classList.add('open');
+    $('#sheet').scrollTop = 0; $('#screen').classList.add('open');
+    const r = $('.phone').getBoundingClientRect(); if(r.bottom > innerHeight + 2 || r.top < -2) $('.phone').scrollIntoView({behavior:'smooth', block:'end'});
   }
   const closeSheet = () => $('#screen').classList.remove('open');
 
@@ -341,6 +347,7 @@
     if(s){ slot = s.dataset.slot; $$('.slot', $('#sheet')).forEach(b => b.classList.toggle('on', b === s)); return; }
     const a = e.target.closest('[data-act]'); if(!a || !cur) return;
     const act = a.dataset.act;
+    if(act === 'close'){ closeSheet(); return; }
     if(act === 'call'){ toast('Calling…', ' (demo)'); return; }
     if(act === 'text'){ toast('Text thread opened', ' (demo)'); return; }
     if(act === 'quote'){ cur.quote = Math.round((cur.est[0]+cur.est[1])/2/10)*10; cur.stage = 'quoted'; cur.ago = 'Just now'; closeSheet(); tab = 'quoted'; render(cur.id); toast('Quote sent', ` ${money(cur.quote)} to ${cur.name.split(' ')[0]} by text and email`); return; }
@@ -355,7 +362,7 @@
   $('#sheetBg').addEventListener('click', closeSheet);
   document.addEventListener('keydown', e => { if(e.key === 'Escape') closeSheet(); });
 
-  $('#tabs').addEventListener('click', e => { const t = e.target.closest('[data-tab]'); if(!t) return; tab = t.dataset.tab; render(); });
+  $('#tabs').addEventListener('click', e => { const t = e.target.closest('[data-tab]'); if(!t) return; tab = t.dataset.tab; render(); $('#list').scrollTop = 0; t.scrollIntoView({inline:'nearest',block:'nearest',behavior:'smooth'}); });
   $('#list').addEventListener('click', e => {
     const r = e.target.closest('[data-remind]');
     if(r){ reminders[+r.dataset.remind].sent = true; render(); toast('Reminder sent', ' “Time for your annual house wash?”'); return; }
@@ -364,7 +371,7 @@
   $('#simBtn').addEventListener('click', () => {
     const p = NEW_POOL[poolIdx % NEW_POOL.length]; poolIdx++;
     const l = {...p, id: nextId++, stage:'new', ago:'Just now'};
-    leads.unshift(l); unread++; tab = 'new'; render(l.id);
+    leads.unshift(l); unread++; tab = 'new'; render(l.id); $('#list').scrollTo({top:0,behavior:'smooth'});
     toast(`New ${SRC[l.src][0].toLowerCase()}: ${l.name}`, ` ${l.service}, ${range(l.est)}. Auto-reply sent.`);
   });
   $('#bellBtn').addEventListener('click', () => { unread = 0; tab = 'new'; render(); });

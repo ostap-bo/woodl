@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="robots" content="noindex">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#0F1B26">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Pressure Washing</title>
 <meta name="description" content="">
@@ -805,30 +808,16 @@ const SITE = {
       </div>
     </div>
     <div class="foot-bottom">
-      <span><span data-t="copy"></span> Concept project.</span>
-      <nav><a href="#" data-dlg="privacy">Privacy policy</a><a href="#" data-dlg="terms">Terms of service</a></nav>
+      <span><span data-t="copy"></span> · <a href="https://woodl-site.com" target="_blank" rel="noopener">Sample website by Woodl</a></span>
+      <nav><a href="privacy.html">Privacy policy</a><a href="terms.html">Terms of service</a></nav>
     </div>
   </div>
 </footer>
 
-<dialog id="dlg-privacy"><div class="dlg">
-  <h3>Privacy policy</h3>
-  <p>We collect only the details you send through the quote form or by phone: your name, phone number, address and a description of the job.</p>
-  <p>We use them to prepare your quote, schedule the work and contact you about it. We don't sell or share your information with third parties for marketing.</p>
-  <p>To have your details deleted, contact us by phone or email and we'll remove them.</p>
-  <button class="btn btn-ink" data-close>Close</button>
-</div></dialog>
 <dialog id="dlg-feedback"><div class="dlg">
   <h3>Tell us what went wrong</h3>
   <p>We read every message and will make it right. This goes straight to the owner, not to Google.</p>
   <form id="fbForm" class="fb"><textarea rows="4" placeholder="What could we have done better?" required></textarea><input type="tel" placeholder="Phone (optional)"><button class="btn btn-sun" type="submit">Send to the owner</button><p class="pq-ok" id="fbOk" hidden></p></form>
-  <button class="btn btn-ink" data-close>Close</button>
-</div></dialog>
-<dialog id="dlg-terms"><div class="dlg">
-  <h3>Terms of service</h3>
-  <p>Quotes are free and valid for 30 days. The final price is the one you approve before work starts.</p>
-  <p>Please make an outdoor water spigot available and move vehicles and loose items away from the work area.</p>
-  <p>If weather prevents safe work, we reschedule at no cost.</p>
   <button class="btn btn-ink" data-close>Close</button>
 </div></dialog>
 
@@ -897,7 +886,7 @@ const SITE = {
     return `<figure class="rev">
       <div class="rev-top"><span class="stars" aria-label="5 out of 5 stars">★★★★★</span><span class="g-dot"><svg><use href="#i-g"/></svg></span></div>
       <blockquote>${esc(r.text)}</blockquote>
-      <cite><span class="ava">${esc(name.trim()[0].toUpperCase())}</span><span>${esc(name)}<small>Concept content</small></span></cite>
+      <cite><span class="ava">${esc(name.trim()[0].toUpperCase())}</span><span>${esc(name)}</span></cite>
     </figure>`;
   }).join('');
   const cards = [...track.children];
@@ -976,7 +965,8 @@ const SITE = {
   var de = document.documentElement;
   de.classList.add('embedded');
   var st = document.createElement('style');
-  st.textContent = 'html,body{scrollbar-width:none;-ms-overflow-style:none}html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}';
+  st.textContent = 'html,body{scrollbar-width:none;-ms-overflow-style:none}html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}html.embedded *,html.embedded *::before,html.embedded *::after{transition:none!important;animation:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;scroll-behavior:auto!important}';
+  document.querySelectorAll('img[loading=lazy]').forEach(function(i){ i.loading = 'eager'; });
   document.head.appendChild(st);
   if(!/[?&]autoscroll/.test(location.search)) return;
   if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -990,11 +980,11 @@ const SITE = {
     var dt = Math.min(t - last, 50); last = t;
     if(wait > 0){ wait -= dt; }
     else {
-      y += dir * speed * dt / 1000 * (dir < 0 ? 6 : 1);
+      y += dir * speed * dt / 1000 * (dir < 0 ? 4 : 1);
       var mx = max();
       if(y >= mx){ y = mx; dir = -1; wait = 1600; }
       else if(y <= 0){ y = 0; dir = 1; wait = 2200; }
-      window.scrollTo(0, y);
+      window.scrollTo(0, Math.round(y));
     }
     requestAnimationFrame(step);
   }
