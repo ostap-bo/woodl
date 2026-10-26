@@ -45,29 +45,29 @@ const SITE = {
 
   // Фото (Unsplash, безкоштовні). Свої фото бізнесу з Google Maps працюють краще — встав посилання.
   photos: {
-    hero: "https://images.unsplash.com/photo-1721620780493-e905708eba0b",
-    heroFlip: true,                      // дзеркалить фото, щоб людина була праворуч від тексту
-    quote: "https://images.unsplash.com/photo-1610891170442-79392fc76493",
-    why: "https://images.unsplash.com/photo-1777126958347-ed3cabf2667b",
+    hero: "../img/heroAlamo.webp",
+    heroFlip: false,                     // дзеркалить фото, щоб людина була праворуч від тексту
+    quote: "../img/driveway.webp",
+    why: "../img/brick.webp",
   },
 
   services: [
     {name: "Driveways & sidewalks", note: "Oil, tire marks, mildew and years of grime.", from: "$150",
-     photo: "https://images.unsplash.com/photo-1707897283727-31befe824066"},
+     photo: "../img/driveway-sm.webp"},
     {name: "House washing", note: "Soft wash for brick, stone, siding and stucco. Safe for paint and plants.", from: "$300",
-     photo: "https://images.unsplash.com/photo-1707872732780-f98cf7592e2c"},
+     photo: "../img/house-sm.webp"},
     {name: "Roof cleaning", note: "Low-pressure wash that removes black streaks and algae.", from: "$350",
-     photo: "https://images.unsplash.com/photo-1593354048605-0e5ad12d39a2"},
+     photo: "../img/roof-sm.webp"},
     {name: "Patios & pavers", note: "Stone, pavers and pool decks, ready for sealing.", from: "$120",
-     photo: "https://images.unsplash.com/photo-1762810981576-1b07f76af9d2"},
+     photo: "../img/patio-sm.webp"},
   ],
 
   // До/після: 3 картки. before порожнє — «до» генерується з фото «після».
   // Реальні пари фото бізнесу (до + після) дають найкращий ефект.
   results: [
-    {title: "Driveway", place: "Stone Oak", after: "https://images.unsplash.com/photo-1764380748983-1b6b339a432f", before: ""},
-    {title: "Paver patio", place: "Helotes", after: "https://images.unsplash.com/photo-1785088476622-8e4c52ee8b53", before: ""},
-    {title: "Brick house wash", place: "Alamo Heights", after: "https://images.unsplash.com/photo-1605146768851-eda79da39897", before: ""},
+    {title: "Driveway", place: "Stone Oak", photo: "../img/driveway.webp"},
+    {title: "Paver patio", place: "Helotes", photo: "../img/patio.webp"},
+    {title: "Brick front & porch", place: "Alamo Heights", photo: "../img/brick.webp"},
   ],
 
   // Тільки СПРАВЖНІ відгуки з Google-профілю бізнесу (текст + імʼя автора, як на Google)
@@ -96,7 +96,7 @@ const SITE = {
 </script>
 <style>
   /* Layout: full-bleed photo hero, then alternating white / ink bands; one yellow accent for every call to action. */
-  :root{
+  :root{--kit-accent:#FFC72C;--kit-accent-ink:#231B00;--kit-ink:#0A141D;--kit-line:#C9D2DA;--kit-radius:12px;
     --ink:#0F1B26;
     --ink-2:#4A5866;
     --ink-3:#7A8794;
@@ -322,16 +322,15 @@ const SITE = {
   .drop input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;}
   .drop svg{width:26px;height:26px;flex:none;color:var(--ink);}
   .drop small{display:block;font-weight:500;font-size:13px;color:#5B6875;}
-  .drop-sm{padding:12px 14px;font-size:14.5px;background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.3);color:#fff;}
-  .drop-sm svg{color:#fff;}
-  .drop-sm:hover{background:rgba(255,255,255,.1);border-color:#fff;}
+  .drop-sm{padding:12px 14px;font-size:14.5px;background:#fff;}
   .pq-thumbs{display:flex;gap:8px;flex-wrap:wrap;}
   .pq-thumbs:empty{display:none;}
   .pq-thumbs img{width:58px;height:58px;object-fit:cover;border-radius:10px;}
   .pq select,.pq input[type=tel]{width:100%;height:50px;border:1.5px solid #C9D2DA;border-radius:12px;padding:0 14px;font:inherit;font-size:15.5px;background:#fff;color:var(--ink);}
   .pq select:focus,.pq input:focus{outline:none;border-color:var(--ink);}
   .pq .btn{width:100%;}
-  .pq-ok{margin:0;font-size:14px;font-weight:600;color:#1A7F43;}
+  .hero .pq .pq-ok{margin:0;font-size:14px;line-height:1.4;font-weight:600;color:#1A7F43;max-width:none;}
+  .hero .pq .pq-ok.bad{color:#B42318;}
   /* review booster */
   .rb{margin-top:44px;display:grid;grid-template-columns:.9fr 1.1fr;gap:20px;}
   .rb-bars,.rb-cta{border-radius:22px;padding:26px;}
@@ -376,6 +375,9 @@ const SITE = {
   input:hover,select:hover,textarea:hover{border-color:var(--ink-3);}
   input:focus,select:focus,textarea:focus{outline:none;border-color:var(--ink);box-shadow:0 0 0 3px rgba(255,201,51,.55);}
   form .btn{width:100%;margin-top:4px;padding:17px 24px;}
+  input.err,textarea.err,input[aria-invalid=true]{border-color:#E5484D !important;box-shadow:0 0 0 3px rgba(229,72,77,.15);}
+  .fb{padding:0 !important;box-shadow:none !important;background:none !important;}
+  .kit-sel-btn{background:var(--paper);border-color:var(--field);}
   .form-note{font-size:13px;color:var(--ink-3);margin:0;text-align:center;}
   .form-ok{background:#E8F6EE;color:#14532D;border-radius:12px;padding:13px 15px;font-weight:600;}
 
@@ -531,6 +533,7 @@ const SITE = {
     .foot-bottom{margin-top:36px;flex-direction:column;gap:10px;}
   }
 </style>
+<link rel="stylesheet" href="../kit.css">
 </head>
 <body>
 
@@ -606,7 +609,7 @@ const SITE = {
         <div class="pq-h"><span class="pq-ic"><svg><use href="#i-cam"/></svg></span><div><b>Price from a photo</b><small>Snap it, send it, get your price today</small></div></div>
         <label class="drop" for="pqFiles"><input id="pqFiles" type="file" accept="image/*" multiple><svg><use href="#i-plus"/></svg><span>Add photos of the area<small>Driveway, siding, roof or patio</small></span></label>
         <div class="pq-thumbs" id="pqThumbs" aria-live="polite"></div>
-        <select id="pqService" name="service" aria-label="What needs cleaning?"></select>
+        <select id="pqService" name="service" aria-label="What needs cleaning?" data-kit></select>
         <input id="pqPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Mobile number for your price" aria-label="Mobile number">
         <button class="btn btn-sun" type="submit">Text me my price</button>
         <p class="pq-ok" id="pqOk" role="status" hidden></p>
@@ -620,7 +623,7 @@ const SITE = {
   <section class="dark" id="results">
     <div class="wrap">
       <div class="sec-head">
-        <div><h2 class="display">See the difference</h2><p class="lede">Drag the handle on each photo to compare before and after.</p></div>
+        <div><h2 class="display">See the difference</h2><p class="lede">Real half-washed surfaces: grime on the left, our result on the right.</p></div>
       </div>
       <div class="res-grid" id="resGrid"></div>
     </div>
@@ -734,7 +737,7 @@ const SITE = {
         <p class="lede">Something else on your mind? Call us and we'll explain.</p>
         <a class="btn btn-ink" data-tel style="margin-top:28px"><svg><use href="#i-phone"/></svg><span data-t="phone"></span></a>
       </div>
-      <div class="faq" id="faqList"></div>
+      <div class="faq" id="faqList" data-kit-faq></div>
     </div>
   </section>
 
@@ -755,15 +758,14 @@ const SITE = {
         <h3>Request your quote</h3>
         <div class="f2">
           <div><label for="fName">Name</label><input id="fName" name="name" autocomplete="name" placeholder="Your name" required></div>
-          <div><label for="fPhone">Phone</label><input id="fPhone" name="phone" type="tel" autocomplete="tel" placeholder="(210) 000-0000" required></div>
+          <div><label for="fPhone">Phone</label><input id="fPhone" name="phone" type="tel" autocomplete="tel" placeholder="(210) 555-0123" required></div>
         </div>
-        <div><label for="fService">What needs cleaning?</label><select id="fService" name="service"></select></div>
+        <div><label for="fService">What needs cleaning?</label><select id="fService" name="service" data-kit></select></div>
         <div><label for="fAddr">Address or neighborhood</label><input id="fAddr" name="address" autocomplete="street-address" placeholder="e.g. Stone Oak"></div>
         <div><label>Photos (optional)</label><label class="drop drop-sm" for="fFiles"><input id="fFiles" name="photos" type="file" accept="image/*" multiple><svg><use href="#i-cam"/></svg><span>Add photos for a faster price</span></label><div class="pq-thumbs" id="fThumbs"></div></div>
         <div><label for="fMsg">Details (optional)</label><textarea id="fMsg" name="message" rows="3" placeholder="Size of the area, stains, best time to call"></textarea></div>
         <button class="btn btn-sun" type="submit">Request my quote</button>
         <p class="form-note">We only use your details to reply to this request.</p>
-        <div class="form-ok" id="formOk" role="status" hidden></div>
       </form>
     </div>
   </section>
@@ -831,6 +833,7 @@ const SITE = {
 </div></dialog>
 
 
+<script src="../kit.js"></script>
 <script>
 (function(){
   const S = SITE;
@@ -864,7 +867,7 @@ const SITE = {
 
   const hero = $('#heroImg');
   hero.src = img(S.photos.hero, 2400);
-  hero.srcset = [1200,1800,2400,3200].map(w=>`${img(S.photos.hero, w)} ${w}w`).join(', ');
+  if(/unsplash/.test(S.photos.hero)) hero.srcset = [1200,1800,2400,3200].map(w=>`${img(S.photos.hero, w)} ${w}w`).join(', ');
   hero.sizes = '100vw';
   if(S.photos.heroFlip) hero.classList.add('flip');
   $('#whyImg').src = img(S.photos.why, 1200);
@@ -881,30 +884,11 @@ const SITE = {
   $('#areas').innerHTML = S.areas.map(a=>`<li><svg><use href="#i-pin"/></svg>${esc(a)}</li>`).join('');
   $('#faqList').innerHTML = (S.faq||[]).map((f,i)=>`<details ${i===0?'open':''}><summary>${esc(f.q)}<i aria-hidden="true"></i></summary><p>${esc(f.a)}</p></details>`).join('');
 
-  // results: 3 before/after cards
-  $('#resGrid').innerHTML = S.results.map((r,i)=>{
-    const a = img(r.after, 1100), b = r.before ? img(r.before, 1100) : a;
-    return `<figure class="res">
-      <div class="ba" data-ba>
-        <img src="${esc(a)}" alt="${esc(r.title)} after cleaning" loading="lazy">
-        <div class="ba-before ${r.before?'':'synth'}"><img src="${esc(b)}" alt="${esc(r.title)} before cleaning" loading="lazy"></div>
-        <div class="ba-line"></div>
-        <div class="ba-knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6-6 6 6 6M15 6l6 6-6 6"/></svg></div>
-        <span class="ba-tag b">Before</span><span class="ba-tag a">After</span>
-        <input type="range" min="0" max="100" value="50" aria-label="Compare ${esc(r.title)} before and after">
-      </div>
+  // results: real half-washed photos, before on the left, after on the right
+  $('#resGrid').innerHTML = S.results.map(r=>`<figure class="res">
+      <div class="kit-ba"><img src="${esc(r.photo)}" alt="${esc(r.title)} half pressure washed, before and after" loading="lazy" width="1264" height="848"><span class="kb-tag kb-b">Before</span><span class="kb-tag kb-a">After</span></div>
       <figcaption>${esc(r.title)}<span>${esc(r.place||'')}</span></figcaption>
-    </figure>`;
-  }).join('');
-  const bas = [...$$('[data-ba]')];
-  bas.forEach(ba=>{
-    const range = ba.querySelector('input');
-    range.addEventListener('input', ()=>{ ba.classList.remove('play'); ba.style.setProperty('--pos', range.value+'%'); });
-    ba.addEventListener('animationend', ()=>ba.classList.remove('play'));
-  });
-  if('IntersectionObserver' in window && bas[0]){
-    new IntersectionObserver((es,o)=>{ if(es[0].isIntersecting){ bas.forEach((b,i)=>setTimeout(()=>b.classList.add('play'), i*250)); o.disconnect(); } }, {threshold:.4}).observe(bas[0]);
-  }
+    </figure>`).join('');
 
   // reviews slider
   const track = $('#track'), dots = $('#dots'), prev = $('#prev'), next = $('#next');
@@ -955,36 +939,33 @@ const SITE = {
     const lbl = input.closest('.drop').querySelector('span'); if(lbl && input.files.length) lbl.firstChild.textContent = `${input.files.length} photo${input.files.length>1?'s':''} added `;
   });
   thumbs($('#pqFiles'), $('#pqThumbs')); thumbs($('#fFiles'), $('#fThumbs'));
+  const usMask = v => { let d = v.replace(/\D/g,''); if(d.length > 10 && d[0] === '1') d = d.slice(1); d = d.slice(0,10); if(!d) return ''; if(d.length < 4) return `(${d}`; if(d.length < 7) return `(${d.slice(0,3)}) ${d.slice(3)}`; return `(${d.slice(0,3)}) ${d.slice(3,6)}-${d.slice(6)}`; };
+  const fPh = $('#fPhone'); if(fPh){ fPh.maxLength = 14; fPh.addEventListener('input', () => { fPh.value = usMask(fPh.value); }); }
+  const pqPh = $('#pqPhone'); if(pqPh){ pqPh.placeholder = '(210) 555-0123'; pqPh.maxLength = 14; pqPh.addEventListener('input', () => { pqPh.value = usMask(pqPh.value); }); }
   const pq = $('#pqForm');
   if(pq) pq.addEventListener('submit', e => {
     e.preventDefault();
-    const ok = $('#pqOk'), ph = $('#pqPhone').value.replace(/\D/g,'');
-    if(ph.length < 10){ ok.style.color = '#B42318'; ok.textContent = 'Add a mobile number so we can text your price.'; ok.hidden = false; $('#pqPhone').focus(); return; }
-    ok.style.color = ''; ok.textContent = `Got it! We'll text your price to (${ph.slice(-10,-7)}) ${ph.slice(-7,-4)}-${ph.slice(-4)} within 2 hours.`; ok.hidden = false;
-    pq.querySelector('button').disabled = true;
+    const ok = $('#pqOk'), ph = $('#pqPhone').value.replace(/\D/g,'').replace(/^1(?=\d{10}$)/,'');
+    if(ph.length !== 10){ ok.classList.add('bad'); ok.textContent = 'Enter a 10-digit US mobile number so we can text your price.'; ok.hidden = false; $('#pqPhone').focus(); return; }
+    ok.hidden = true; KitToast('Photo quote received', `We'll text your price to ${$('#pqPhone').value} within 2 hours.`);
+    pq.reset(); $('#pqThumbs').innerHTML = ''; const pl = pq.querySelector('.drop span'); if(pl) pl.firstChild.textContent = 'Add photos of the area '; $('#pqService').kitRender && $('#pqService').kitRender();
   });
   const fb = $('#fbForm');
-  if(fb) fb.addEventListener('submit', e => { e.preventDefault(); const ok = $('#fbOk'); ok.textContent = 'Thank you. The owner will reach out today.'; ok.hidden = false; fb.querySelector('button').disabled = true; });
+  if(fb) fb.addEventListener('submit', e => { e.preventDefault(); fb.reset(); $('#dlg-feedback').close(); KitToast('Sent to the owner', 'Thank you. We will reach out today to make it right.'); });
 
-  // form
-  const form = $('#quoteForm'), ok = $('#formOk');
-  const show = m => { ok.textContent = m; ok.hidden = false; };
-  form.addEventListener('submit', async e=>{
+  // form (concept: validates and confirms, nothing is sent)
+  const form = $('#quoteForm');
+  const fErr = (el, bad) => { el.classList.toggle('err', bad); if(bad) el.setAttribute('aria-invalid','true'); else el.removeAttribute('aria-invalid'); return !bad; };
+  ['#fName','#fPhone'].forEach(id => $(id).addEventListener('input', () => fErr($(id), false)));
+  form.addEventListener('submit', e=>{
     e.preventDefault();
-    const d = Object.fromEntries(new FormData(form));
-    if(!d.name.trim() || !d.phone.trim()){ show('Add your name and phone number so we can reply.'); (d.name.trim()? $('#fPhone') : $('#fName')).focus(); return; }
-    if(S.formEndpoint){
-      try{
-        const r = await fetch(S.formEndpoint, {method:'POST', headers:{'Accept':'application/json'}, body:new FormData(form)});
-        if(r.ok){ form.querySelector('button').disabled = true; return show(`Thanks, ${d.name}! We'll call you back shortly.`); }
-      }catch(err){}
-      return show(`The form didn't send. Please call ${S.phone}.`);
-    }
-    const body = `Quote request: ${d.service}. ${d.name}, ${d.phone}${d.address ? ', '+d.address : ''}${d.message ? '. '+d.message : ''}`;
-    location.href = S.email
-      ? `mailto:${S.email}?subject=${encodeURIComponent('Quote request')}&body=${encodeURIComponent(body)}`
-      : `sms:${(S.phone||'').replace(/[^\d+]/g,'')}?&body=${encodeURIComponent(body)}`;
-    show(`Thanks, ${d.name}! Your request is ready to send.`);
+    const okName = fErr($('#fName'), !$('#fName').value.trim());
+    const okPhone = fErr($('#fPhone'), !KitPhone.valid($('#fPhone').value));
+    if(!okName || !okPhone){ KitToast('Almost there', !okName ? 'Add your name so we know who to call.' : 'Enter a 10-digit phone number.', 'err'); (!okName ? $('#fName') : $('#fPhone')).focus(); return; }
+    const name = $('#fName').value.trim().split(' ')[0];
+    const btn = form.querySelector('button[type=submit]'); btn.disabled = true; btn.textContent = 'Sending…';
+    setTimeout(() => { btn.disabled = false; btn.textContent = 'Request my quote'; form.reset(); $('#fThumbs').innerHTML = ''; $('#fService').kitRender && $('#fService').kitRender();
+      KitToast(`Thanks, ${name}!`, `We'll text you a fixed price for your ${($('#fService').value||'project').toLowerCase()} today.`); }, 700);
   });
 })();
 </script>

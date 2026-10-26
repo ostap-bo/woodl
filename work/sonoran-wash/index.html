@@ -21,7 +21,7 @@ const SITE = {
 </script>
 <style>
   /* Layout: bright desert daylight. White and sand bands, cobalt for trust, one hot orange for actions. Hero = split with a live estimate card. */
-  :root{
+  :root{--kit-accent:#F2701F;--kit-accent-ink:#fff;--kit-ink:#16202B;--kit-line:#E2DCD2;
     --ink:#15202B;
     --ink-2:#4F5B66;
     --ink-3:#8A949D;
@@ -148,10 +148,10 @@ const SITE = {
   .live{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:#1A7F43;background:#E6F6EC;border-radius:999px;padding:5px 10px;}
   .live i{width:8px;height:8px;border-radius:50%;background:#22A55A;animation:livep 1.8s ease-in-out infinite;}
   @keyframes livep{50%{opacity:.3;}}
-  .av-slots{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0;}
+  .av-slots{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0;padding:4px 2px;margin:-4px -2px;}
   .av-slots::-webkit-scrollbar{display:none;}
-  .av-slot{display:flex;flex-direction:column;justify-content:flex-start;flex:none;border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:10px 14px;text-align:left;cursor:pointer;transition:border-color .3s, transform .3s, box-shadow .3s;font:inherit;color:inherit;}
-  .av-slot:hover{border-color:var(--orange, #F26B1D);transform:translateY(-2px);box-shadow:0 12px 22px -16px rgba(0,0,0,.4);}
+  .av-slot{display:flex;flex-direction:column;justify-content:flex-start;flex:none;border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:10px 14px;text-align:left;cursor:pointer;transition:border-color .3s, background-color .3s;font:inherit;color:inherit;}
+  .av-slot:hover{border-color:var(--orange, #F26B1D);background:#FFF7F0;}
   .av-slot b{display:block;font-size:15px;}
   .av-slot span{font-size:13px;color:#5B6875;}
   .av-slot em{display:block;font-style:normal;font-size:12px;font-weight:700;color:#C2410C;margin-top:2px;}
@@ -242,7 +242,8 @@ const SITE = {
 
   /* cta */
   .cta{background:var(--cobalt);color:#fff;border-radius:30px;padding:60px 56px;display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center;position:relative;overflow:hidden;}
-  .cta::after{content:"";position:absolute;right:-90px;top:-90px;width:320px;height:320px;border-radius:50%;background:var(--orange);opacity:.9;}
+  .cta::after{content:"";position:absolute;right:-120px;bottom:-140px;width:300px;height:300px;border-radius:50%;background:var(--orange);opacity:.9;z-index:0;}
+  .cta>*{position:relative;z-index:1;}
   .cta > *{position:relative;z-index:1;}
   .cta p{color:#D6E2F7;font-size:18px;margin:14px 0 0;}
   .cta-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end;}
@@ -383,7 +384,7 @@ const SITE = {
     .rev-card{padding:24px;}
     .rev-card blockquote{font-size:18px;}
     .cta{padding:40px 24px;border-radius:24px;}
-    .cta::after{width:200px;height:200px;right:-80px;top:-80px;}
+    .cta::after{width:180px;height:180px;right:-90px;bottom:-100px;top:auto;}
     .foot{grid-template-columns:1fr;}
     .f2{grid-template-columns:1fr;}
     .dialog-head,.dialog-body{padding-left:20px;padding-right:20px;}
@@ -394,6 +395,7 @@ const SITE = {
     .topbar{font-size:13px;}
   }
 </style>
+<link rel="stylesheet" href="../kit.css">
 </head>
 <body>
 
@@ -447,7 +449,7 @@ const SITE = {
         </div>
       </div>
       <div class="hero-visual">
-        <div class="hero-photo"><img data-u="photo-1783278092758-3d9713960a85" data-w="1400" alt="Desert-landscaped home with a clean driveway in the Phoenix area"></div>
+        <div class="hero-photo"><img src="../img/heroSonoran.webp" width="1200" height="896" alt="Desert-landscaped home with a clean driveway in the Phoenix area"></div>
         <div class="badge-float"><svg><use href="#i-shield"/></svg>Licensed &amp; insured</div>
         <form class="est" id="estForm" aria-label="Instant estimate">
           <h3><svg><use href="#i-calc"/></svg>Instant estimate</h3>
@@ -540,7 +542,7 @@ const SITE = {
 
   <section id="area">
     <div class="wrap area">
-      <div class="area-photo"><img data-u="photo-1764380748983-1b6b339a432f" data-w="1200" alt="Clean driveway leading to a home with palm trees" loading="lazy"></div>
+      <div class="area-photo"><img src="../img/driveway-sm.webp" alt="Clean driveway leading to a home with palm trees" loading="lazy"></div>
       <div>
         <h2>Do we come to you?</h2>
         <p class="lede">We cover most of the Phoenix metro. Enter your ZIP code to check.</p>
@@ -557,7 +559,7 @@ const SITE = {
   <section class="sand" id="faq">
     <div class="wrap">
       <div class="sec-head" style="justify-content:center;text-align:center"><div><h2>Good questions</h2></div></div>
-      <div class="faq" id="faqList"></div>
+      <div data-kit-faq class="faq" id="faqList"></div>
     </div>
   </section>
 
@@ -675,30 +677,31 @@ const SITE = {
 
 <div class="toast" id="toast" role="status"></div>
 
+<script src="../kit.js"></script>
 <script>(function(){var e=window.self!==window.top;document.querySelectorAll('img[data-u]').forEach(function(i){var w=+i.dataset.w;if(e)w=Math.min(w,640);i.src='https://images.unsplash.com/'+i.dataset.u+'?w='+w+'&q=80&auto=format&fit=crop';});})();</script>
 <script>
 (function(){
   const $ = (s, r=document) => r.querySelector(s), $$ = (s, r=document) => [...r.querySelectorAll(s)];
-  const U = (id, w) => `https://images.unsplash.com/${id}?w=${(window.self !== window.top ? Math.min(w, 640) : w)}&q=80&auto=format&fit=crop`;
+  const U = (id, w) => /^photo-/.test(id) ? `https://images.unsplash.com/${id}?w=${(window.self !== window.top ? Math.min(w, 640) : w)}&q=80&auto=format&fit=crop` : `../img/${id}${(w <= 800 || window.self !== window.top) ? '-sm' : ''}.webp`;
 
   /* ---------- data ---------- */
   const SERVICES = [
-    {id:'driveway', name:'Driveway & walkways', note:'Oil, tire marks, rust and dust lifted from concrete and pavers.', base:149, img:'photo-1718152423993-a29048dbc223'},
-    {id:'house', name:'Stucco & house wash', note:'Soft wash that brightens stucco and trim without damaging paint.', base:299, img:'photo-1782511295240-2d55c11776ec'},
-    {id:'roof', name:'Tile roof cleaning', note:'Low-pressure wash that clears dust, lichen and streaks from tile.', base:349, img:'photo-1676500684456-99f21e42a6fe'},
-    {id:'pavers', name:'Pavers & pool deck', note:'Deep clean for pavers and travertine, ready for sealing.', base:179, img:'photo-1785088476622-8e4c52ee8b53'},
-    {id:'solar', name:'Solar panel cleaning', note:'Dusty panels lose output. Pure-water clean, no scratches.', base:119, img:'photo-1781578724586-55ed76e1757f'},
-    {id:'commercial', name:'Storefronts & lots', note:'Sidewalks, entries and drive-thrus for local businesses.', base:249, img:'photo-1777126958347-ed3cabf2667b'},
+    {id:'driveway', name:'Driveway & walkways', note:'Oil, tire marks, rust and dust lifted from concrete and pavers.', base:149, img:'driveway'},
+    {id:'house', name:'Stucco & house wash', note:'Soft wash that brightens stucco and trim without damaging paint.', base:299, img:'heroSonoran'},
+    {id:'roof', name:'Tile roof cleaning', note:'Low-pressure wash that clears dust, lichen and streaks from tile.', base:349, img:'roof'},
+    {id:'pavers', name:'Pavers & pool deck', note:'Deep clean for pavers and travertine, ready for sealing.', base:179, img:'pool'},
+    {id:'solar', name:'Solar panel cleaning', note:'Dusty panels lose output. Pure-water clean, no scratches.', base:119, img:'solar'},
+    {id:'commercial', name:'Brick, steps & entries', note:'Front steps, porches and brick entries cleared of mildew and grime.', base:149, img:'brick'},
   ];
   const SIZE = {s:{label:'Small (under 1,500 sq ft)', k:.85}, m:{label:'Medium (1,500–2,500 sq ft)', k:1}, l:{label:'Large (over 2,500 sq ft)', k:1.35}};
   const PROPERTY = [{value:'house', label:'Single-family home'},{value:'town', label:'Townhouse / condo'},{value:'biz', label:'Business'}];
   const GALLERY = [
-    {id:'photo-1707897283727-31befe824066', cap:'Driveway, Scottsdale'},
-    {id:'photo-1605146768851-eda79da39897', cap:'House wash, Mesa'},
-    {id:'photo-1762810981576-1b07f76af9d2', cap:'Pavers, Gilbert'},
-    {id:'photo-1610891170442-79392fc76493', cap:'Detail work'},
-    {id:'photo-1593354048605-0e5ad12d39a2', cap:'Full exterior, Paradise Valley'},
-    {id:'photo-1573208078429-16e423f5f1e3', cap:'Siding, Tempe'},
+    {id:'pool', cap:'Travertine pool deck, Scottsdale · before / after'},
+    {id:'driveway', cap:'Driveway, Mesa · before / after'},
+    {id:'solar', cap:'Solar panels, Gilbert'},
+    {id:'patio', cap:'Pavers, Chandler · before / after'},
+    {id:'brick', cap:'Entry & steps, Tempe · before / after'},
+    {id:'heroSonoran', cap:'Full exterior, Paradise Valley'},
   ];
   const REVIEWS = [
     {n:'Sample review', c:'#1E5BBF', t:'Our driveway had years of oil stains from the old owners. It looks brand new, and the instant price on the site was exactly what we paid.'},

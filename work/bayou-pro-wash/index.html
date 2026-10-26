@@ -20,7 +20,7 @@ const SITE = {
 </script>
 <style>
   /* Layout: humid-city night palette. Deep navy ground, aqua for water and actions, tall condensed signage type. A booking bar overlaps the hero like a counter. */
-  :root{
+  :root{--kit-accent:#14C6B0;--kit-accent-ink:#0B1A2C;--kit-ink:#0B1A2C;
     --navy:#0B1A2C;
     --navy-2:#11263F;
     --navy-3:#1A3352;
@@ -188,7 +188,13 @@ const SITE = {
   /* results */
   .res{display:grid;grid-template-columns:1.6fr 1fr;gap:28px;align-items:center;}
   .ba{position:relative;aspect-ratio:16/11;border-radius:14px;overflow:hidden;user-select:none;touch-action:pan-y;background:var(--navy-2);max-width:100%;}
-  .ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+  .ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .25s ease;}
+  .ba img.swap{opacity:.2;}
+  .ba::after{content:"";position:absolute;inset:auto 0 0 0;height:35%;background:linear-gradient(0deg,rgba(11,26,44,.75),transparent);pointer-events:none;}
+  .ba-cap{position:absolute;left:18px;bottom:16px;z-index:2;color:#fff;display:flex;gap:10px;align-items:baseline;}
+  .ba-cap b{font-size:18px;}
+  .ba-cap span{opacity:.8;font-size:14px;}
+  .ba-tag{z-index:2;}
   .ba-before{position:absolute;inset:0;clip-path:inset(0 calc(100% - var(--pos,50%)) 0 0);}
   .ba-before img{filter:sepia(.5) saturate(.6) brightness(.55) contrast(1.2) hue-rotate(40deg);}
   .ba-before::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 50% 40% at 30% 80%, rgba(30,50,20,.55), transparent 70%), radial-gradient(ellipse 40% 30% at 75% 30%, rgba(20,40,20,.45), transparent 70%);mix-blend-mode:multiply;}
@@ -398,6 +404,7 @@ const SITE = {
     .thumb small{display:none;}
   }
 </style>
+<link rel="stylesheet" href="../kit.css">
 </head>
 <body>
 
@@ -438,7 +445,7 @@ const SITE = {
 
 <main id="top">
   <section class="hero">
-    <img class="hero-img" data-u="photo-1593354048605-0e5ad12d39a2" data-w="2400" alt="">
+    <img class="hero-img" src="../img/heroBayou.webp" width="1376" height="768" alt="">
     <div class="wrap hero-body">
       <span class="chip">Houston · Katy · Sugar Land · The Woodlands</span>
       <h1>Houston grows mold. <span>We wash it off.</span></h1>
@@ -490,15 +497,12 @@ const SITE = {
 
   <section class="dark" id="results">
     <div class="wrap">
-      <div class="sec-head"><div><h2>Before. After.</h2><p class="lede">Drag the handle. Pick a job on the right to switch.</p></div></div>
+      <div class="sec-head"><div><h2>Before. After.</h2><p class="lede">Real half-washed surfaces from Houston jobs. Pick one to compare.</p></div></div>
       <div class="res">
         <div class="ba" id="ba">
-          <img id="baA" alt="After">
-          <div class="ba-before"><img id="baB" alt="Before"></div>
-          <div class="ba-line"></div>
-          <div class="ba-knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6-6 6 6 6M15 6l6 6-6 6"/></svg></div>
+          <img id="baA" alt="" width="1264" height="848">
           <span class="ba-tag b">Before</span><span class="ba-tag a">After</span>
-          <input type="range" min="0" max="100" value="50" id="baRange" aria-label="Compare before and after">
+          <div class="ba-cap" id="baCap"></div>
         </div>
         <div class="thumbs" id="thumbs"></div>
       </div>
@@ -530,7 +534,7 @@ const SITE = {
   <section id="faq">
     <div class="wrap">
       <div class="sec-head"><div><h2>FAQ</h2></div></div>
-      <div class="faq faq-grid" id="faqGrid"></div>
+      <div class="faq faq-grid" id="faqGrid" data-kit-faq></div>
     </div>
   </section>
 
@@ -606,7 +610,7 @@ const SITE = {
 <!-- promo -->
 <div class="modal" id="promo" role="dialog" aria-modal="true" aria-labelledby="pTitle">
   <div class="dialog promo">
-    <div class="promo-img"><img data-u="photo-1610891170442-79392fc76493" data-w="900" alt=""><b>10%<small>off</small></b></div>
+    <div class="promo-img"><img src="../img/house-sm.webp" alt=""><b>10%<small>off</small></b></div>
     <div class="d-body">
       <div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start"><h3 id="pTitle" style="font-size:40px">Your first wash</h3><button class="x" data-close aria-label="Close"><svg><use href="#i-x"/></svg></button></div>
       <p style="margin:0;color:var(--ink-2)">New customers get 10% off any service this month. Mention the code when you book.</p>
@@ -630,11 +634,12 @@ const SITE = {
 
 <div class="toast" id="toast" role="status"></div>
 
+<script src="../kit.js"></script>
 <script>(function(){var e=window.self!==window.top;document.querySelectorAll('img[data-u]').forEach(function(i){var w=+i.dataset.w;if(e)w=Math.min(w,640);i.src='https://images.unsplash.com/'+i.dataset.u+'?w='+w+'&q=80&auto=format&fit=crop';});})();</script>
 <script>
 (function(){
   const $ = (s, r=document) => r.querySelector(s), $$ = (s, r=document) => [...r.querySelectorAll(s)];
-  const U = (id, w) => `https://images.unsplash.com/${id}?w=${(window.self !== window.top ? Math.min(w, 640) : w)}&q=80&auto=format&fit=crop`;
+  const U = (id, w) => /^photo-/.test(id) ? `https://images.unsplash.com/${id}?w=${(window.self !== window.top ? Math.min(w, 640) : w)}&q=80&auto=format&fit=crop` : `../img/${id}${(w <= 800 || window.self !== window.top) ? '-sm' : ''}.webp`;
   const tel = 'tel:' + SITE.phone.replace(/[^\d+]/g,'');
   $$('[data-tel]').forEach(a => a.href = tel);
   $$('[data-tel-text]').forEach(s => s.textContent = SITE.phone);
@@ -644,23 +649,23 @@ const SITE = {
 
   /* data */
   const RES = [
-    {id:'house', name:'House soft wash', note:'Removes green algae and mildew from siding, brick and stucco.', from:249, img:'photo-1573208078429-16e423f5f1e3'},
-    {id:'drive', name:'Driveway & sidewalk', note:'Hot-water surface cleaning for oil, rust and black mold.', from:139, img:'photo-1718152423993-a29048dbc223'},
-    {id:'roof', name:'Roof cleaning', note:'Low-pressure wash that kills black streaks on shingles.', from:349, img:'photo-1781578724586-55ed76e1757f'},
-    {id:'fence', name:'Fence & deck', note:'Brightens wood and composite before staining or sealing.', from:159, img:'photo-1605146768851-eda79da39897'},
+    {id:'house', name:'House soft wash', note:'Removes green algae and mildew from siding, brick and stucco.', from:249, img:'house'},
+    {id:'drive', name:'Driveway & sidewalk', note:'Hot-water surface cleaning for oil, rust and black mold.', from:139, img:'driveway'},
+    {id:'roof', name:'Roof cleaning', note:'Low-pressure wash that kills black streaks on shingles.', from:349, img:'roof'},
+    {id:'patio', name:'Patio & pavers', note:'Moss and black mold lifted from pavers and stone, ready for sealing.', from:159, img:'patio'},
   ];
   const COM = [
-    {id:'store', name:'Storefronts', note:'Entrances, sidewalks and signage for retail and restaurants.', from:199, img:'photo-1777126958347-ed3cabf2667b'},
-    {id:'lot', name:'Parking lots & garages', note:'Gum, oil and tire marks removed, after-hours scheduling.', from:399, img:'photo-1672314377849-29b699c42386'},
-    {id:'fleet', name:'Dumpster pads', note:'Degreased and sanitized to keep odors and pests away.', from:149, img:'photo-1707897283710-4beef9a1b066'},
-    {id:'build', name:'Building washes', note:'Soft wash for multi-story offices, HOAs and apartments.', from:599, img:'photo-1782511295240-2d55c11776ec'},
+    {id:'store', name:'Entrances & walkways', note:'Storefront entries, steps and sidewalks cleaned before opening hours.', from:199, img:'brick'},
+    {id:'lot', name:'Parking & drive lanes', note:'Gum, oil and tire marks removed, after-hours scheduling.', from:399, img:'driveway'},
+    {id:'build', name:'Building washes', note:'Soft wash for offices, HOAs and apartment buildings.', from:599, img:'heroBayou'},
   ];
   const ALL = [...RES, ...COM];
   const PROPS = [{value:'home', label:'House', icon:'i-home'},{value:'town', label:'Townhome / condo', icon:'i-home'},{value:'biz', label:'Business', icon:'i-store'},{value:'hoa', label:'HOA / apartments', icon:'i-store'}];
   const RESULTS = [
-    {t:'Siding mildew', p:'Katy', id:'photo-1573208078429-16e423f5f1e3'},
-    {t:'Black driveway', p:'Sugar Land', id:'photo-1676500684456-99f21e42a6fe'},
-    {t:'Brick front', p:'The Heights', id:'photo-1707872732780-f98cf7592e2c'},
+    {t:'Black driveway', p:'Sugar Land', id:'driveway'},
+    {t:'Roof algae streaks', p:'Katy', id:'roof'},
+    {t:'Mossy paver patio', p:'The Woodlands', id:'patio'},
+    {t:'Brick porch & steps', p:'The Heights', id:'brick'},
   ];
   const PLANS = [
     {n:'Spring wash', v:1, per:249, items:['House soft wash once a year','Driveway and walkways','Free re-wash within 14 days'], cta:'Choose Spring'},
@@ -794,9 +799,9 @@ const SITE = {
   /* results */
   let ri = 0;
   $('#thumbs').innerHTML = RESULTS.map((r,i)=>`<button type="button" class="thumb" aria-pressed="${i===0}" data-i="${i}"><img src="${U(r.id,300)}" alt=""><span><b>${r.t}</b><small>${r.p}</small></span></button>`).join('');
-  const showR = i => { ri=i; const r = RESULTS[i]; $('#baA').src = U(r.id,1400); $('#baB').src = U(r.id,1400); $('#baA').alt = r.t+' after'; $('#baB').alt = r.t+' before'; $$('.thumb').forEach((t,k)=>t.setAttribute('aria-pressed', k===i)); $('#ba').style.setProperty('--pos','50%'); $('#baRange').value = 50; };
+  const showR = i => { ri=i; const r = RESULTS[i]; const im = $('#baA'); im.classList.add('swap'); setTimeout(() => { im.src = U(r.id,1400); im.alt = r.t + ' half washed, before and after'; $('#baCap').innerHTML = `<b>${r.t}</b><span>${r.p}</span>`; }, 180); im.onload = () => im.classList.remove('swap'); $$('.thumb').forEach((t,k)=>t.setAttribute('aria-pressed', k===i)); };
   $$('.thumb').forEach(t => t.onclick = () => showR(+t.dataset.i)); showR(0);
-  $('#baRange').addEventListener('input', e => $('#ba').style.setProperty('--pos', e.target.value+'%'));
+
 
   /* plans */
   const sw = $('#billing');

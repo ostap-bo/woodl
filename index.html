@@ -133,6 +133,8 @@ const WOODL = {
   @keyframes blobs{0%{transform:translate(0,0) scale(1);}50%{transform:translate(3%,2%) scale(1.06);}100%{transform:translate(-2%,4%) scale(1);}}
   .hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center;}
   .pill{display:inline-flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:7px 14px 7px 8px;font-size:14.5px;font-weight:600;color:var(--text-2);}
+  .pill b{white-space:nowrap;}
+  @media (max-width:640px){.pill-x{display:none;}.pill{padding:5px;}}
   .pill b{background:var(--grad);color:#fff;border-radius:999px;padding:3px 10px;font-size:13px;}
   .hero h1{font-size:clamp(38px,4.7vw,64px);letter-spacing:-.04em;line-height:.98;margin-top:26px;}
   .hero h1 em{white-space:nowrap;font-style:normal;background:linear-gradient(90deg,#2A4BD7,#3A86FF,#6EA8FF,#2A4BD7);background-size:300% 100%;animation:shine 6s linear infinite;-webkit-background-clip:text;background-clip:text;color:transparent;}
@@ -467,6 +469,7 @@ const WOODL = {
     .avatar{max-width:440px;}
     .foot,.foot.has-social{grid-template-columns:1fr 1fr;}
     .foot-brand{grid-column:1 / -1;}
+    .foot-contact{grid-column:1 / -1;order:5;}
   }
   @media (max-width:640px){
     body{font-size:16px;}
@@ -478,7 +481,8 @@ const WOODL = {
     .hero{padding-top:36px;}
     .hero h1{font-size:clamp(34px,10vw,46px);}
     .hero .lede{font-size:17px;}
-    .hero-ctas .btn{flex:1;padding:16px 12px;}
+    .hero-ctas{flex-direction:column;}
+    .hero-ctas .btn{width:100%;padding:16px 12px;}
     .micro{gap:8px 14px;}
     .upw{font-size:13.5px;gap:8px;flex-wrap:wrap;}
     .upw .stars{display:none;}
@@ -504,7 +508,8 @@ const WOODL = {
     .mod h3{font-size:16px;}
     .mod p{font-size:14px;}
     .demo-card{padding:26px 20px;border-radius:22px;}
-    .demo-btns .btn{flex:1;}
+    .demo-btns{flex-direction:column;}
+    .demo-btns .btn{width:100%;}
     .ps-h{padding:22px 22px 0;}
     .ps-p{padding:12px 22px 20px;}
     .ps-fix{padding:18px 22px 20px;}
@@ -516,7 +521,7 @@ const WOODL = {
     .cta{padding:40px 20px;border-radius:24px;}
     .form{padding:22px 18px;}
     .pair{grid-template-columns:1fr;}
-    .cta-alt .row .btn{flex:1;}
+    .cta-alt .row .btn{flex:1;padding:14px 10px;font-size:15px;gap:8px;}
     .cta-points{grid-template-columns:1fr;}
     .cta-alt{margin-top:28px;}
     .faq summary{font-size:16.5px;padding:20px 0;}
@@ -583,7 +588,7 @@ const WOODL = {
   <section class="hero">
     <div class="wrap">
       <div class="hero-in">
-        <span class="pill"><b>For pressure washing companies</b>Website + booking system</span>
+        <span class="pill"><b>For pressure washing companies</b><span class="pill-x">Website + booking system</span></span>
         <h1>Turn your website into a booking machine. <em>Live in 7 days.</em></h1>
         <p class="lede"><b>From $400, fixed.</b> A fast website with instant quotes, online booking and Google review requests on autopilot. See a free preview of yours before you pay a dollar.</p>
         <div class="hero-ctas">
@@ -652,14 +657,14 @@ const WOODL = {
         <p>Everything a pressure washing company needs to turn searches into booked, paid and reviewed jobs, set up for you and ready on day one.</p>
       </div>
       <div class="sys-grid">
-        <div class="mod"><i><svg><use href="#m-web"/></svg></i><span class="lvl">Launch</span><h3>A website that sells</h3><p>Fast, mobile-first site with your services, before and after photos, service areas and Google reviews.</p></div>
-        <div class="mod"><i><svg><use href="#m-quote"/></svg></i><span class="lvl">Launch</span><h3>Instant quote calculator</h3><p>Customers pick a service and size and see a price range in seconds. Fewer “how much?” calls.</p></div>
-        <div class="mod"><i><svg><use href="#m-photo"/></svg></i><span class="lvl">Launch</span><h3>Photo quotes</h3><p>Customers snap a photo of the driveway or siding, so you can quote without driving out.</p></div>
-        <div class="mod"><i><svg><use href="#m-inbox"/></svg></i><span class="lvl">Launch</span><h3>Lead Inbox</h3><p>Every request in one simple list on your phone, from new to quoted, booked and done.</p></div>
-        <div class="mod"><i><svg><use href="#m-book"/></svg></i><span class="lvl sys">System</span><h3>Online booking</h3><p>Customers choose a time window. Rain in the forecast? Reschedule with one tap.</p></div>
-        <div class="mod"><i><svg><use href="#m-reply"/></svg></i><span class="lvl sys">System</span><h3>Instant auto-replies</h3><p>Every lead gets a reply with their estimate in seconds, even when you're on a job.</p></div>
-        <div class="mod"><i><svg><use href="#m-star"/></svg></i><span class="lvl sys">System</span><h3>Google review requests</h3><p>Mark a job done and the customer gets a friendly review request. More stars, higher on Maps.</p></div>
-        <div class="mod"><i><svg><use href="#m-repeat"/></svg></i><span class="lvl sys">System</span><h3>Repeat-job reminders</h3><p>Last year's customers get a “time for your annual wash?” message. Repeat work without ads.</p></div>
+        <div class="mod"><i><svg><use href="#m-web"/></svg></i><span class="lvl">Website</span><h3>A website that sells</h3><p>Fast, mobile-first site with your services, before and after photos, service areas and Google reviews.</p></div>
+        <div class="mod"><i><svg><use href="#m-quote"/></svg></i><span class="lvl">Website</span><h3>Instant quote calculator</h3><p>Customers pick a service and size and see a price range in seconds. Fewer “how much?” calls.</p></div>
+        <div class="mod"><i><svg><use href="#m-photo"/></svg></i><span class="lvl">Website</span><h3>Photo quotes</h3><p>Customers snap a photo of the driveway or siding, so you can quote without driving out.</p></div>
+        <div class="mod"><i><svg><use href="#m-inbox"/></svg></i><span class="lvl sys">CRM system</span><h3>Lead Inbox</h3><p>Every request in one simple list on your phone, from new to quoted, booked and done.</p></div>
+        <div class="mod"><i><svg><use href="#m-book"/></svg></i><span class="lvl sys">CRM system</span><h3>Online booking</h3><p>Customers choose a time window. Rain in the forecast? Reschedule with one tap.</p></div>
+        <div class="mod"><i><svg><use href="#m-reply"/></svg></i><span class="lvl sys">CRM system</span><h3>Instant auto-replies</h3><p>Every lead gets a reply with their estimate in seconds, even when you're on a job.</p></div>
+        <div class="mod"><i><svg><use href="#m-star"/></svg></i><span class="lvl sys">CRM system</span><h3>Google review requests</h3><p>Mark a job done and the customer gets a friendly review request. More stars, higher on Maps.</p></div>
+        <div class="mod"><i><svg><use href="#m-repeat"/></svg></i><span class="lvl sys">CRM system</span><h3>Repeat-job reminders</h3><p>Last year's customers get a “time for your annual wash?” message. Repeat work without ads.</p></div>
       </div>
       <div class="demo-card">
         <div class="demo-txt">
@@ -843,7 +848,7 @@ const WOODL = {
         <p>Websites and booking systems for<br>pressure washing companies across the US.</p>
       </div>
       <div><h4>Explore</h4><ul><li><a href="#system">The system</a></li><li><a href="demo/">Live demo</a></li><li><a href="#work">Recent projects</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#process">How it works</a></li><li><a href="#faq">FAQ</a></li></ul></div>
-      <div><h4>Contact</h4><ul id="footContact"></ul></div>
+      <div class="foot-contact"><h4>Contact</h4><ul id="footContact"></ul></div>
       <div id="footSocialCol" hidden><h4>Follow</h4><ul id="footSocial"></ul></div>
     </div>
     <div class="foot-bottom"><span data-copy></span><nav><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Service</a></nav></div>
