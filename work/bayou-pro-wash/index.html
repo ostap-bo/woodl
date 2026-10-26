@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="robots" content="noindex">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Bayou Pro Wash | Pressure Washing in Houston, TX</title>
 <meta name="description" content="Residential and commercial pressure washing in Houston, Katy, Sugar Land and The Woodlands. Mold, mildew and algae removal. Book online.">
@@ -429,7 +430,7 @@ const SITE = {
 
 <main id="top">
   <section class="hero">
-    <img class="hero-img" src="https://images.unsplash.com/photo-1593354048605-0e5ad12d39a2?w=2400&q=80&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1593354048605-0e5ad12d39a2?w=1200&q=80&auto=format&fit=crop 1200w, https://images.unsplash.com/photo-1593354048605-0e5ad12d39a2?w=2400&q=80&auto=format&fit=crop 2400w" sizes="100vw" alt="">
+    <img class="hero-img" data-u="photo-1593354048605-0e5ad12d39a2" data-w="2400" alt="">
     <div class="wrap hero-body">
       <span class="chip">Houston · Katy · Sugar Land · The Woodlands</span>
       <h1>Houston grows mold. <span>We wash it off.</span></h1>
@@ -596,7 +597,7 @@ const SITE = {
 <!-- promo -->
 <div class="modal" id="promo" role="dialog" aria-modal="true" aria-labelledby="pTitle">
   <div class="dialog promo">
-    <div class="promo-img"><img src="https://images.unsplash.com/photo-1610891170442-79392fc76493?w=900&q=80&auto=format&fit=crop" alt=""><b>10%<small>off</small></b></div>
+    <div class="promo-img"><img data-u="photo-1610891170442-79392fc76493" data-w="900" alt=""><b>10%<small>off</small></b></div>
     <div class="d-body">
       <div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start"><h3 id="pTitle" style="font-size:40px">Your first wash</h3><button class="x" data-close aria-label="Close"><svg><use href="#i-x"/></svg></button></div>
       <p style="margin:0;color:var(--ink-2)">New customers get 10% off any service this month. Mention the code when you book.</p>
@@ -620,10 +621,11 @@ const SITE = {
 
 <div class="toast" id="toast" role="status"></div>
 
+<script>(function(){var e=window.self!==window.top;document.querySelectorAll('img[data-u]').forEach(function(i){var w=+i.dataset.w;if(e)w=Math.min(w,640);i.src='https://images.unsplash.com/'+i.dataset.u+'?w='+w+'&q=80&auto=format&fit=crop';});})();</script>
 <script>
 (function(){
   const $ = (s, r=document) => r.querySelector(s), $$ = (s, r=document) => [...r.querySelectorAll(s)];
-  const U = (id, w) => `https://images.unsplash.com/${id}?w=${w}&q=80&auto=format&fit=crop`;
+  const U = (id, w) => `https://images.unsplash.com/${id}?w=${(window.self !== window.top ? Math.min(w, 640) : w)}&q=80&auto=format&fit=crop`;
   const tel = 'tel:' + SITE.phone.replace(/[^\d+]/g,'');
   $$('[data-tel]').forEach(a => a.href = tel);
   $$('[data-tel-text]').forEach(s => s.textContent = SITE.phone);

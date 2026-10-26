@@ -11,10 +11,15 @@
 <meta property="og:url" content="https://woodl-site.com/">
 <meta property="og:title" content="Woodl | Professional Websites for Local Service Businesses">
 <meta property="og:description" content="Fixed pricing from $250, live in 5 days. Get a free custom preview of your new website before you pay.">
-<meta property="og:image" content="https://woodl-site.com/ostap.jpg">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..700&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta property="og:image" content="https://woodl-site.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#2A4BD7">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Woodl","url":"https://woodl-site.com/","image":"https://woodl-site.com/og.png","logo":"https://woodl-site.com/logo.png","description":"Professional, mobile-first websites, lead systems and AI automation for local service businesses in the US.","email":"contact@woodl-site.com","founder":{"@type":"Person","name":"Ostap Bodnar"},"areaServed":"US","priceRange":"$250–$600","sameAs":["https://www.linkedin.com/in/ostap-bodnar-171147275","https://www.upwork.com/freelancers/~01e0c89dbdc64d0663","https://www.fiverr.com/ostap_bo"]}</script>
+<link rel="preload" href="archivo-600-wide.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="figtree.woff2" as="font" type="font/woff2" crossorigin>
 <script>document.documentElement.classList.add('js');</script>
 <script>
 /* =====================================================================
@@ -39,6 +44,8 @@ const WOODL = {
 </script>
 <style>
   /* Layout: light studio page in the brand blue; one dark navy band for pricing and the final call to action. Live site previews carry the hero. */
+  @font-face{font-family:"Archivo";src:url(archivo-600-wide.woff2) format("woff2");font-weight:100 900;font-display:swap;}
+  @font-face{font-family:"Figtree";src:url(figtree.woff2) format("woff2");font-weight:300 900;font-display:swap;}
   :root{
     --bg:#F5F6FA;
     --surface:#FFFFFF;
@@ -47,7 +54,7 @@ const WOODL = {
     --line:#DDE1EC;
     --text:#0E1430;
     --text-2:#4A5270;
-    --text-3:#8790AA;
+    --text-3:#677090;
     --blue:#2A4BD7;
     --blue-hi:#3A86FF;
     --grad:linear-gradient(180deg, #2A4BD7 0%, #3A86FF 100%);
@@ -91,13 +98,14 @@ const WOODL = {
   .js .hero-in > *{animation:heroIn .9s cubic-bezier(.2,.7,.2,1) both;}
   .js .hero-in > *:nth-child(2){animation-delay:.08s;} .js .hero-in > *:nth-child(3){animation-delay:.16s;} .js .hero-in > *:nth-child(4){animation-delay:.24s;} .js .hero-in > *:nth-child(5){animation-delay:.32s;}
   @keyframes heroIn{from{opacity:0;transform:translateY(26px);}to{opacity:1;transform:none;}}
-  .plan.pop{animation:glow 3.5s ease-in-out infinite;}
-  @keyframes glow{0%,100%{box-shadow:0 30px 70px -30px rgba(58,134,255,.55);}50%{box-shadow:0 30px 90px -24px rgba(58,134,255,.9);}}
+  .plan.pop{position:relative;}
+  .plan.pop::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:0 30px 90px -24px rgba(58,134,255,.9);opacity:0;animation:glow 3.5s ease-in-out infinite;pointer-events:none;}
+  @keyframes glow{50%{opacity:1;}}
   .pill b{position:relative;overflow:hidden;}
   .pill b::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.5) 50%,transparent 70%);transform:translateX(-120%);animation:sweep 3.5s 1.2s ease-in-out infinite;}
   @keyframes sweep{0%{transform:translateX(-120%);}40%,100%{transform:translateX(120%);}}
-  .wa-float{animation:waPulse 2.8s ease-out infinite;}
-  @keyframes waPulse{0%{box-shadow:0 12px 30px -8px rgba(0,0,0,.35),0 0 0 0 rgba(37,211,102,.55);}70%{box-shadow:0 12px 30px -8px rgba(0,0,0,.35),0 0 0 16px rgba(37,211,102,0);}100%{box-shadow:0 12px 30px -8px rgba(0,0,0,.35),0 0 0 0 rgba(37,211,102,0);}}
+  .wa-float::before{content:"";position:absolute;inset:0;border-radius:50%;background:#25D366;z-index:-1;animation:waPulse 2.8s ease-out infinite;}
+    @keyframes waPulse{0%{transform:scale(1);opacity:.55;}70%,100%{transform:scale(1.55);opacity:0;}}
   .wcard .frame iframe{transition:filter .4s;}
 
   /* 1. header */
@@ -120,7 +128,7 @@ const WOODL = {
   .hero::before{content:"";position:absolute;inset:-20% -10% auto -10%;height:900px;z-index:0;pointer-events:none;
     background:radial-gradient(ellipse 40% 35% at 8% 12%, rgba(58,134,255,.22), transparent 70%),
                radial-gradient(ellipse 35% 30% at 95% 30%, rgba(42,75,215,.16), transparent 70%);
-    filter:blur(10px);animation:blobs 16s ease-in-out infinite alternate;}
+    animation:blobs 16s ease-in-out infinite alternate;will-change:transform;}
   @keyframes shine{to{background-position:300% 0;}}
   @keyframes blobs{0%{transform:translate(0,0) scale(1);}50%{transform:translate(3%,2%) scale(1.06);}100%{transform:translate(-2%,4%) scale(1);}}
   .hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center;}
@@ -149,7 +157,12 @@ const WOODL = {
   @keyframes floatB{0%,100%{transform:translateY(0);}50%{transform:translateY(-14px);}}
   @keyframes floatC{0%,100%{transform:rotate(6deg) translateY(0);}50%{transform:rotate(5deg) translateY(-10px);}}
   .frame{position:relative;overflow:hidden;background:var(--surface-2);}
-  .frame iframe{position:absolute;top:0;left:0;border:0;transform-origin:0 0;pointer-events:none;}
+  .frame iframe{position:absolute;top:0;left:0;border:0;transform-origin:0 0;pointer-events:none;opacity:0;transition:opacity .6s ease;}
+  .frame iframe.ready{opacity:1;}
+  .frame::before{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.55) 50%,transparent 70%);transform:translateX(-100%);animation:skel 1.6s ease-in-out infinite;}
+  .frame.loaded::before{display:none;}
+  .phone .frame{background:#E9EDF7;}
+  @keyframes skel{to{transform:translateX(100%);}}
 
   /* 3. built for */
   .trust{padding-top:0;padding-bottom:0;}
@@ -250,7 +263,8 @@ const WOODL = {
   .about{display:grid;grid-template-columns:.8fr 1.2fr;gap:64px;align-items:center;}
   .avatar{aspect-ratio:4/5;border-radius:28px;background:#03050C;position:relative;overflow:hidden;border:1px solid var(--line);}
   .avatar > img.mark{position:absolute;left:50%;top:50%;width:58%;height:auto;transform:translate(-50%,-50%);}
-  .avatar > img.photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 45%;}
+  .avatar picture{position:absolute;inset:0;}
+  .avatar img.photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 45%;}
   .about p{color:var(--text-2);font-size:18px;margin:18px 0 0;max-width:34em;}
   .about-stats{display:flex;gap:40px;flex-wrap:wrap;margin-top:34px;}
   .about-stats b{display:block;font-family:var(--display);font-variation-settings:"wdth" 125;font-weight:600;font-size:38px;letter-spacing:-.03em;line-height:1;}
@@ -363,7 +377,7 @@ const WOODL = {
   .foot-bottom a{text-decoration:none;transition:color .35s cubic-bezier(.22,.61,.36,1);}
   .foot-bottom a:hover{color:var(--blue);}
 
-  .wa-float{position:fixed;right:max(20px, env(safe-area-inset-right));bottom:calc(20px + env(safe-area-inset-bottom));z-index:50;width:60px;height:60px;border-radius:50%;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 30px -8px rgba(0,0,0,.35);}
+  .wa-float{isolation:isolate;position:fixed;right:max(20px, env(safe-area-inset-right));bottom:calc(20px + env(safe-area-inset-bottom));z-index:50;width:60px;height:60px;border-radius:50%;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 30px -8px rgba(0,0,0,.35);}
   .wa-float{transition:transform .4s cubic-bezier(.22,.61,.36,1);}
   .wa-float:hover{transform:scale(1.08);}
   .wa-float svg{width:30px;height:30px;}
@@ -505,9 +519,9 @@ const WOODL = {
         <div class="micro"><span><svg><use href="#i-check"/></svg>No upfront payment</span><span><svg><use href="#i-check"/></svg>No obligation</span><span><svg><use href="#i-check"/></svg>Reply within 24 hours</span></div>
       </div>
       <div class="phones" aria-label="Example websites on a phone">
-        <a class="phone" href="work/sonoran-wash/index.html" target="_blank" rel="noopener"><div class="frame" data-frame="390"><iframe src="work/sonoran-wash/index.html?autoscroll=1&amp;speed=38&amp;delay=2200" title="Sonoran Wash Co. on a phone" scrolling="no" tabindex="-1"></iframe></div></a>
-        <a class="phone" href="work/alamo-shine/index.html" target="_blank" rel="noopener"><div class="frame" data-frame="390"><iframe src="work/alamo-shine/index.html?autoscroll=1&amp;speed=44&amp;delay=1200" title="Alamo Shine on a phone" scrolling="no" tabindex="-1"></iframe></div></a>
-        <a class="phone" href="work/bayou-pro-wash/index.html" target="_blank" rel="noopener"><div class="frame" data-frame="390"><iframe src="work/bayou-pro-wash/index.html?autoscroll=1&amp;speed=40&amp;delay=3000" title="Bayou Pro Wash on a phone" scrolling="no" tabindex="-1"></iframe></div></a>
+        <a class="phone" href="work/sonoran-wash/index.html" target="_blank" rel="noopener"><div class="frame" data-frame="390"><iframe data-src="work/sonoran-wash/index.html?autoscroll=1&amp;speed=38&amp;delay=2200" title="Sonoran Wash Co. on a phone" scrolling="no" tabindex="-1"></iframe></div></a>
+        <a class="phone" href="work/alamo-shine/index.html" target="_blank" rel="noopener"><div class="frame" data-frame="390"><iframe data-src="work/alamo-shine/index.html?autoscroll=1&amp;speed=44&amp;delay=1200" title="Alamo Shine on a phone" scrolling="no" tabindex="-1"></iframe></div></a>
+        <a class="phone" href="work/bayou-pro-wash/index.html" target="_blank" rel="noopener"><div class="frame" data-frame="390"><iframe data-src="work/bayou-pro-wash/index.html?autoscroll=1&amp;speed=40&amp;delay=3000" title="Bayou Pro Wash on a phone" scrolling="no" tabindex="-1"></iframe></div></a>
       </div>
     </div>
   </section>
@@ -751,7 +765,7 @@ const WOODL = {
   $$('[data-wa]').forEach(a => { if(waLink){ a.href = waLink; a.target = '_blank'; a.rel = 'noopener'; } else a.remove(); });
   $$('[data-tg]').forEach(a => { if(tgLink){ a.href = tgLink; a.target = '_blank'; a.rel = 'noopener'; } else a.remove(); });
   const cal = $('#calBtn'); if(W.calendly) cal.href = W.calendly; else cal.remove();
-  $$('[data-logo]').forEach(a => a.innerHTML = '<img src="logo.png" alt=""><span class="wm">WOODL</span>');
+  $$('[data-logo]').forEach(a => a.innerHTML = '<img src="logo.png" alt="" width="227" height="160" decoding="async"><span class="wm">WOODL</span>');
   $('[data-copy]').textContent = `© ${new Date().getFullYear()} Woodl. All rights reserved.`;
   $('#footContact').innerHTML = [
     waLink ? `<li><a class="clink wa" href="${waLink}" target="_blank" rel="noopener"><i><svg><use href="#i-wa"/></svg></i>${esc(W.whatsapp)}</a></li>` : '',
@@ -760,7 +774,7 @@ const WOODL = {
   ].join('');
   const soc = [['linkedin','LinkedIn'],['upwork','Upwork'],['fiverr','Fiverr'],['instagram','Instagram']].filter(([k]) => W[k]);
   if(soc.length){ $('#footSocial').innerHTML = soc.map(([k,l]) => `<li><a class="clink ${k}" href="${esc(W[k])}" target="_blank" rel="noopener"><i><svg><use href="#s-${k}"/></svg></i>${l}</a></li>`).join(''); $('#footSocialCol').hidden = false; $('#foot').classList.add('has-social'); }
-  $('#avatar').innerHTML = W.photo ? `<img class="photo" src="${esc(W.photo)}" alt="Ostap, founder of Woodl">` : '<img class="mark" src="logo.png" alt="">';
+  $('#avatar').innerHTML = W.photo ? `<picture><source srcset="ostap.webp" type="image/webp"><img class="photo" src="${esc(W.photo)}" alt="Ostap, founder of Woodl" width="800" height="1000" loading="lazy" decoding="async"></picture>` : '<img class="mark" src="logo.png" alt="">';
 
   /* work: w = render width, chosen so the 3:2 frame shows exactly the first screen */
   const WORK = [
@@ -775,7 +789,7 @@ const WOODL = {
   ];
   $('#workGrid').innerHTML = WORK.map(p => `
     <a class="wcard" href="${p.href}" target="_blank" rel="noopener">
-      <div class="frame" data-frame="${p.w}"><iframe src="${p.href}" title="${esc(p.name)} website" scrolling="no" tabindex="-1"></iframe></div>
+      <div class="frame" data-frame="${p.w}"><iframe data-src="${p.href}" title="${esc(p.name)} website" scrolling="no" tabindex="-1"></iframe></div>
       <div class="wcard-body">
         <h3>${esc(p.name)}</h3>
         <div class="wmeta">${esc(p.niche)} · ${esc(p.city)}</div>
@@ -792,11 +806,25 @@ const WOODL = {
   }
 
   /* scale live previews */
-  const fit = () => $$('[data-frame]').forEach(f => {
-    const w = +f.dataset.frame, ifr = $('iframe', f), s = f.clientWidth / w;
-    ifr.style.width = w + 'px'; ifr.style.height = (f.clientHeight / s) + 'px'; ifr.style.transform = `scale(${s})`;
-  });
-  fit(); addEventListener('resize', fit);
+  const fit = () => {
+    const fr = $$('[data-frame]'), m = fr.map(f => [f.clientWidth, f.clientHeight]);
+    fr.forEach((f, i) => { const w = +f.dataset.frame, ifr = $('iframe', f), sc = m[i][0] / w; ifr.style.width = w + 'px'; ifr.style.height = (m[i][1] / sc) + 'px'; ifr.style.transform = `scale(${sc})`; });
+  };
+  /* load previews only after the page has loaded and when they come near the screen */
+  const loadFrame = ifr => { if(ifr.src) return; ifr.addEventListener('load', () => { ifr.classList.add('ready'); ifr.parentElement.classList.add('loaded'); }, {once:true}); ifr.src = ifr.dataset.src; };
+  const startFrames = () => {
+    const frames = $$('iframe[data-src]');
+    if(!('IntersectionObserver' in window)){ frames.forEach(loadFrame); return; }
+    const fio = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){ loadFrame(e.target); fio.unobserve(e.target); } }), {rootMargin:'250px 0px'});
+    frames.forEach(f => fio.observe(f));
+  };
+  let framesOn = false;
+  const kick = () => { if(framesOn) return; framesOn = true; ['scroll','pointermove','touchstart','keydown','wheel'].forEach(ev => removeEventListener(ev, kick)); startFrames(); };
+  ['scroll','pointermove','touchstart','keydown','wheel'].forEach(ev => addEventListener(ev, kick, {passive:true}));
+  const idle = cb => ('requestIdleCallback' in window) ? requestIdleCallback(cb, {timeout:2000}) : setTimeout(cb, 200);
+  const fallback = () => setTimeout(() => idle(kick), 3500);
+  if(document.readyState === 'complete') fallback(); else addEventListener('load', fallback, {once:true});
+fit(); addEventListener('resize', fit);
 
   /* header + drawer */
   const header = $('#header');
@@ -905,9 +933,10 @@ const WOODL = {
     ['.faq details', ''], ['.cta', 'rv-s'], ['.cta-points li', ''], ['.leadin', ''], ['.foot > *', ''], ['.niche', 'rv-s']
   ];
   const rvEls = [];
+  const scrollers = new Set($$('.niches, .work-grid').filter(el => el.scrollWidth > el.clientWidth + 4));
   groups.forEach(([sel, extra]) => {
     const els = $$(sel), byParent = new Map();
-    els.forEach(el => { if(el.parentElement.scrollWidth > el.parentElement.clientWidth + 4) return; const k = el.parentElement, i = byParent.get(k) || 0; byParent.set(k, i + 1); el.classList.add('rv'); if(extra) el.classList.add(extra); el.style.setProperty('--d', (Math.min(i, 8) * 0.08) + 's'); rvEls.push(el); });
+    els.forEach(el => { if(scrollers.has(el.parentElement)) return; const k = el.parentElement, i = byParent.get(k) || 0; byParent.set(k, i + 1); el.classList.add('rv'); if(extra) el.classList.add(extra); el.style.setProperty('--d', (Math.min(i, 8) * 0.08) + 's'); rvEls.push(el); });
   });
   const countUp = root => $$('[data-count]', root).forEach(el => {
     if(el.dataset.done) return; el.dataset.done = 1;

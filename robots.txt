@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /work/
+
+Sitemap: https://woodl-site.com/sitemap.xml

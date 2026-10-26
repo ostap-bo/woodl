@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="robots" content="noindex">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Pressure Washing</title>
 <meta name="description" content="">
@@ -752,7 +753,7 @@ const SITE = {
   const S = SITE;
   const $ = s => document.querySelector(s), $$ = s => document.querySelectorAll(s);
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const img = (u, w) => !u ? '' : (u.includes('images.unsplash.com') ? `${u.split('?')[0]}?w=${w}&q=80&auto=format&fit=crop` : u);
+  const img = (u, w) => !u ? '' : (u.includes('images.unsplash.com') ? `${u.split('?')[0]}?w=${(window.self !== window.top ? Math.min(w, 640) : w)}&q=80&auto=format&fit=crop` : u);
   const tel = 'tel:' + (S.phone||'').replace(/[^\d+]/g,'');
 
   const T = {

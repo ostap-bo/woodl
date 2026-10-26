@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="robots" content="noindex">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Sonoran Wash Co. | Pressure Washing in Phoenix, AZ</title>
 <meta name="description" content="Driveway, house, roof, paver and solar panel cleaning across Phoenix, Scottsdale, Mesa and Chandler. Instant online estimate.">
@@ -431,7 +432,7 @@ const SITE = {
         </div>
       </div>
       <div class="hero-visual">
-        <div class="hero-photo"><img src="https://images.unsplash.com/photo-1783278092758-3d9713960a85?w=1400&q=80&auto=format&fit=crop" alt="Desert-landscaped home with a clean driveway in the Phoenix area"></div>
+        <div class="hero-photo"><img data-u="photo-1783278092758-3d9713960a85" data-w="1400" alt="Desert-landscaped home with a clean driveway in the Phoenix area"></div>
         <div class="badge-float"><svg><use href="#i-shield"/></svg>Licensed &amp; insured</div>
         <form class="est" id="estForm" aria-label="Instant estimate">
           <h3><svg><use href="#i-calc"/></svg>Instant estimate</h3>
@@ -526,7 +527,7 @@ const SITE = {
 
   <section id="area">
     <div class="wrap area">
-      <div class="area-photo"><img src="https://images.unsplash.com/photo-1764380748983-1b6b339a432f?w=1200&q=80&auto=format&fit=crop" alt="Clean driveway leading to a home with palm trees" loading="lazy"></div>
+      <div class="area-photo"><img data-u="photo-1764380748983-1b6b339a432f" data-w="1200" alt="Clean driveway leading to a home with palm trees" loading="lazy"></div>
       <div>
         <h2>Do we come to you?</h2>
         <p class="lede">We cover most of the Phoenix metro. Enter your ZIP code to check.</p>
@@ -662,10 +663,11 @@ const SITE = {
 
 <div class="toast" id="toast" role="status"></div>
 
+<script>(function(){var e=window.self!==window.top;document.querySelectorAll('img[data-u]').forEach(function(i){var w=+i.dataset.w;if(e)w=Math.min(w,640);i.src='https://images.unsplash.com/'+i.dataset.u+'?w='+w+'&q=80&auto=format&fit=crop';});})();</script>
 <script>
 (function(){
   const $ = (s, r=document) => r.querySelector(s), $$ = (s, r=document) => [...r.querySelectorAll(s)];
-  const U = (id, w) => `https://images.unsplash.com/${id}?w=${w}&q=80&auto=format&fit=crop`;
+  const U = (id, w) => `https://images.unsplash.com/${id}?w=${(window.self !== window.top ? Math.min(w, 640) : w)}&q=80&auto=format&fit=crop`;
 
   /* ---------- data ---------- */
   const SERVICES = [
