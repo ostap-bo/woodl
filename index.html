@@ -134,11 +134,18 @@ const WOODL = {
   .hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center;}
   .pill{display:inline-flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:7px 14px 7px 8px;font-size:14.5px;font-weight:600;color:var(--text-2);}
   .pill b{background:var(--grad);color:#fff;border-radius:999px;padding:3px 10px;font-size:13px;}
-  .hero h1{font-size:clamp(40px,5.6vw,76px);letter-spacing:-.04em;line-height:.98;margin-top:26px;}
-  .hero h1 em{font-style:normal;background:linear-gradient(90deg,#2A4BD7,#3A86FF,#6EA8FF,#2A4BD7);background-size:300% 100%;animation:shine 6s linear infinite;-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .hero h1{font-size:clamp(38px,4.7vw,64px);letter-spacing:-.04em;line-height:.98;margin-top:26px;}
+  .hero h1 em{white-space:nowrap;font-style:normal;background:linear-gradient(90deg,#2A4BD7,#3A86FF,#6EA8FF,#2A4BD7);background-size:300% 100%;animation:shine 6s linear infinite;-webkit-background-clip:text;background-clip:text;color:transparent;}
   .hero .lede{font-size:20px;}
   .hero .lede b{color:var(--text);}
   .hero-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px;}
+  .upw{display:inline-flex;align-items:center;gap:10px;margin-top:22px;padding:6px 14px 6px 6px;border-radius:999px;background:var(--surface);border:1px solid var(--line);text-decoration:none;font-size:14.5px;color:var(--text-2);transition:border-color .35s cubic-bezier(.22,.61,.36,1),box-shadow .35s cubic-bezier(.22,.61,.36,1);}
+  .upw:hover{border-color:#14A800;box-shadow:0 10px 24px -16px rgba(20,168,0,.6);}
+  .upw i{width:28px;height:28px;border-radius:50%;background:#14A800;color:#fff;display:flex;align-items:center;justify-content:center;flex:none;}
+  .upw i svg{width:16px;height:16px;}
+  .upw b{color:var(--text);font-weight:700;}
+  .upw .sep{width:1px;height:16px;background:var(--line);}
+  .upw .stars{color:#F5A524;letter-spacing:1px;font-size:13px;}
   .micro{display:flex;gap:18px;flex-wrap:wrap;margin-top:18px;font-size:14.5px;color:var(--text-2);}
   .micro span{display:flex;align-items:center;gap:6px;}
   .micro svg{width:15px;height:15px;color:var(--blue-hi);}
@@ -323,6 +330,8 @@ const WOODL = {
   .form .btn{width:100%;padding:18px;font-size:17px;}
   .form small{font-size:13.5px;color:var(--text-3);text-align:center;}
   .form small a{color:var(--text-2);}
+  .form small.form-err{color:#D63B3B;font-weight:600;}
+  .form small.form-err a{color:#D63B3B;}
   .done{display:none;text-align:center;padding:34px 10px;}
   .done .ok{width:64px;height:64px;border-radius:50%;background:var(--grad);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;}
   .done .ok svg{width:30px;height:30px;}
@@ -382,8 +391,21 @@ const WOODL = {
   .wa-float:hover{transform:scale(1.08);}
   .wa-float svg{width:30px;height:30px;}
 
+  .mbar{display:none;}
+  @media (max-width:640px){
+    .mbar{display:flex;gap:10px;position:fixed;left:0;right:0;bottom:0;z-index:55;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:rgba(245,246,250,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);transform:translateY(110%);transition:transform .45s cubic-bezier(.22,.61,.36,1);}
+    .mbar.show{transform:none;}
+    .mbar .btn{flex:1;padding:15px 18px;}
+    .mbar-wa{width:52px;height:52px;border-radius:14px;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;flex:none;}
+    .mbar-wa svg{width:26px;height:26px;}
+    .wa-float{display:none;}
+    body.has-mbar .site-foot{padding-bottom:110px;}
+  }
   @media (max-width:1100px){
     .terms{display:none;}
+    .trust-in{overflow:hidden;}
+    .niches{overflow-x:auto;scrollbar-width:none;min-width:0;}
+    .niches::-webkit-scrollbar{display:none;}
     .work-grid{grid-template-columns:1fr 1fr;}
   }
   @media (max-width:1060px){
@@ -401,9 +423,10 @@ const WOODL = {
     .phones{height:500px;max-width:640px;width:100%;margin:0 auto;}
     .sec-head{grid-template-columns:1fr;gap:14px;}
     .sec-head p{justify-self:start;}
-    .ps-grid{grid-template-columns:1fr;grid-template-rows:none;gap:14px;max-width:620px;}
+    .ps-grid{grid-template-columns:1fr;grid-template-rows:none;gap:14px;}
     .ps{grid-row:auto;grid-template-rows:auto;}
-    .plans{grid-template-columns:1fr;max-width:560px;}
+    .plans{grid-template-columns:1fr;max-width:640px;margin:0 auto;}
+    .care{max-width:640px;margin-left:auto;margin-right:auto;}
     .t-grid{grid-template-columns:1fr 1fr;}
     .steps{grid-template-columns:1fr 1fr;}
     .about,.cta,.faq-wrap{grid-template-columns:1fr;gap:40px;}
@@ -423,6 +446,8 @@ const WOODL = {
     .hero .lede{font-size:17px;}
     .hero-ctas .btn{flex:1;padding:16px 12px;}
     .micro{gap:8px 14px;}
+    .upw{font-size:13.5px;gap:8px;flex-wrap:wrap;}
+    .upw .stars{display:none;}
     .phones{height:380px;}
     .phone{width:160px;border-radius:26px;padding:6px;}
     .phone .frame{border-radius:20px;}
@@ -516,6 +541,7 @@ const WOODL = {
           <button class="btn btn-main" type="button" data-open-form>Get my free preview</button>
           <a class="btn btn-line" href="#pricing">View pricing</a>
         </div>
+        <a class="upw" href="https://www.upwork.com/freelancers/~01e0c89dbdc64d0663" target="_blank" rel="noopener"><i><svg><use href="#s-upwork"/></svg></i><span><b>Top Rated</b> on Upwork</span><span class="sep"></span><span><b>100%</b> Job Success</span><span class="stars" aria-hidden="true">★★★★★</span></a>
         <div class="micro"><span><svg><use href="#i-check"/></svg>No upfront payment</span><span><svg><use href="#i-check"/></svg>No obligation</span><span><svg><use href="#i-check"/></svg>Reply within 24 hours</span></div>
       </div>
       <div class="phones" aria-label="Example websites on a phone">
@@ -751,6 +777,10 @@ const WOODL = {
 </div>
 
 <a class="wa-float" data-wa aria-label="Message me on WhatsApp"><svg><use href="#i-wa"/></svg></a>
+<div class="mbar" id="mbar" aria-hidden="true">
+  <button class="btn btn-main" type="button" data-open-form tabindex="-1">Get a free preview</button>
+  <a class="mbar-wa" data-wa aria-label="Message me on WhatsApp" tabindex="-1"><svg><use href="#i-wa"/></svg></a>
+</div>
 
 <script>
 (function(){
@@ -910,7 +940,12 @@ fit(); addEventListener('resize', fit);
       try{
         if(W.formEndpoint){
           if(/script\.google\.com/.test(W.formEndpoint)){
-            await fetch(W.formEndpoint, {method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain;charset=utf-8'}, body:JSON.stringify(data)});
+            const ctrl = new AbortController(), timer = setTimeout(() => ctrl.abort(), 20000);
+            let res;
+            try{ res = await fetch(W.formEndpoint, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body:JSON.stringify(data), signal:ctrl.signal}); }
+            finally{ clearTimeout(timer); }
+            const out = await res.json().catch(() => null);
+            if(!res.ok || !out || !out.ok) throw new Error((out && out.error) || 'send failed');
           } else {
             const r = await fetch(W.formEndpoint, {method:'POST', headers:{'Accept':'application/json','Content-Type':'application/json'}, body:JSON.stringify(data)});
             if(!r.ok) throw new Error('send failed');
@@ -921,7 +956,9 @@ fit(); addEventListener('resize', fit);
         form.classList.add('sent');
       }catch(err){
         btn.disabled = false; btn.textContent = btnText;
-        $('small', form).textContent = 'Something went wrong. Please try again or message me on WhatsApp.';
+        const sm = $('small', form);
+        sm.classList.add('form-err');
+        sm.innerHTML = 'Your request didn\'t go through. Please try again or <a href="' + (waLink || '#contact') + '" target="_blank" rel="noopener">message me on WhatsApp</a>.';
       }
     });
   });
@@ -952,13 +989,23 @@ fit(); addEventListener('resize', fit);
     $$('.about-stats').forEach(el => { $$('[data-count]', el).forEach(c => c.textContent = c.dataset.from || 0); cio.observe(el); });
   } else rvEls.forEach(el => el.classList.add('in'));
 
+  /* mobile sticky CTA: visible after the hero buttons, hidden near the form */
+  const mbar = $('#mbar');
+  if(mbar && 'IntersectionObserver' in window){
+    document.body.classList.add('has-mbar');
+    let pastHero = false, nearForm = false;
+    const upd = () => { const on = pastHero && !nearForm; mbar.classList.toggle('show', on); mbar.setAttribute('aria-hidden', !on); $$('button, a', mbar).forEach(el => el.tabIndex = on ? 0 : -1); };
+    new IntersectionObserver(([e]) => { pastHero = !e.isIntersecting && e.boundingClientRect.top < 0; upd(); }).observe($('.hero-ctas'));
+    new IntersectionObserver(([e]) => { nearForm = e.isIntersecting; upd(); }, {rootMargin:'0px 0px -20% 0px'}).observe($('#contact'));
+  }
+
   /* popup */
   const modal = $('#formModal'), mForm = $('form', modal);
   let lastFocus = null;
   const openForm = plan => {
     lastFocus = document.activeElement;
     setDrawer(false);
-    if(mForm.classList.contains('sent')){ mForm.reset(); mForm.classList.remove('sent'); const b = $('button[type=submit]', mForm); b.disabled = false; b.textContent = 'Send my request'; }
+    if(mForm.classList.contains('sent')){ mForm.reset(); mForm.classList.remove('sent'); const sm0 = $('small', mForm); sm0.classList.remove('form-err'); sm0.innerHTML = 'Your information stays private. See the <a href="privacy.html">Privacy Policy</a>.'; const b = $('button[type=submit]', mForm); b.disabled = false; b.textContent = 'Send my request'; }
     mForm.elements.plan.value = plan || '';
     $('#mTitle').textContent = plan && plan !== 'Not sure yet' ? `Get started with ${plan}` : 'Get your free website preview';
     modal.classList.add('open'); modal.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden';
