@@ -93,6 +93,7 @@ const WOODL = {
   .btn-line:hover{border-color:var(--blue);color:var(--blue);background:var(--tint);transform:translateY(-2px);}
   .btn svg{width:19px;height:19px;flex:none;}
 
+
   /* scroll reveal */
   .js .rv{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s);}
   .js .rv.rv-l{transform:translateX(-32px);}
@@ -181,7 +182,8 @@ const WOODL = {
   .trust{padding-top:0;padding-bottom:0;}
   .trust-in{display:flex;align-items:center;gap:28px;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:20px 28px;}
   .trust-lbl{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text-3);white-space:nowrap;}
-  .niches{display:flex;gap:8px;flex-wrap:nowrap;padding-left:28px;border-left:1px solid var(--line);}
+  .niches{display:flex;flex:1;gap:8px;flex-wrap:nowrap;padding-left:28px;border-left:1px solid var(--line);}
+  .niche{flex:1;justify-content:center;}
   .niche{display:inline-flex;align-items:center;gap:8px;padding:6px 14px 6px 6px;border-radius:999px;background:var(--tint);font-size:14.5px;font-weight:600;color:var(--text);white-space:nowrap;}
   .niche i{width:28px;height:28px;border-radius:50%;background:#fff;color:var(--blue);display:flex;align-items:center;justify-content:center;flex:none;}
   .niche svg{width:16px;height:16px;}
@@ -440,8 +442,9 @@ const WOODL = {
   }
   @media (max-width:1100px){
     .terms{display:none;}
-    .trust-in{overflow:hidden;}
-    .niches{overflow-x:auto;scrollbar-width:none;min-width:0;}
+    .trust-in{flex-direction:column;align-items:stretch;gap:14px;}
+    .niches{flex-wrap:wrap;min-width:0;padding-left:0;border-left:none;}
+    .niche{flex:1 1 auto;}
     .niches::-webkit-scrollbar{display:none;}
     .work-grid{grid-template-columns:1fr 1fr;}
   }
@@ -497,7 +500,9 @@ const WOODL = {
     .phone:nth-child(2){margin-left:-80px;}
     .phone:nth-child(3){right:0;top:50px;}
     .trust-in{flex-direction:column;align-items:flex-start;gap:14px;padding:18px;}
-    .niches{padding-left:0;border-left:none;overflow-x:auto;scrollbar-width:none;max-width:calc(100% + 18px);margin-right:-18px;padding-right:18px;}
+    .niches{padding-left:0;border-left:none;flex-wrap:wrap;gap:8px;width:100%;}
+    .niche{flex:1 1 calc(50% - 4px);justify-content:flex-start;font-size:14px;}
+    .niche:last-child{flex-basis:100%;}
     .niches::-webkit-scrollbar{display:none;}
     .sec-head{margin-bottom:26px;}
     .sec-head p{font-size:16.5px;}
@@ -530,9 +535,56 @@ const WOODL = {
     .cta-alt{margin-top:28px;}
     .faq summary{font-size:16.5px;padding:20px 0;}
     .about-stats{gap:28px;}
-    .modal{padding:10px;align-items:flex-end;}
-    .modal-box{max-height:calc(100dvh - 20px);}
+    .modal{padding:12px;align-items:center;}
+    .modal-box{max-height:calc(100dvh - 24px);}
+    .modal .form{padding:18px 16px 16px;gap:10px;}
+    .modal .form h3{font-size:20px;padding-right:48px;}
+    .modal .form .sub{display:none;}
+    .modal .field{gap:4px;}
+    .modal .field label{font-size:13px;}
+    .modal .field input{height:44px;font-size:16px;border-radius:10px;}
+    .modal .pair{gap:10px;}
+    .modal .hint{margin:-4px 0 0;font-size:12px;}
+    .modal .form .btn{padding:14px;font-size:16px;}
+    .modal .form small{font-size:12px;}
+    .modal-x{top:12px;right:12px;width:36px;height:36px;}
     .wa-float{width:54px;height:54px;}
+  }
+
+  /* mobile sliders (problems, process) */
+  .sl-nav{display:none;}
+  @media (max-width:640px){
+    .ps-grid.msl,.steps.msl{display:flex;grid-template-columns:none;grid-template-rows:none;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin:0 -16px;padding:4px 16px 6px;scroll-padding:0 16px;}
+    .msl::-webkit-scrollbar{display:none;}
+    .msl > *{flex:0 0 86%;scroll-snap-align:start;}
+    .ps-grid.msl .ps{display:flex;flex-direction:column;}
+    .ps-grid.msl .ps-fix{margin-top:auto;}
+    .sl-nav{display:flex;align-items:center;justify-content:space-between;margin-top:14px;}
+    .sl-dots{display:flex;gap:6px;}
+    .sl-dots i{width:7px;height:7px;border-radius:4px;background:var(--line);transition:width .35s cubic-bezier(.22,.61,.36,1),background-color .35s;}
+    .sl-dots i.on{width:22px;background:var(--blue);}
+    .sl-btns{display:flex;gap:8px;}
+    .sl-btns button{width:42px;height:42px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--text);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .35s,color .35s,opacity .35s;}
+    .sl-btns button:disabled{opacity:.35;cursor:default;}
+    .sl-btns svg{width:18px;height:18px;}
+    /* CTA: compact benefit chips + compact form */
+    .cta-points{grid-template-columns:1fr 1fr;gap:8px;margin-top:20px;}
+    .cta-points li{padding:9px 10px;gap:8px;font-size:13px;border-radius:12px;}
+    .cta-points i{width:20px;height:20px;box-shadow:none;}
+    .cta-points svg{width:11px;height:11px;}
+    .cta .form{padding:18px 16px 16px;gap:10px;}
+    .cta .field{gap:4px;}
+    .cta .field label{font-size:13px;}
+    .cta .field input{height:44px;border-radius:10px;}
+    .cta .hint{margin:-4px 0 0;font-size:12px;}
+    .cta .form .btn{padding:14px;font-size:16px;}
+    .cta .form small{font-size:12px;}
+    .cta{padding:28px 16px 16px !important;}
+    .cta-l > p{display:none;}
+    .cta-points li:nth-child(n+5){display:none;}
+    .cta-alt{margin-top:18px !important;padding-top:16px !important;}
+    .cta-alt .lbl{font-size:13px;}
+    .cta-alt .btn{padding:11px 10px !important;font-size:14px !important;}
   }
 </style>
 <script src="a.js" defer></script>
@@ -1054,6 +1106,24 @@ fit(); addEventListener('resize', fit);
     });
   });
 
+  /* mobile sliders with arrows */
+  (function(){
+    const arrow = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="${d}"/></svg>`;
+    $$('.ps-grid, .steps').forEach(track => {
+      track.classList.add('msl');
+      const items = [...track.children];
+      const nav = document.createElement('div'); nav.className = 'sl-nav';
+      nav.innerHTML = `<div class="sl-dots">${items.map(() => '<i></i>').join('')}</div><div class="sl-btns"><button type="button" aria-label="Previous">${arrow('M15 6l-6 6 6 6')}</button><button type="button" aria-label="Next">${arrow('M9 6l6 6-6 6')}</button></div>`;
+      track.after(nav);
+      const [prev, next] = $$('button', nav), dots = $$('.sl-dots i', nav);
+      const idx = () => { const x = track.scrollLeft; let best = 0, d = 1e9; items.forEach((it, i) => { const dd = Math.abs(it.offsetLeft - track.offsetLeft - x - parseFloat(getComputedStyle(track).paddingLeft) + 0); if(dd < d){ d = dd; best = i; } }); return best; };
+      const go = i => { const it = items[Math.max(0, Math.min(items.length - 1, i))]; track.scrollTo({left: it.offsetLeft - items[0].offsetLeft, behavior:'smooth'}); };
+      const upd = () => { const i = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4 ? items.length - 1 : idx(); dots.forEach((d, k) => d.classList.toggle('on', k === i)); prev.disabled = track.scrollLeft < 4; next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4; };
+      prev.onclick = () => go(idx() - 1); next.onclick = () => go(idx() + 1);
+      track.addEventListener('scroll', () => requestAnimationFrame(upd), {passive:true});
+      addEventListener('resize', upd); upd();
+    });
+  })();
   /* scroll reveal */
   const groups = [
     ['.trust-in', 'rv-s'], ['.sec-head > *', ''], ['.ps', ''], ['.wcard', ''], ['.plan', ''], ['.care', ''],
@@ -1061,7 +1131,7 @@ fit(); addEventListener('resize', fit);
     ['.faq details', ''], ['.cta', 'rv-s'], ['.cta-points li', ''], ['.leadin', ''], ['.foot > *', ''], ['.niche', 'rv-s']
   ];
   const rvEls = [];
-  const scrollers = new Set($$('.niches, .work-grid').filter(el => el.scrollWidth > el.clientWidth + 4));
+  const scrollers = new Set($$('.niches, .work-grid, .msl').filter(el => el.scrollWidth > el.clientWidth + 4));
   groups.forEach(([sel, extra]) => {
     const els = $$(sel), byParent = new Map();
     els.forEach(el => { if(scrollers.has(el.parentElement)) return; const k = el.parentElement, i = byParent.get(k) || 0; byParent.set(k, i + 1); el.classList.add('rv'); if(extra) el.classList.add(extra); el.style.setProperty('--d', (Math.min(i, 8) * 0.08) + 's'); rvEls.push(el); });
@@ -1100,7 +1170,7 @@ fit(); addEventListener('resize', fit);
     mForm.elements.plan.value = plan || '';
     $('#mTitle').textContent = plan && plan !== 'Not sure yet' ? `Get started with ${plan}` : 'Get your free website preview';
     modal.classList.add('open'); modal.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden';
-    setTimeout(() => $('input', mForm).focus(), 60);
+    if(!matchMedia('(hover: none)').matches) setTimeout(() => $('input', mForm).focus(), 60);
   };
   const closeForm = () => { modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; if(lastFocus) lastFocus.focus(); };
   document.addEventListener('click', e => { const t = e.target.closest('[data-open-form]'); if(t){ e.preventDefault(); openForm(t.dataset.openForm); if(window.track) track('open_form', {plan: t.dataset.openForm || 'none'}); } });
