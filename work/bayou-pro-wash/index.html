@@ -411,6 +411,7 @@ const SITE = {
   .foot-bottom a{color:inherit;}
 </style>
 <link rel="stylesheet" href="../kit.css">
+<script src="../../a.js" defer></script>
 </head>
 <body>
 
@@ -616,7 +617,7 @@ const SITE = {
 <!-- promo -->
 <div class="modal" id="promo" role="dialog" aria-modal="true" aria-labelledby="pTitle">
   <div class="dialog promo">
-    <div class="promo-img"><img src="../img/house-sm.webp" alt=""><b>10%<small>off</small></b></div>
+    <div class="promo-img"><img src="../img/baySiding-sm.webp" alt=""><b>10%<small>off</small></b></div>
     <div class="d-body">
       <div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start"><h3 id="pTitle" style="font-size:40px">Your first wash</h3><button class="x" data-close aria-label="Close"><svg><use href="#i-x"/></svg></button></div>
       <p style="margin:0;color:var(--ink-2)">New customers get 10% off any service this month. Mention the code when you book.</p>
@@ -655,23 +656,24 @@ const SITE = {
 
   /* data */
   const RES = [
-    {id:'house', name:'House soft wash', note:'Removes green algae and mildew from siding, brick and stucco.', from:249, img:'house'},
-    {id:'drive', name:'Driveway & sidewalk', note:'Hot-water surface cleaning for oil, rust and black mold.', from:139, img:'driveway'},
-    {id:'roof', name:'Roof cleaning', note:'Low-pressure wash that kills black streaks on shingles.', from:349, img:'roof'},
-    {id:'patio', name:'Patio & pavers', note:'Moss and black mold lifted from pavers and stone, ready for sealing.', from:159, img:'patio'},
+    {id:'house', name:'House soft wash', note:'Removes green algae and mildew from siding, brick and stucco.', from:249, img:'baySiding'},
+    {id:'drive', name:'Driveway & sidewalk', note:'Hot-water surface cleaning for oil, rust and black mold.', from:139, img:'bayDriveway'},
+    {id:'roof', name:'Roof cleaning', note:'Low-pressure wash that kills black streaks on shingles.', from:349, img:'bayRoof'},
+    {id:'deck', name:'Fence & deck', note:'Gray, mildewed wood brought back to its natural color, ready for stain.', from:159, img:'bayDeck'},
   ];
   const COM = [
-    {id:'store', name:'Entrances & walkways', note:'Storefront entries, steps and sidewalks cleaned before opening hours.', from:199, img:'brick'},
-    {id:'lot', name:'Parking & drive lanes', note:'Gum, oil and tire marks removed, after-hours scheduling.', from:399, img:'driveway'},
+    {id:'store', name:'Entrances & walkways', note:'Storefront entries, steps and sidewalks cleaned before opening hours.', from:199, img:'bayStore'},
+    {id:'lot', name:'Parking & drive lanes', note:'Gum, oil and tire marks removed, after-hours scheduling.', from:399, img:'bayDriveway'},
     {id:'build', name:'Building washes', note:'Soft wash for offices, HOAs and apartment buildings.', from:599, img:'heroBayou'},
   ];
   const ALL = [...RES, ...COM];
   const PROPS = [{value:'home', label:'House', icon:'i-home'},{value:'town', label:'Townhome / condo', icon:'i-home'},{value:'biz', label:'Business', icon:'i-store'},{value:'hoa', label:'HOA / apartments', icon:'i-store'}];
   const RESULTS = [
-    {t:'Black driveway', p:'Sugar Land', id:'driveway'},
-    {t:'Roof algae streaks', p:'Katy', id:'roof'},
-    {t:'Mossy paver patio', p:'The Woodlands', id:'patio'},
-    {t:'Brick porch & steps', p:'The Heights', id:'brick'},
+    {t:'Black driveway', p:'Sugar Land', id:'bayDriveway'},
+    {t:'Green siding', p:'Pearland', id:'baySiding'},
+    {t:'Roof algae streaks', p:'Katy', id:'bayRoof'},
+    {t:'Fence & deck', p:'The Woodlands', id:'bayDeck'},
+    {t:'Brick porch & steps', p:'The Heights', id:'bayBrick'},
   ];
   const PLANS = [
     {n:'Spring wash', v:1, per:249, items:['House soft wash once a year','Driveway and walkways','Free re-wash within 14 days'], cta:'Choose Spring'},

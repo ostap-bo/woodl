@@ -250,6 +250,7 @@
     .screen{border-radius:22px 22px 0 0;border-top:1px solid var(--line);}
   }
 </style>
+<script src="../a.js" defer></script>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -412,7 +413,7 @@
   const banner = () => `<div class="banner"><b>Want this for your business?</b><span>Your Lead Inbox comes with the Booked Jobs System. See your website preview first, free.</span><a href="../?ref=demo#contact" target="_top">Get a free preview →</a></div>`;
 
   function tabsFade(){ const T = $('#tabs'); T.classList.toggle('end', T.scrollLeft + T.clientWidth >= T.scrollWidth - 4); }
-  function setView(v){ view = v; $$('.view').forEach(x => x.classList.toggle('on', x.id === v)); $$('#bnav [data-view]').forEach(b => b.classList.toggle('on', b.dataset.view === v)); $('#screen').classList.toggle('inbox', v === 'list'); const el = $('#'+v); if(el) el.scrollTop = 0; }
+  function setView(v){ if(window.track && v !== view) track('demo_action', {action:'view_'+v.replace(/^v/,'').toLowerCase()}); view = v; $$('.view').forEach(x => x.classList.toggle('on', x.id === v)); $$('#bnav [data-view]').forEach(b => b.classList.toggle('on', b.dataset.view === v)); $('#screen').classList.toggle('inbox', v === 'list'); const el = $('#'+v); if(el) el.scrollTop = 0; }
   function renderNotes(){
     $('#npL').innerHTML = notes.length ? notes.map((n,i) => `<button class="ni ${n.read?'':'unread'}" data-n="${i}"><i>${n.ic}</i><div><b>${esc(n.t)}</b><span>${esc(n.txt)}</span></div><small>${esc(n.time)}</small></button>`).join('') : '<div class="empty">You’re all caught up.</div>';
   }
@@ -482,6 +483,7 @@
     if(s){ slot = s.dataset.slot; $$('.slot', $('#sheet')).forEach(b => b.classList.toggle('on', b === s)); return; }
     const a = e.target.closest('[data-act]'); if(!a || !cur) return;
     const act = a.dataset.act;
+    if(window.track && act !== 'close') track('demo_action', {action: act});
     if(act === 'close'){ closeSheet(); return; }
     if(act === 'call'){ toast('Calling…', ' (demo)'); return; }
     if(act === 'text'){ toast('Text thread opened', ' (demo)'); return; }
@@ -504,6 +506,7 @@
     const c = e.target.closest('[data-id]'); if(c) openSheet(+c.dataset.id);
   });
   $('#simBtn').addEventListener('click', () => {
+    if(window.track) track('demo_action', {action:'simulate_lead'});
     const p = NEW_POOL[poolIdx % NEW_POOL.length]; poolIdx++;
     const l = {...p, id: nextId++, stage:'new', ago:'Just now'};
     leads.unshift(l); note('📥', `New lead: ${l.name}`, `${l.service}, ${range(l.est)}. Auto-reply sent.`, l.id); tab = 'new'; setView('list'); render(l.id); $('#list').scrollTo({top:0,behavior:'smooth'});

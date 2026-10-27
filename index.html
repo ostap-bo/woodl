@@ -535,6 +535,7 @@ const WOODL = {
     .wa-float{width:54px;height:54px;}
   }
 </style>
+<script src="a.js" defer></script>
 </head>
 <body>
 
@@ -1043,6 +1044,7 @@ fit(); addEventListener('resize', fit);
           try{ const k='woodl_leads', a=JSON.parse(localStorage.getItem(k)||'[]'); a.push({...data, at:new Date().toISOString()}); localStorage.setItem(k, JSON.stringify(a)); }catch(_){}
         }
         form.classList.add('sent');
+        if(window.track) track('generate_lead', {plan: data.plan || 'none', source: data.source || 'form', currency:'USD', value: /Booked/.test(data.plan||'') ? 750 : /Care/.test(data.plan||'') ? 79 : 400});
       }catch(err){
         btn.disabled = false; btn.textContent = btnText;
         const sm = $('small', form);
@@ -1101,7 +1103,7 @@ fit(); addEventListener('resize', fit);
     setTimeout(() => $('input', mForm).focus(), 60);
   };
   const closeForm = () => { modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; if(lastFocus) lastFocus.focus(); };
-  document.addEventListener('click', e => { const t = e.target.closest('[data-open-form]'); if(t){ e.preventDefault(); openForm(t.dataset.openForm); } });
+  document.addEventListener('click', e => { const t = e.target.closest('[data-open-form]'); if(t){ e.preventDefault(); openForm(t.dataset.openForm); if(window.track) track('open_form', {plan: t.dataset.openForm || 'none'}); } });
   $$('[data-close-form]').forEach(b => b.addEventListener('click', closeForm));
   modal.addEventListener('click', e => { if(e.target === modal) closeForm(); });
   document.addEventListener('keydown', e => {

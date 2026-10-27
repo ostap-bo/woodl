@@ -401,6 +401,7 @@ const SITE = {
   .foot-bottom a{color:inherit;}
 </style>
 <link rel="stylesheet" href="../kit.css">
+<script src="../../a.js" defer></script>
 </head>
 <body>
 
@@ -547,7 +548,7 @@ const SITE = {
 
   <section id="area">
     <div class="wrap area">
-      <div class="area-photo"><img src="../img/driveway-sm.webp" alt="Clean driveway leading to a home with palm trees" loading="lazy"></div>
+      <div class="area-photo"><img src="../img/sonPavers-sm.webp" alt="Clean driveway leading to a home with palm trees" loading="lazy"></div>
       <div>
         <h2>Do we come to you?</h2>
         <p class="lede">We cover most of the Phoenix metro. Enter your ZIP code to check.</p>
@@ -679,22 +680,22 @@ const SITE = {
 
   /* ---------- data ---------- */
   const SERVICES = [
-    {id:'driveway', name:'Driveway & walkways', note:'Oil, tire marks, rust and dust lifted from concrete and pavers.', base:149, img:'driveway'},
-    {id:'house', name:'Stucco & house wash', note:'Soft wash that brightens stucco and trim without damaging paint.', base:299, img:'heroSonoran'},
-    {id:'roof', name:'Tile roof cleaning', note:'Low-pressure wash that clears dust, lichen and streaks from tile.', base:349, img:'roof'},
+    {id:'driveway', name:'Driveway & walkways', note:'Oil, tire marks, rust and dust lifted from concrete and pavers.', base:149, img:'sonDriveway'},
+    {id:'house', name:'Stucco & house wash', note:'Soft wash that brightens stucco and trim without damaging paint.', base:299, img:'sonStucco'},
+    {id:'roof', name:'Tile roof cleaning', note:'Low-pressure wash that clears dust, lichen and streaks from tile.', base:349, img:'heroSonoran'},
     {id:'pavers', name:'Pavers & pool deck', note:'Deep clean for pavers and travertine, ready for sealing.', base:179, img:'pool'},
     {id:'solar', name:'Solar panel cleaning', note:'Dusty panels lose output. Pure-water clean, no scratches.', base:119, img:'solar'},
-    {id:'commercial', name:'Brick, steps & entries', note:'Front steps, porches and brick entries cleared of mildew and grime.', base:149, img:'brick'},
+    {id:'commercial', name:'Flagstone, steps & entries', note:'Courtyards, flagstone and front steps cleared of dust, stains and hard water marks.', base:149, img:'sonEntry'},
   ];
   const SIZE = {s:{label:'Small (under 1,500 sq ft)', k:.85}, m:{label:'Medium (1,500–2,500 sq ft)', k:1}, l:{label:'Large (over 2,500 sq ft)', k:1.35}};
   const PROPERTY = [{value:'house', label:'Single-family home'},{value:'town', label:'Townhouse / condo'},{value:'biz', label:'Business'}];
   const GALLERY = [
     {id:'pool', cap:'Travertine pool deck, Scottsdale · before / after'},
-    {id:'driveway', cap:'Driveway, Mesa · before / after'},
+    {id:'sonDriveway', cap:'Driveway, Mesa · before / after'},
     {id:'solar', cap:'Solar panels, Gilbert'},
-    {id:'patio', cap:'Pavers, Chandler · before / after'},
-    {id:'brick', cap:'Entry & steps, Tempe · before / after'},
-    {id:'heroSonoran', cap:'Full exterior, Paradise Valley'},
+    {id:'sonPavers', cap:'Paver patio, Chandler · before / after'},
+    {id:'sonEntry', cap:'Flagstone entry, Scottsdale · before / after'},
+    {id:'sonStucco', cap:'Stucco wall, Tempe · before / after'},
   ];
   const REVIEWS = [
     {n:'Sample review', c:'#1E5BBF', t:'Our driveway had years of oil stains from the old owners. It looks brand new, and the instant price on the site was exactly what we paid.'},
