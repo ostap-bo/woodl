@@ -280,29 +280,31 @@
     .stage{grid-template-columns:1fr;gap:28px;}
     .phone{position:relative;top:0;margin:0 auto;}
   }
+  /* tap-to-activate overlay (phones only) */
+  .tap-lock{display:none;}
   @media (max-width:520px){
-    /* phone: the demo is a full-screen app, the page itself never scrolls */
-    html,body{height:100%;overflow:hidden;overscroll-behavior:none;}
-    body{display:flex;flex-direction:column;height:100dvh;}
-    .top,.stage{width:100%;max-width:100%;min-width:0;}
-    .phone,.screen,.app-h,.tabs{min-width:0;max-width:100%;}
-    .top{flex:none;padding:10px 14px;}
-    .top .btn{padding:10px 14px;}
+    .top{padding:12px 16px;}
     .top .btn .lg{display:none;}
     .top .btn .sm{display:inline;}
-    .stage{flex:1;min-height:0;display:flex;flex-direction:column;gap:10px;padding:0 10px calc(10px + env(safe-area-inset-bottom));}
-    .intro{flex:none;}
-    .intro .pill{font-size:12.5px;padding:5px 10px 5px 5px;}
-    .intro h1,.intro > p,.tour,.intro-cta,.note{display:none;}
-    .phone{flex:1;width:100%;height:auto;min-height:0;border-radius:38px;padding:7px;background:#141826;box-shadow:0 24px 50px -28px rgba(14,20,48,.55);position:relative;top:0;}
+    .stage{padding:2px 16px 40px;gap:18px;}
+    .intro .pill{font-size:13px;}
+    .intro h1{font-size:27px;margin-top:14px;}
+    .intro > p{font-size:15px;margin-top:8px;}
+    .tour,.intro-cta,.note{display:none;}
+    .phone{width:calc(100% - 16px);margin:0 auto;height:min(760px,calc(100dvh - 72px));min-height:520px;border-radius:40px;padding:9px;background:#141826;box-shadow:0 30px 60px -30px rgba(14,20,48,.55);}
     .screen{border-radius:31px;}
-    .app-h{padding:14px 12px 10px;}
-    .kpis{margin-top:10px;}
-    .kpi{padding:7px 9px;}
-    .kpi b{font-size:15px;}
-    .kpi span{font-size:10.5px;}
-    .tabs{margin-top:10px;}
-    .np{top:54px;}
+    .app-h{padding:16px 14px 10px;}
+    .kpi b{font-size:16px;}
+    .kpi span{font-size:11px;}
+    .np{top:56px;}
+    .tap-lock{display:flex;position:absolute;inset:0;z-index:20;border-radius:inherit;align-items:center;justify-content:center;flex-direction:column;gap:12px;background:rgba(245,246,250,.35);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);transition:opacity .35s var(--ease),visibility .35s;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+    .tap-lock b{display:inline-flex;align-items:center;gap:10px;background:var(--grad);color:#fff;font-size:16px;padding:15px 22px;border-radius:14px;box-shadow:0 16px 34px -14px rgba(42,75,215,.8);}
+    .tap-lock b svg{width:20px;height:20px;}
+    .tap-lock span{font-size:13.5px;font-weight:600;color:var(--text-2);background:rgba(255,255,255,.85);padding:6px 12px;border-radius:999px;}
+    .tap-lock b::after{content:"";position:absolute;}
+    .phone.live .tap-lock{opacity:0;visibility:hidden;pointer-events:none;}
+    .tap-lock .pulse{animation:tapPulse 1.8s var(--ease) infinite;}
+    @keyframes tapPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
   }
 </style>
 <script src="../a.js" defer></script>
@@ -344,6 +346,7 @@
 
   <div class="phone">
     <div class="screen inbox" id="screen">
+      <button class="tap-lock" id="tapLock" type="button" aria-label="Tap to try the demo"><b class="pulse"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V10m0-1.5a1.5 1.5 0 0 1 3 0V11m0-1a1.5 1.5 0 0 1 3 0v3.5A6.5 6.5 0 0 1 11.5 20h-.7a6 6 0 0 1-4.6-2.2L3.6 14.6a1.5 1.5 0 0 1 2.2-2L9 15"/></svg>Tap to try the demo</b><span>Scroll and tap inside the app</span></button>
       <div class="toast" id="toast" role="status"><i><svg><use href="#i-check"/></svg></i><div id="toastTxt"></div></div>
       <div class="app-h">
         <div class="row">
@@ -609,6 +612,28 @@
   $('#resetBtn').addEventListener('click', () => { reset(); toast('Demo reset', ''); });
 
   reset();
+
+  /* phones: blurred lock until tapped; tap centers the phone, then unlocks */
+  (function(){
+    const phone = $('.phone'), lock = $('#tapLock');
+    if(!lock) return;
+    const mq = matchMedia('(max-width:520px)');
+    let busy = false;
+    const unlock = () => { phone.classList.add('live'); busy = false; if(window.track) track('demo_action', {action:'unlock_mobile'}); };
+    lock.addEventListener('click', () => {
+      if(busy) return; busy = true;
+      const r = phone.getBoundingClientRect();
+      const target = scrollY + r.top - Math.max(0, (innerHeight - r.height) / 2);
+      if(Math.abs(target - scrollY) < 4){ unlock(); return; }
+      scrollTo({top: target, behavior: 'smooth'});
+      let last = scrollY, still = 0;
+      const t0 = performance.now();
+      const tick = () => { const y = scrollY; still = Math.abs(y - last) < 1 ? still + 1 : 0; last = y; if(still > 4 || performance.now() - t0 > 1500) unlock(); else requestAnimationFrame(tick); };
+      requestAnimationFrame(tick);
+    });
+    // lock again once the phone leaves the screen
+    new IntersectionObserver(([e]) => { if(mq.matches && e.intersectionRatio < .35){ phone.classList.remove('live'); $('#screen').classList.remove('open'); $('#np').classList.remove('open'); } }, {threshold:[0, .35]}).observe(phone);
+  })();
 })();
 </script>
 </body>
