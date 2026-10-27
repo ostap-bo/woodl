@@ -174,7 +174,8 @@ const WOODL = {
   .frame iframe{position:absolute;top:0;left:0;border:0;transform-origin:0 0;pointer-events:none;opacity:0;transition:opacity .6s ease;}
   .frame iframe.ready{opacity:1;}
   .frame::before{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.55) 50%,transparent 70%);transform:translateX(-100%);animation:skel 1.6s ease-in-out infinite;}
-  .frame.loaded::before{display:none;}
+  .frame.loaded::before,.frame:has(.poster)::before{display:none;}
+  .frame .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;display:block;}
   .phone .frame{background:#E9EDF7;}
   @keyframes skel{to{transform:translateX(100%);}}
 
@@ -443,8 +444,9 @@ const WOODL = {
   @media (max-width:1100px){
     .terms{display:none;}
     .trust-in{flex-direction:column;align-items:stretch;gap:14px;}
-    .niches{flex-wrap:wrap;min-width:0;padding-left:0;border-left:none;}
-    .niche{flex:1 1 auto;}
+    .niches{padding-left:0;border-left:none;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;width:100%;}
+    .niche{flex-direction:column;justify-content:flex-start;gap:8px;padding:12px 6px 11px;border-radius:16px;font-size:13.5px;line-height:1.2;text-align:center;white-space:normal;}
+    .niche i{width:34px;height:34px;}
     .niches::-webkit-scrollbar{display:none;}
     .work-grid{grid-template-columns:1fr 1fr;}
   }
@@ -590,6 +592,8 @@ const WOODL = {
     .cta-alt .btn{padding:11px 10px !important;font-size:14px !important;}
   }
 
+  .mbr{display:none;}
+  @media (max-width:1100px){.mbr{display:inline;}}
   /* mobile: smaller headings */
   @media (max-width:640px){
     h2,.cta h2{font-size:clamp(25px,7.2vw,29px);line-height:1.08;}
@@ -669,9 +673,9 @@ const WOODL = {
         <div class="micro"><span><svg><use href="#i-check"/></svg>No upfront payment</span><span><svg><use href="#i-check"/></svg>No obligation</span><span><svg><use href="#i-check"/></svg>Reply within 24 hours</span></div>
       </div>
       <div class="phones" aria-label="Example websites on a phone">
-        <a class="phone" href="work/sonoran-wash/index.html" target="_blank" rel="noopener"><div class="frame" data-frame="390"><iframe data-src="work/sonoran-wash/index.html?autoscroll=1&amp;speed=38&amp;delay=2200" title="Sonoran Wash Co. on a phone" scrolling="no" tabindex="-1"></iframe></div></a>
-        <a class="phone" href="work/alamo-shine/index.html" target="_blank" rel="noopener"><div class="frame" data-frame="390"><iframe data-src="work/alamo-shine/index.html?autoscroll=1&amp;speed=44&amp;delay=1200" title="Alamo Shine on a phone" scrolling="no" tabindex="-1"></iframe></div></a>
-        <a class="phone" href="work/bayou-pro-wash/index.html" target="_blank" rel="noopener"><div class="frame" data-frame="390"><iframe data-src="work/bayou-pro-wash/index.html?autoscroll=1&amp;speed=40&amp;delay=3000" title="Bayou Pro Wash on a phone" scrolling="no" tabindex="-1"></iframe></div></a>
+        <a class="phone" href="work/sonoran-wash/index.html" target="_blank" rel="noopener"><div class="frame" data-frame="390"><img class="poster" src="work/img/poster-sonoran-wash-m.webp" alt="" width="390" height="800" fetchpriority="high" decoding="async"><iframe data-src="work/sonoran-wash/index.html?autoscroll=1&amp;speed=38&amp;delay=2200" title="Sonoran Wash Co. on a phone" scrolling="no" tabindex="-1"></iframe></div></a>
+        <a class="phone" href="work/alamo-shine/index.html" target="_blank" rel="noopener"><div class="frame" data-frame="390"><img class="poster" src="work/img/poster-alamo-shine-m.webp" alt="" width="390" height="800" fetchpriority="high" decoding="async"><iframe data-src="work/alamo-shine/index.html?autoscroll=1&amp;speed=44&amp;delay=1200" title="Alamo Shine on a phone" scrolling="no" tabindex="-1"></iframe></div></a>
+        <a class="phone" href="work/bayou-pro-wash/index.html" target="_blank" rel="noopener"><div class="frame" data-frame="390"><img class="poster" src="work/img/poster-bayou-pro-wash-m.webp" alt="" width="390" height="800" fetchpriority="high" decoding="async"><iframe data-src="work/bayou-pro-wash/index.html?autoscroll=1&amp;speed=40&amp;delay=3000" title="Bayou Pro Wash on a phone" scrolling="no" tabindex="-1"></iframe></div></a>
       </div>
     </div>
   </section>
@@ -682,11 +686,11 @@ const WOODL = {
       <div class="trust-in">
         <span class="trust-lbl">Inside the system</span>
         <div class="niches">
-          <span class="niche"><i><svg><use href="#m-quote"/></svg></i>Instant quotes</span>
-          <span class="niche"><i><svg><use href="#m-photo"/></svg></i>Photo quotes</span>
-          <span class="niche"><i><svg><use href="#m-book"/></svg></i>Online booking</span>
-          <span class="niche"><i><svg><use href="#m-inbox"/></svg></i>Lead Inbox</span>
-          <span class="niche"><i><svg><use href="#m-star"/></svg></i>Review requests</span>
+          <span class="niche"><i><svg><use href="#m-quote"/></svg></i><span>Instant<br class="mbr"> quotes</span></span>
+          <span class="niche"><i><svg><use href="#m-photo"/></svg></i><span>Photo<br class="mbr"> quotes</span></span>
+          <span class="niche"><i><svg><use href="#m-book"/></svg></i><span>Online<br class="mbr"> booking</span></span>
+          <span class="niche"><i><svg><use href="#m-inbox"/></svg></i><span>Lead<br class="mbr"> Inbox</span></span>
+          <span class="niche"><i><svg><use href="#m-star"/></svg></i><span>Review<br class="mbr"> requests</span></span>
         </div>
       </div>
     </div>
@@ -974,7 +978,7 @@ const WOODL = {
   ];
   $('#workGrid').innerHTML = WORK.map(p => `
     <a class="wcard" href="${p.href}" target="_blank" rel="noopener">
-      <div class="frame" data-frame="${p.w}"><iframe data-src="${p.href}" title="${esc(p.name)} website" scrolling="no" tabindex="-1"></iframe></div>
+      <div class="frame" data-frame="${p.w}"><img class="poster" src="work/img/poster-${p.href.split('/')[1]}-d.webp" alt="" loading="lazy" decoding="async"><iframe data-src="${p.href}" title="${esc(p.name)} website" scrolling="no" tabindex="-1"></iframe></div>
       <div class="wcard-body">
         <h3>${esc(p.name)}</h3>
         <div class="wmeta">${esc(p.niche)} · ${esc(p.city)}</div>
@@ -996,7 +1000,7 @@ const WOODL = {
     fr.forEach((f, i) => { const w = +f.dataset.frame, ifr = $('iframe', f), sc = m[i][0] / w; ifr.style.width = w + 'px'; ifr.style.height = (m[i][1] / sc) + 'px'; ifr.style.transform = `scale(${sc})`; });
   };
   /* load previews only after the page has loaded and when they come near the screen */
-  const loadFrame = ifr => { if(ifr.src) return; ifr.addEventListener('load', () => { ifr.classList.add('ready'); ifr.parentElement.classList.add('loaded'); }, {once:true}); ifr.src = ifr.dataset.src; };
+  const loadFrame = ifr => { if(ifr.src) return; ifr.addEventListener('load', () => setTimeout(() => { ifr.classList.add('ready'); ifr.parentElement.classList.add('loaded'); }, 700), {once:true}); ifr.src = ifr.dataset.src; };
   const startFrames = () => {
     const frames = $$('iframe[data-src]');
     if(!('IntersectionObserver' in window)){ frames.forEach(loadFrame); return; }
