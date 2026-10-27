@@ -123,7 +123,7 @@
   .view::-webkit-scrollbar{display:none;}
   .view.on{display:block;}
   #list.view.on{display:grid;padding-bottom:80px;}
-  .bnav{display:grid;grid-template-columns:repeat(3,1fr);background:#fff;border-top:1px solid var(--line);padding:6px 8px;flex:none;position:relative;z-index:2;}
+  .bnav{display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border-top:1px solid var(--line);padding:6px 8px;flex:none;position:relative;z-index:2;}
   .bnav button{border:0;background:none;display:grid;justify-items:center;gap:2px;padding:6px 0;font-size:11.5px;font-weight:700;color:var(--text-3);border-radius:10px;transition:color .3s var(--ease),background-color .3s var(--ease);}
   .bnav button svg{width:21px;height:21px;}
   .bnav button.on{color:var(--blue);background:var(--tint);}
@@ -179,7 +179,7 @@
   .job b{display:block;font-size:14px;}
   .job span{font-size:12.5px;color:var(--text-3);}
   /* notifications */
-  .np{position:absolute;z-index:6;top:62px;right:12px;left:12px;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 30px 60px -24px rgba(14,20,48,.45);max-height:70%;display:flex;flex-direction:column;opacity:0;visibility:hidden;transform:translateY(-8px) scale(.98);transform-origin:top right;transition:opacity .25s var(--ease),transform .25s var(--ease),visibility .25s;}
+  .np{position:absolute;z-index:6;top:72px;right:12px;left:12px;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 30px 60px -24px rgba(14,20,48,.45);max-height:70%;display:flex;flex-direction:column;opacity:0;visibility:hidden;transform:translateY(-8px) scale(.98);transform-origin:top right;transition:opacity .25s var(--ease),transform .25s var(--ease),visibility .25s;}
   .np.open{opacity:1;visibility:visible;transform:none;}
   .np-h{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-bottom:1px solid var(--line);}
   .np-h b{font-size:15px;}
@@ -192,6 +192,70 @@
   .ni b{display:block;font-size:13.5px;line-height:1.3;}
   .ni span{font-size:12.5px;color:var(--text-2);line-height:1.35;display:block;}
   .ni small{font-size:11px;color:var(--text-3);white-space:nowrap;}
+
+  /* settings */
+  .set-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:10px;}
+  .set-card h4{margin:0 0 10px;font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-3);}
+  .prof{display:flex;gap:12px;align-items:center;}
+  .prof i{width:46px;height:46px;border-radius:14px;background:#0F2A3A;color:#5FE0C3;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-style:normal;font-size:17px;flex:none;}
+  .prof b{display:block;font-size:15.5px;}
+  .prof span{font-size:12.5px;color:var(--text-3);}
+  .sf{display:grid;gap:5px;margin-bottom:10px;}
+  .sf:last-child{margin-bottom:0;}
+  .sf label{font-size:12.5px;font-weight:700;color:var(--text-2);}
+  .sf input,.sf select{width:100%;height:42px;border:1.5px solid var(--line);border-radius:11px;padding:0 12px;font-size:15px;background:#fff;color:var(--text);transition:border-color .3s var(--ease),box-shadow .3s var(--ease);-webkit-appearance:none;appearance:none;}
+  .sf select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23677090' stroke-width='2.2' stroke-linecap='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;background-size:16px;padding-right:34px;}
+  .sf input:focus,.sf select:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 4px rgba(42,75,215,.14);}
+  .sf2{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+  .tg{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:9px 0;border-top:1px solid var(--line);font-size:14px;}
+  .tg:first-of-type{border-top:0;padding-top:0;}
+  .tg small{display:block;font-size:12px;color:var(--text-3);}
+  .sw{position:relative;width:44px;height:26px;flex:none;}
+  .sw input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer;z-index:1;}
+  .sw span{position:absolute;inset:0;border-radius:13px;background:#CBD2E1;transition:background-color .3s var(--ease);}
+  .sw span::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.2);transition:transform .3s var(--ease);}
+  .sw input:checked + span{background:var(--blue);}
+  .sw input:checked + span::after{transform:translateX(18px);}
+  .wx-src{font-size:12px;color:var(--text-3);margin:-4px 0 10px;display:flex;align-items:center;gap:6px;}
+  .wx-src i{width:7px;height:7px;border-radius:50%;background:var(--green);display:inline-block;}
+  .wx-src.off i{background:var(--amber);}
+  .tag.sample{background:#FFF3DF;color:var(--amber);}
+  .toast{touch-action:none;cursor:grab;}
+  .toast.drag{transition:none;}
+  /* lead form popup */
+  .fm{position:fixed;inset:0;z-index:150;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(5,10,31,.6);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);opacity:0;visibility:hidden;transition:opacity .25s var(--ease),visibility .25s;}
+  .fm.open{opacity:1;visibility:visible;}
+  .fm-box{position:relative;width:100%;max-width:480px;max-height:calc(100dvh - 32px);overflow:auto;background:#fff;border-radius:22px;padding:24px;transform:translateY(12px);transition:transform .3s var(--ease);box-shadow:0 40px 80px -30px rgba(0,0,0,.5);}
+  .fm.open .fm-box{transform:none;}
+  .fm-box h3{font-size:22px;padding-right:44px;}
+  .fm-box .sub{color:var(--text-2);font-size:14.5px;margin:6px 0 14px;}
+  .fm-x{position:absolute;top:14px;right:14px;width:38px;height:38px;border-radius:11px;border:1px solid var(--line);background:var(--surface-2);display:flex;align-items:center;justify-content:center;transition:transform .35s var(--ease);}
+  .fm-x:hover{transform:rotate(90deg);}
+  .fm-x svg{width:18px;height:18px;}
+  .ff{display:grid;gap:5px;margin-bottom:11px;}
+  .ff label{font-size:13.5px;font-weight:700;}
+  .ff label span{font-weight:500;color:var(--text-3);}
+  .ff input{width:100%;height:46px;border:1.5px solid #B9C0D3;border-radius:11px;padding:0 13px;font-size:16px;background:#fff;transition:border-color .2s,box-shadow .2s;}
+  .ff input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 4px rgba(42,75,215,.15);}
+  .ff.err input{border-color:var(--red);}
+  .ff .msg{display:none;font-size:12.5px;color:var(--red);}
+  .ff.err .msg{display:block;}
+  .ff2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .ff .tel{position:relative;}
+  .ff .tel em{position:absolute;left:12px;top:50%;transform:translateY(-50%);font-style:normal;font-weight:600;font-size:14.5px;color:var(--text-2);padding-right:9px;border-right:1px solid var(--line);}
+  .ff .tel input{padding-left:66px;}
+  .fhint{font-size:12.5px;color:var(--text-3);margin:-4px 0 11px;}
+  .fhint.err{color:var(--red);}
+  .fm-box .btn{width:100%;padding:16px;font-size:16px;margin-top:2px;}
+  .fm-box small{display:block;text-align:center;font-size:12.5px;color:var(--text-3);margin-top:10px;}
+  .fm-box small.err{color:var(--red);font-weight:600;}
+  .fm-done{display:none;text-align:center;padding:16px 0 6px;}
+  .fm-done .ok{width:60px;height:60px;border-radius:50%;background:var(--grad);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;}
+  .fm-done .ok svg{width:28px;height:28px;}
+  .fm-done p{color:var(--text-2);font-size:15px;margin:8px 0 0;}
+  .fm-box.sent form{display:none;}
+  .fm-box.sent .fm-done{display:block;}
+  @media (max-width:520px){.ff2{grid-template-columns:1fr;gap:0;}.fm-box{padding:18px 16px;}.fm-box .sub{display:none;}.fm-box h3{font-size:20px;margin-bottom:12px;}.ff input{height:44px;}}
 
   /* photo lightbox */
   .thumbs img{cursor:zoom-in;transition:transform .3s var(--ease);}
@@ -219,7 +283,10 @@
   .sh-x:hover{border-color:var(--blue);}
   .sheet .c-top{padding-right:44px;}
   .grab{width:44px;height:5px;border-radius:3px;background:var(--line);margin:0 auto 12px;}
-  .sheet h3{font-size:22px;}
+  .sheet h3{font-size:20px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .sheet .c-top{align-items:center;}
+  .sheet .c-top > div{min-width:0;}
+  .sheet .c-top .tag{white-space:nowrap;flex:none;}
   .kv{display:grid;grid-template-columns:96px 1fr;gap:6px 10px;margin-top:14px;font-size:14px;}
   .kv dt{color:var(--text-3);}
   .kv dd{margin:0;font-weight:600;}
@@ -296,7 +363,7 @@
     .app-h{padding:16px 14px 10px;}
     .kpi b{font-size:16px;}
     .kpi span{font-size:11px;}
-    .np{top:56px;}
+    .np{top:68px;}
     .tap-lock{display:flex;position:absolute;inset:0;z-index:20;border-radius:inherit;align-items:center;justify-content:center;flex-direction:column;gap:12px;background:rgba(245,246,250,.35);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);transition:opacity .35s var(--ease),visibility .35s;cursor:pointer;-webkit-tap-highlight-color:transparent;}
     .tap-lock b{display:inline-flex;align-items:center;gap:10px;background:var(--grad);color:#fff;font-size:16px;padding:15px 22px;border-radius:14px;box-shadow:0 16px 34px -14px rgba(42,75,215,.8);}
     .tap-lock b svg{width:20px;height:20px;}
@@ -325,7 +392,7 @@
 
 <header class="top">
   <a class="logo" href="../"><img src="../logo.png" alt="" width="227" height="160">WOODL</a>
-  <a class="btn btn-main" href="../?ref=demo#contact"><span class="lg">Get this for my business</span><span class="sm">Get yours</span></a>
+  <a class="btn btn-main" href="../?ref=demo#contact" data-open-form><span class="lg">Get this for my business</span><span class="sm">Get yours</span></a>
 </header>
 
 <main class="stage">
@@ -341,7 +408,7 @@
       <li><div><b>See your week and your numbers</b><span>Schedule shows jobs and weather by day. Stats shows revenue, close rate and where leads come from. The bell keeps every alert in one place.</span></div></li>
     </ol>
     <div class="intro-cta">
-      <a class="btn btn-main" href="../?ref=demo#contact">Get a free preview for my business</a>
+      <a class="btn btn-main" href="../?ref=demo#contact" data-open-form>Get a free preview for my business</a>
       <a class="btn btn-line" href="../#pricing">See pricing</a>
     </div>
     <p class="note">Demo data only. Your real inbox works on any phone, no app to install.</p>
@@ -353,7 +420,7 @@
       <div class="toast" id="toast" role="status"><i><svg><use href="#i-check"/></svg></i><div id="toastTxt"></div></div>
       <div class="app-h">
         <div class="row">
-          <div class="biz"><i>SP</i><div><b>Shine Pro Wash</b><small>Lead Inbox · San Antonio</small></div></div>
+          <div class="biz"><i id="bizIni">SP</i><div><b id="bizName">Shine Pro Wash</b><small id="bizSub">Lead Inbox · San Antonio</small></div></div>
           <div style="display:flex;gap:8px">
             <button class="icon-btn" id="resetBtn" aria-label="Reset demo" title="Reset demo"><svg><use href="#i-reset"/></svg></button>
             <button class="icon-btn" id="bellBtn" aria-label="Notifications"><svg><use href="#i-bell"/></svg><span class="dot" id="dot">0</span></button>
@@ -369,10 +436,12 @@
       <div class="list view on" id="list"></div>
       <div class="view" id="vSched"></div>
       <div class="view" id="vStats"></div>
+      <div class="view" id="vSet"></div>
       <nav class="bnav" id="bnav">
         <button class="on" data-view="list"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.5 5.1 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.5-6.9A2 2 0 0 0 16.8 4H7.2a2 2 0 0 0-1.7 1.1z"/></svg>Inbox</button>
         <button data-view="vSched"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Schedule</button>
         <button data-view="vStats"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 6-7"/></svg>Stats</button>
+        <button data-view="vSet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Account</button>
       </nav>
       <div class="np" id="np" role="dialog" aria-label="Notifications"><div class="np-h"><b>Notifications</b><button id="npAll">Mark all read</button></div><div class="np-l" id="npL"></div></div>
       <div class="fab"><button class="btn btn-main" id="simBtn"><svg><use href="#i-plus"/></svg>Simulate new lead</button></div>
@@ -381,6 +450,28 @@
     </div>
   </div>
 </main>
+
+<div class="fm" id="fm" role="dialog" aria-modal="true" aria-labelledby="fmT" aria-hidden="true">
+  <div class="fm-box" id="fmBox">
+    <button class="fm-x" type="button" data-close-form aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <form id="fmForm" novalidate>
+      <h3 id="fmT">Get your free website preview</h3>
+      <p class="sub">Tell me about your business. I'll design a custom homepage preview with this Lead Inbox and send it within 1–2 business days.</p>
+      <div class="ff"><label for="f-name">Your name</label><input id="f-name" name="name" autocomplete="name" placeholder="John Smith" required><span class="msg">Please enter your name.</span></div>
+      <div class="ff"><label for="f-biz">Business name</label><input id="f-biz" name="business" autocomplete="organization" placeholder="Smith Pressure Washing" required><span class="msg">Please enter your business name.</span></div>
+      <div class="ff2">
+        <div class="ff"><label for="f-email">Email</label><input id="f-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="john@smithwash.com"><span class="msg">Please enter a valid email.</span></div>
+        <div class="ff"><label for="f-phone">Phone</label><div class="tel"><em>US +1</em><input id="f-phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="(210) 555-0123" maxlength="14"></div><span class="msg">Please enter a 10-digit US number.</span></div>
+      </div>
+      <p class="fhint" id="fHint">Fill in at least one so I can send you the preview.</p>
+      <div class="ff"><label for="f-link">Website or Google Maps link <span>(optional)</span></label><input id="f-link" name="link" inputmode="url" placeholder="https://maps.app.goo.gl/…"></div>
+      <div style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden" aria-hidden="true"><label>Company website<input name="company_website" tabindex="-1" autocomplete="off"></label></div>
+      <button class="btn btn-main" type="submit" id="fBtn">Send my request</button>
+      <small id="fNote">Your information stays private. See the <a href="../privacy.html">Privacy Policy</a>.</small>
+    </form>
+    <div class="fm-done" role="status"><div class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><h3 style="padding:0">Request received!</h3><p>Thank you. I'll send your free preview within 1–2 business days. Keep an eye on your inbox or phone.</p></div>
+  </div>
+</div>
 
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Customer photos">
   <div class="lb-top"><span id="lbCount">1 / 3</span><button id="lbClose" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
@@ -423,14 +514,14 @@
   ];
 
   const notesSeed = () => ([
-    {ic:'🌧', t:'Rain alert for Friday', txt:'70% rain. Daniel Wilson’s fence wash may need a new time.', time:'1h', read:false, lead:6},
+    {ic:'🌧', kind:'rain', t:'Rain alert for Friday', txt:'70% rain. Daniel Wilson’s fence wash may need a new time.', time:'1h', read:false, lead:6},
     {ic:'⭐', t:'New 5-star review', txt:'Susan Miller: “Driveway looks brand new. Fast and friendly.”', time:'3h', read:false},
     {ic:'💬', t:'Quote viewed', txt:'Linda Nguyen opened your $470 patio quote.', time:'5h', read:true, lead:3},
     {ic:'📅', t:'Job confirmed', txt:'Patricia Brown confirmed Thu 8–10 AM.', time:'Yesterday', read:true, lead:5},
   ]);
   let leads, reminders, notes, view = 'list', tab = 'new', poolIdx = 0, reviews = 1, nextId = 100, period = 'week', selDay = 'Thu';
   const unreadN = () => notes.filter(n => !n.read).length;
-  const reset = () => { leads = seed(); reminders = remindersSeed(); notes = notesSeed(); tab = 'new'; poolIdx = 0; reviews = 1; setView('list'); render(); };
+  const reset = () => { leads = seed(); reminders = remindersSeed(); notes = notesSeed(); tab = 'new'; poolIdx = 0; reviews = 1; setView('list'); if(DAYS.length) applyRain(); render(); };
   const note = (ic, t, txt, lead) => { notes.unshift({ic, t, txt, time:'now', read:false, lead}); };
 
   /* toast */
@@ -438,8 +529,58 @@
   const toast = (title, txt) => { $('#toastTxt').innerHTML = `<b>${esc(title)}</b>${esc(txt||'')}`; $('#toast').classList.add('show'); clearTimeout(tTimer); tTimer = setTimeout(() => $('#toast').classList.remove('show'), 2800); };
 
   /* render */
-  const money = n => '$' + n.toLocaleString('en-US');
+  /* account settings (kept in this browser only) */
+  const CITIES = {
+    'San Antonio, TX':[29.42,-98.49], 'Houston, TX':[29.76,-95.37], 'Dallas, TX':[32.78,-96.80], 'Austin, TX':[30.27,-97.74],
+    'Phoenix, AZ':[33.45,-112.07], 'Tampa, FL':[27.95,-82.46], 'Orlando, FL':[28.54,-81.38], 'Atlanta, GA':[33.75,-84.39],
+    'Charlotte, NC':[35.23,-80.84], 'Nashville, TN':[36.16,-86.78], 'Las Vegas, NV':[36.17,-115.14], 'Denver, CO':[39.74,-104.99]
+  };
+  const CUR = {USD:'US dollar ($)', CAD:'Canadian dollar (C$)', EUR:'Euro (€)', GBP:'British pound (£)'};
+  const DEF = {biz:'Shine Pro Wash', owner:'Mike Torres', email:'mike@shineprowash.com', city:'San Antonio, TX', cur:'USD', start:'8 AM', end:'6 PM', radius:'25', autoReply:true, reviews:true, rainAlerts:true, review:'g.page/r/shine-pro-wash/review'};
+  let cfg = {...DEF};
+  try{ const sv = JSON.parse(localStorage.getItem('woodl_demo_cfg') || 'null'); if(sv) cfg = {...DEF, ...sv}; }catch(_){}
+  const cityShort = () => cfg.city.split(',')[0];
+  let fmt;
+  const setFmt = () => { try{ fmt = new Intl.NumberFormat('en-US', {style:'currency', currency:cfg.cur, maximumFractionDigits:0}); }catch(_){ fmt = new Intl.NumberFormat('en-US', {style:'currency', currency:'USD', maximumFractionDigits:0}); } };
+  setFmt();
+  const money = n => fmt.format(n);
   const range = e => `${money(e[0])}–${money(e[1])}`;
+
+  /* weather: live 7-day forecast from Open-Meteo, sample data as a fallback */
+  const WD = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'], WDF = {Sun:'Sunday',Mon:'Monday',Tue:'Tuesday',Wed:'Wednesday',Thu:'Thursday',Fri:'Friday',Sat:'Saturday'};
+  let DAYS = [], WX = {}, wxLive = false, wxSample = false;
+  const wxIcon = c => c >= 95 ? '⛈' : c >= 51 ? '🌧' : c >= 45 ? '🌫' : c >= 3 ? '☁️' : c >= 1 ? '⛅' : '☀️';
+  const wxLabel = c => c >= 95 ? 'Thunderstorms' : c >= 61 ? 'Rain' : c >= 51 ? 'Drizzle' : c >= 45 ? 'Fog' : c >= 3 ? 'Cloudy' : c >= 1 ? 'Partly cloudy' : 'Clear';
+  const fallbackWx = () => {
+    const base = new Date(); DAYS = []; WX = {};
+    const sample = {0:[0,84,5],1:[2,81,10],2:[0,83,0],3:[1,85,10],4:[63,72,70],5:[2,78,15],6:[0,80,0]};
+    for(let i = 0; i < 7; i++){ const d = new Date(base); d.setDate(base.getDate() + i); const n = WD[d.getDay()]; DAYS.push([n, d.getDate()]); }
+    DAYS.forEach(([n]) => { const k = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].indexOf(n); const [c,t,pr] = sample[k]; WX[n] = {ic:wxIcon(c), t:t+'°', label:wxLabel(c), prob:pr, rain:pr >= 50}; });
+    wxLive = false; wxSample = false;
+  };
+  const isRain = d => !!(WX[d] && WX[d].rain);
+  const wxText = d => { const w = WX[d]; if(!w) return '☀️ Clear'; return w.rain ? `${w.ic} ${w.prob}% rain` : `${w.ic} ${w.label}`; };
+  function applyRain(){
+    leads.forEach(l => { if((l.stage === 'booked') && l.day) l.rain = cfg.rainAlerts && isRain(l.day); else if(l.stage !== 'done') l.rain = false; });
+    const n = notes.find(x => x.kind === 'rain');
+    const hit = leads.find(l => l.stage === 'booked' && l.rain);
+    if(n){ if(hit){ n.t = `Rain alert for ${WDF[hit.day] || hit.day}`; n.txt = `${WX[hit.day].prob}% rain. ${hit.name}’s ${hit.service.toLowerCase()} may need a new time.`; n.lead = hit.id; n.ic = '🌧'; } else { n.t = 'Dry week ahead'; n.txt = `No rain expected for your booked jobs in ${cityShort()}.`; n.lead = null; n.ic = '☀️'; } }
+  }
+  async function loadWeather(){
+    const [lat, lon] = CITIES[cfg.city] || CITIES['San Antonio, TX'];
+    try{
+      const ctl = new AbortController(); const tm = setTimeout(() => ctl.abort(), 6000);
+      const r = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weathercode,temperature_2m_max,precipitation_probability_max&temperature_unit=fahrenheit&timezone=auto&forecast_days=7`, {signal:ctl.signal});
+      clearTimeout(tm);
+      const j = await r.json(); const D = j.daily;
+      DAYS = []; WX = {};
+      D.time.forEach((t, i) => { const d = new Date(t + 'T12:00:00'); const n = WD[d.getDay()]; DAYS.push([n, d.getDate()]); const c = D.weathercode[i], pr = D.precipitation_probability_max[i] ?? 0; WX[n] = {ic:wxIcon(c), t:Math.round(D.temperature_2m_max[i])+'°', label:wxLabel(c), prob:pr, rain:pr >= 50 || (c >= 61 && c < 70) || c >= 80}; });
+      wxLive = true; wxSample = false;
+      // no rain in the real forecast: mark one sample day so the rain workflow can still be tried
+      if(!Object.values(WX).some(w => w.rain) && WX.Fri){ WX.Fri = {...WX.Fri, ic:'🌧', label:'Rain', prob:70, rain:true, sample:true}; wxSample = true; }
+    }catch(_){ fallbackWx(); }
+    applyRain(); render();
+  }
   function render(freshId){
     const count = s => s === 'reminders' ? reminders.filter(r => !r.sent).length : leads.filter(l => l.stage === s).length;
     $('#tabs').innerHTML = STAGES.map(([k,l]) => `<button class="tab ${tab===k?'on':''}" role="tab" aria-selected="${tab===k}" data-tab="${k}">${l}<b>${count(k)}</b></button>`).join('');
@@ -447,7 +588,7 @@
     $('#kBooked').textContent = money(leads.filter(l => l.stage==='booked' || l.stage==='done').reduce((a,l) => a + (l.quote||l.est[1]), 0) + 1860);
     $('#kReviews').textContent = reviews + 3;
     const dot = $('#dot'); dot.textContent = unreadN(); dot.classList.toggle('on', unreadN() > 0);
-    renderNotes(); renderSched(); renderStats(); tabsFade();
+    renderNotes(); renderSched(); renderStats(); tabsFade(); if(!$('#vSet').innerHTML) renderSettings();
 
     const L = $('#list');
     if(tab === 'reminders'){
@@ -459,14 +600,13 @@
     if(!items.length){ L.innerHTML = `<div class="empty">Nothing here right now.</div>${tab==='new'?banner():''}`; return; }
     let html = '';
     if(tab === 'booked'){
-      ['Thu','Fri'].forEach(d => {
+      DAYS.forEach(([d]) => {
         const dayItems = items.filter(l => l.day === d);
         if(!dayItems.length) return;
-        const rain = dayItems.some(l => l.rain);
-        html += `<div class="day">${d==='Thu'?'Thursday':'Friday'} <span class="wx">${rain?'🌧 70% rain':'☀️ Clear'}</span></div>` + dayItems.map(card).join('');
+        html += `<div class="day">${WDF[d]} <span class="wx">${wxText(d)}</span></div>` + dayItems.map(card).join('');
       });
-      const other = items.filter(l => !['Thu','Fri'].includes(l.day));
-      if(other.length) html += `<div class="day">Next week <span class="wx">☀️ Clear</span></div>` + other.map(card).join('');
+      const other = items.filter(l => !DAYS.some(([d]) => d === l.day));
+      if(other.length) html += `<div class="day">Later</div>` + other.map(card).join('');
     } else html = items.map(card).join('');
     if(tab === 'done') html += banner();
     L.innerHTML = html;
@@ -482,23 +622,23 @@
       ${l.stage==='new'?`<div class="reply"><svg><use href="#i-check"/></svg>Auto-reply sent in 12 sec</div>`:''}
     </button>`;
   }
-  const banner = () => `<div class="banner"><b>Want this for your business?</b><span>Your Lead Inbox comes with the Booked Jobs System. See your website preview first, free.</span><a href="../?ref=demo#contact" target="_top">Get a free preview →</a></div>`;
+  const banner = () => `<div class="banner"><b>Want this for your business?</b><span>Your Lead Inbox comes with the Booked Jobs System. See your website preview first, free.</span><a href="../?ref=demo#contact" data-open-form>Get a free preview →</a></div>`;
 
   function tabsFade(){ const T = $('#tabs'); T.classList.toggle('end', T.scrollLeft + T.clientWidth >= T.scrollWidth - 4); }
   function setView(v){ if(window.track && v !== view) track('demo_action', {action:'view_'+v.replace(/^v/,'').toLowerCase()}); view = v; $$('.view').forEach(x => x.classList.toggle('on', x.id === v)); $$('#bnav [data-view]').forEach(b => b.classList.toggle('on', b.dataset.view === v)); $('#screen').classList.toggle('inbox', v === 'list'); const el = $('#'+v); if(el) el.scrollTop = 0; }
   function renderNotes(){
     $('#npL').innerHTML = notes.length ? notes.map((n,i) => `<button class="ni ${n.read?'':'unread'}" data-n="${i}"><i>${n.ic}</i><div><b>${esc(n.t)}</b><span>${esc(n.txt)}</span></div><small>${esc(n.time)}</small></button>`).join('') : '<div class="empty">You’re all caught up.</div>';
   }
-  const DAYS = [['Mon',27],['Tue',28],['Wed',29],['Thu',30],['Fri',31],['Sat',1],['Sun',2]];
-  const WX = {Mon:['☀️','84°','Clear'],Tue:['⛅','81°','Partly cloudy'],Wed:['☀️','83°','Clear'],Thu:['☀️','85°','Clear'],Fri:['🌧','72°','70% rain'],Sat:['⛅','78°','Partly cloudy'],Sun:['☀️','80°','Clear']};
   const SLOT_T = {'8–10 AM':'8:00 AM','1–3 PM':'1:00 PM','10–12 AM':'10:00 AM'};
   function renderSched(){
     const booked = leads.filter(l => (l.stage === 'booked' || l.stage === 'done') && l.day);
     const jobs = d => booked.filter(l => l.day === d);
-    const w = WX[selDay];
+    if(!WX[selDay] && DAYS.length) selDay = DAYS[0][0];
+    const w = WX[selDay] || {ic:'☀️', t:'', label:'Clear', prob:0};
     const list = jobs(selDay);
-    $('#vSched').innerHTML = `<div class="wk">${DAYS.map(([d,n]) => `<button data-day="${d}" class="${d===selDay?'on':''} ${WX[d][2].includes('rain')?'rain':''}">${d}<b>${n}</b>${jobs(d).length?'<span class="jd"></span>':''}</button>`).join('')}</div>
-      <div class="wx-bar"><div><b>${w[0]} ${w[1]} · ${w[2]}</b><div class="c-sub">${WX[selDay][2].includes('rain')?'Customers get a one-tap reschedule offer.':'Good day for washing.'}</div></div><b>${list.length} job${list.length===1?'':'s'}</b></div>
+    $('#vSched').innerHTML = `<div class="wx-src ${wxLive?'':'off'}"><i></i>${wxLive ? `Live forecast for ${esc(cityShort())} · Open-Meteo` : `Sample forecast · live weather unavailable`}</div>
+      <div class="wk">${DAYS.map(([d,n]) => `<button data-day="${d}" class="${d===selDay?'on':''} ${isRain(d)?'rain':''}">${d}<b>${n}</b>${jobs(d).length?'<span class="jd"></span>':''}</button>`).join('')}</div>
+      <div class="wx-bar"><div><b>${w.ic} ${w.t} · ${w.rain ? w.prob+'% rain' : w.label}</b>${w.sample?' <span class="tag sample">Sample rain day</span>':''}<div class="c-sub">${w.rain?'Customers get a one-tap reschedule offer.':'Good day for washing.'}</div></div><b>${list.length} job${list.length===1?'':'s'}</b></div>
       ${list.length ? list.map(l => { const t = (l.when||'').split('·')[1]?.trim() || ''; return `<button class="job" data-id="${l.id}"><time>${esc(SLOT_T[t]||t)}</time><div><b>${esc(l.name)}${l.rain?' <span class="tag warn">Rain risk</span>':''}${l.stage==='done'?' <span class="tag src-book">Done</span>':''}</b><span>${esc(l.service)} · ${esc(l.area)} · ${money(l.quote||l.est[1])}</span></div></button>`; }).join('') : `<div class="empty">No jobs on ${selDay}. Open slots are shown to customers on your website.</div>`}`;
   }
   function renderStats(){
@@ -525,6 +665,102 @@
       </div>`;
   }
 
+  /* account view */
+  const opt = (list, v) => list.map(x => `<option ${x===v?'selected':''}>${esc(x)}</option>`).join('');
+  const HOURS = ['6 AM','7 AM','8 AM','9 AM','10 AM','2 PM','4 PM','5 PM','6 PM','7 PM','8 PM'];
+  function renderSettings(){
+    const ini = cfg.biz.split(/\s+/).map(w => w[0]).join('').slice(0,2).toUpperCase();
+    $('#vSet').innerHTML = `
+      <div class="set-card"><div class="prof"><i>${esc(ini)}</i><div><b>${esc(cfg.owner)}</b><span>${esc(cfg.email)} · Owner</span></div></div></div>
+      <form id="setForm">
+      <div class="set-card"><h4>Business</h4>
+        <div class="sf"><label for="s-biz">Business name</label><input id="s-biz" name="biz" value="${esc(cfg.biz)}" maxlength="40"></div>
+        <div class="sf"><label for="s-city">City (used for weather)</label><select id="s-city" name="city">${opt(Object.keys(CITIES), cfg.city)}</select></div>
+        <div class="sf2"><div class="sf"><label for="s-cur">Currency</label><select id="s-cur" name="cur">${Object.entries(CUR).map(([k,v]) => `<option value="${k}" ${k===cfg.cur?'selected':''}>${esc(v)}</option>`).join('')}</select></div>
+        <div class="sf"><label for="s-rad">Service radius</label><select id="s-rad" name="radius">${['10','15','25','40','60'].map(x => `<option value="${x}" ${x===cfg.radius?'selected':''}>${x} miles</option>`).join('')}</select></div></div>
+        <div class="sf2"><div class="sf"><label for="s-start">Work starts</label><select id="s-start" name="start">${opt(HOURS, cfg.start)}</select></div>
+        <div class="sf"><label for="s-end">Work ends</label><select id="s-end" name="end">${opt(HOURS, cfg.end)}</select></div></div>
+      </div>
+      <div class="set-card"><h4>Automations</h4>
+        <label class="tg"><div>Instant auto-reply<small>Customers get their estimate in seconds</small></div><span class="sw"><input type="checkbox" name="autoReply" ${cfg.autoReply?'checked':''}><span></span></span></label>
+        <label class="tg"><div>Google review requests<small>Sent when you mark a job done</small></div><span class="sw"><input type="checkbox" name="reviews" ${cfg.reviews?'checked':''}><span></span></span></label>
+        <label class="tg"><div>Rain alerts<small>Flags booked jobs on rainy days</small></div><span class="sw"><input type="checkbox" name="rainAlerts" ${cfg.rainAlerts?'checked':''}><span></span></span></label>
+        <div class="sf" style="margin-top:8px"><label for="s-rev">Google review link</label><input id="s-rev" name="review" value="${esc(cfg.review)}"></div>
+      </div>
+      <button class="btn btn-main" type="submit" style="width:100%">Save settings</button>
+      </form>
+      <p class="c-sub" style="text-align:center;margin:10px 0 0">Demo only: settings are saved in this browser.</p>`;
+  }
+  function applyCfg(){
+    setFmt();
+    $('#bizName').textContent = cfg.biz;
+    $('#bizSub').textContent = `Lead Inbox · ${cityShort()}`;
+    $('#bizIni').textContent = cfg.biz.split(/\s+/).map(w => w[0]).join('').slice(0,2).toUpperCase();
+  }
+  $('#vSet').addEventListener('submit', e => {
+    e.preventDefault();
+    const f = e.target, oldCity = cfg.city;
+    cfg = {...cfg, biz:(f.biz.value.trim() || DEF.biz), city:f.city.value, cur:f.cur.value, radius:f.radius.value, start:f.start.value, end:f.end.value, autoReply:f.autoReply.checked, reviews:f.reviews.checked, rainAlerts:f.rainAlerts.checked, review:f.review.value.trim()};
+    try{ localStorage.setItem('woodl_demo_cfg', JSON.stringify(cfg)); }catch(_){}
+    applyCfg(); renderSettings();
+    if(cfg.city !== oldCity) loadWeather(); else { applyRain(); render(); }
+    toast('Settings saved', cfg.city !== oldCity ? ` Loading the forecast for ${cityShort()}…` : ' Your inbox is updated.');
+    if(window.track) track('demo_action', {action:'save_settings'});
+  });
+
+  /* lead form popup on the demo page */
+  (function(){
+    const fm = $('#fm'), box = $('#fmBox'), form = $('#fmForm');
+    const ENDPOINT = 'https://script.google.com/macros/s/AKfycbxxJrnudKpqm4yl7FAg1oabQvtwyrX0XcfF4DzH5ZEKmqA0Aw76tROtPfO_t3n06w9HAQ/exec';
+    const WA = 'https://wa.me/48576101740';
+    const ph = $('#f-phone'), em = $('#f-email');
+    const mask = v => { let d = v.replace(/\D/g,''); if(d.length > 10 && d[0] === '1') d = d.slice(1); d = d.slice(0,10); if(!d) return ''; if(d.length < 4) return `(${d}`; if(d.length < 7) return `(${d.slice(0,3)}) ${d.slice(3)}`; return `(${d.slice(0,3)}) ${d.slice(3,6)}-${d.slice(6)}`; };
+    ph.addEventListener('input', () => { ph.value = mask(ph.value); });
+    const open = () => { if(box.classList.contains('sent')){ form.reset(); box.classList.remove('sent'); } fm.classList.add('open'); fm.setAttribute('aria-hidden','false'); document.body.style.overflow = 'hidden'; if(!matchMedia('(hover: none)').matches) setTimeout(() => $('#f-name').focus(), 60); if(window.track) track('open_form', {plan:'demo'}); };
+    const close = () => { fm.classList.remove('open'); fm.setAttribute('aria-hidden','true'); document.body.style.overflow = ''; };
+    document.addEventListener('click', e => { const t = e.target.closest('[data-open-form]'); if(t){ e.preventDefault(); e.stopPropagation(); open(); } }, true);
+    fm.addEventListener('click', e => { if(e.target === fm || e.target.closest('[data-close-form]')) close(); });
+    document.addEventListener('keydown', e => { if(e.key === 'Escape' && fm.classList.contains('open')) close(); });
+    const setErr = (inp, bad) => inp.closest('.ff').classList.toggle('err', bad);
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      const nameOk = !!form.name.value.trim(), bizOk = !!form.business.value.trim();
+      setErr(form.name, !nameOk); setErr(form.business, !bizOk);
+      const eV = em.value.trim(), pD = ph.value.replace(/\D/g,'');
+      const eOk = !eV || /^[^\s@]+@[^\s@.]+(\.[^\s@.]+)*\.[a-z]{2,}$/i.test(eV), pOk = !pD || pD.length === 10;
+      setErr(em, !eOk); setErr(ph, !pOk);
+      const one = !!(eV || pD); $('#fHint').classList.toggle('err', !one);
+      if(!(nameOk && bizOk && eOk && pOk && one)) return;
+      const data = Object.fromEntries(new FormData(form)); data.plan = ''; data.source = 'Demo page'; data.page = location.href;
+      const btn = $('#fBtn'); btn.disabled = true; btn.textContent = 'Sending…';
+      try{
+        const ctl = new AbortController(), tm = setTimeout(() => ctl.abort(), 20000);
+        const res = await fetch(ENDPOINT, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body:JSON.stringify(data), signal:ctl.signal});
+        clearTimeout(tm);
+        const out = await res.json().catch(() => null);
+        if(!res.ok || !out || !out.ok) throw new Error('send failed');
+        box.classList.add('sent');
+        if(window.track) track('generate_lead', {plan:'none', source:'Demo page', currency:'USD', value:400});
+      }catch(_){
+        const n = $('#fNote'); n.classList.add('err'); n.innerHTML = `Your request didn't go through. Please try again or <a href="${WA}" target="_blank" rel="noopener">message me on WhatsApp</a>.`;
+      }finally{ btn.disabled = false; btn.textContent = 'Send my request'; }
+    });
+  })();
+
+  /* toast: swipe up (or drag) to dismiss */
+  (function(){
+    const t = $('#toast'); let y0 = null, dy = 0;
+    const down = y => { y0 = y; dy = 0; t.classList.add('drag'); clearTimeout(tTimer); };
+    const move = y => { if(y0 === null) return; dy = Math.min(0, y - y0); t.style.transform = `translateY(${dy}px)`; t.style.opacity = String(1 + dy / 120); };
+    const up = () => { if(y0 === null) return; t.classList.remove('drag'); t.style.transform = ''; t.style.opacity = ''; if(dy < -24) t.classList.remove('show'); else tTimer = setTimeout(() => t.classList.remove('show'), 2000); y0 = null; };
+    t.addEventListener('touchstart', e => down(e.touches[0].clientY), {passive:true});
+    t.addEventListener('touchmove', e => { move(e.touches[0].clientY); e.preventDefault(); }, {passive:false});
+    t.addEventListener('touchend', up);
+    t.addEventListener('pointerdown', e => { if(e.pointerType === 'mouse'){ down(e.clientY); t.setPointerCapture(e.pointerId); } });
+    t.addEventListener('pointermove', e => { if(e.pointerType === 'mouse') move(e.clientY); });
+    t.addEventListener('pointerup', e => { if(e.pointerType === 'mouse') up(); });
+  })();
+
   /* photo lightbox */
   let lbList = [], lbI = 0, lbName = '';
   const lbShow = () => { const im = $('#lbImg'); im.style.opacity = 0; const src = lbList[lbI]; const pre = new Image(); pre.onload = pre.onerror = () => { im.src = src; im.style.opacity = 1; }; pre.src = src; $('#lbCount').textContent = `${lbI+1} / ${lbList.length}`; $('#lbCap').textContent = `Photo from ${lbName}`; $('#lbPrev').style.visibility = $('#lbNext').style.visibility = lbList.length > 1 ? 'visible' : 'hidden'; };
@@ -546,14 +782,14 @@
   function openSheet(id){
     cur = leads.find(l => l.id === id); if(!cur) return; slot = null;
     const st = ['new','quoted','booked','done'].indexOf(cur.stage);
-    const autoMsg = `Hi ${cur.name.split(' ')[0]}, thanks for reaching out to Shine Pro Wash! Your estimate for ${cur.service.toLowerCase()} is ${range(cur.est)}. We'll confirm the exact price shortly.`;
+    const autoMsg = `Hi ${cur.name.split(' ')[0]}, thanks for reaching out to ${cfg.biz}! Your estimate for ${cur.service.toLowerCase()} is ${range(cur.est)}. We'll confirm the exact price shortly.`;
     let acts = '';
     if(cur.stage === 'new') acts = `<button class="btn btn-main wide" data-act="quote">Send quote: ${money(Math.round((cur.est[0]+cur.est[1])/2/10)*10)}</button>`;
     if(cur.stage === 'quoted') acts = `<div class="wide" style="font-size:13.5px;font-weight:700;margin-top:4px">Pick a time slot</div><div class="slots wide">${['Thu 8–10 AM','Thu 1–3 PM','Fri 8–10 AM','Mon 10–12 AM'].map(s => `<button class="slot" data-slot="${s}">${s}</button>`).join('')}</div><button class="btn btn-main wide" data-act="book">Book job</button>`;
     if(cur.stage === 'booked') acts = `${cur.rain?`<div class="msg wide" style="margin-top:0;background:#FDECEC;color:#8A2626"><b style="color:#8A2626">Rain expected on ${esc(cur.day)}</b>Send a one-tap reschedule offer to the customer.</div><button class="btn btn-line" data-act="reschedule">Offer new time</button>`:''}<button class="btn btn-main ${cur.rain?'':'wide'}" data-act="done">Mark job done</button>`;
     if(cur.stage === 'done') acts = `<div class="msg wide" style="margin-top:0"><b>All set</b>Review request sent and a reminder is scheduled for next year's wash.</div>`;
     $('#sheet').innerHTML = `<div class="grab"></div><button class="sh-x" data-act="close" aria-label="Close"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
-      <div class="c-top"><div><h3 id="shTitle">${esc(cur.name)}</h3><div class="c-sub">${esc(cur.area)}, San Antonio</div></div><span class="tag ${SRC[cur.src][1]}">${SRC[cur.src][0]}</span></div>
+      <div class="c-top"><div><h3 id="shTitle">${esc(cur.name)}</h3><div class="c-sub">${esc(cur.area)}, ${esc(cityShort())}</div></div><span class="tag ${SRC[cur.src][1]}">${SRC[cur.src][0]}</span></div>
       <div class="flow">${[0,1,2,3].map(i => `<i class="${i<=st?'on':''}"></i>`).join('')}</div>
       <div class="flow-l"><span>New</span><span>Quoted</span><span>Booked</span><span>Done</span></div>
       <dl class="kv"><dt>Service</dt><dd>${esc(cur.service)}</dd><dt>Size</dt><dd>${esc(cur.size||'')}</dd><dt>Estimate</dt><dd>${range(cur.est)}</dd>${cur.quote?`<dt>Quoted</dt><dd>${money(cur.quote)}</dd>`:''}${cur.when?`<dt>Scheduled</dt><dd>${esc(cur.when)}</dd>`:''}<dt>Phone</dt><dd>(210) 555-01${String(cur.id).padStart(2,'0').slice(-2)}</dd></dl>
@@ -578,7 +814,7 @@
     if(act === 'quote'){ cur.quote = Math.round((cur.est[0]+cur.est[1])/2/10)*10; cur.stage = 'quoted'; cur.ago = 'Just now'; closeSheet(); tab = 'quoted'; render(cur.id); toast('Quote sent', ` ${money(cur.quote)} to ${cur.name.split(' ')[0]} by text and email`); return; }
     if(act === 'book'){
       if(!slot){ toast('Pick a time slot first', ''); return; }
-      cur.when = slot.replace(' ', ' · '); cur.day = slot.startsWith('Thu') ? 'Thu' : slot.startsWith('Fri') ? 'Fri' : 'Mon'; cur.rain = cur.day === 'Fri'; cur.stage = 'booked'; closeSheet(); tab = 'booked'; render(cur.id);
+      cur.when = slot.replace(' ', ' · '); cur.day = slot.startsWith('Thu') ? 'Thu' : slot.startsWith('Fri') ? 'Fri' : 'Mon'; cur.rain = cfg.rainAlerts && isRain(cur.day); cur.stage = 'booked'; closeSheet(); tab = 'booked'; render(cur.id);
       note('📅', `Job booked: ${cur.name}`, `${cur.when}. Confirmation sent.`, cur.id); selDay = cur.day; render(cur.id); toast('Job booked', ` ${cur.when}. Confirmation sent to the customer.`); return;
     }
     if(act === 'reschedule'){ cur.day = 'Mon'; cur.when = 'Mon · 8–10 AM'; cur.rain = false; closeSheet(); render(cur.id); toast('Reschedule sent', ' Customer picked Monday 8–10 AM'); return; }
@@ -618,7 +854,9 @@
   T.addEventListener('scroll', tabsFade);
   $('#resetBtn').addEventListener('click', () => { reset(); toast('Demo reset', ''); });
 
+  fallbackWx(); applyCfg();
   reset();
+  loadWeather();
 
   /* while the demo is live on a phone, gestures inside the app never scroll the page */
   (function(){
