@@ -391,7 +391,7 @@ const WOODL = {
   .modal-x svg{width:18px;height:18px;}
 
   /* 12. footer */
-  .site-foot{padding-top:64px;padding-bottom:40px;color:var(--text-2);font-size:15px;}
+  .site-foot{padding-top:42px;padding-bottom:40px;color:var(--text-2);font-size:15px;}
   .foot{display:grid;grid-template-columns:1.4fr 1fr 1.2fr;gap:32px;padding-bottom:32px;border-bottom:1px solid var(--line);}
   .foot.has-social{grid-template-columns:1.4fr 1fr 1.2fr 1fr;}
   .foot-brand p{margin:14px 0 0;}
@@ -438,7 +438,7 @@ const WOODL = {
     .mbar-wa{width:52px;height:52px;border-radius:14px;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;flex:none;}
     .mbar-wa svg{width:26px;height:26px;}
     .wa-float{display:none;}
-    body.has-mbar .site-foot{padding-bottom:110px;}
+    body.has-mbar .site-foot{padding-bottom:28px;}
   }
   @media (max-width:1100px){
     .terms{display:none;}
@@ -500,9 +500,9 @@ const WOODL = {
     .phone:nth-child(2){margin-left:-80px;}
     .phone:nth-child(3){right:0;top:50px;}
     .trust-in{flex-direction:column;align-items:flex-start;gap:14px;padding:18px;}
-    .niches{padding-left:0;border-left:none;flex-wrap:wrap;gap:8px;width:100%;}
-    .niche{flex:1 1 calc(50% - 4px);justify-content:flex-start;font-size:14px;}
-    .niche:last-child{flex-basis:100%;}
+    .niches{padding-left:0;border-left:none;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;width:100%;}
+    .niche{flex-direction:column;justify-content:flex-start;gap:7px;padding:10px 4px 9px;border-radius:14px;font-size:11.5px;line-height:1.2;text-align:center;white-space:normal;}
+    .niche i{width:32px;height:32px;}
     .niches::-webkit-scrollbar{display:none;}
     .sec-head{margin-bottom:26px;}
     .sec-head p{font-size:16.5px;}
@@ -554,7 +554,10 @@ const WOODL = {
   /* mobile sliders (problems, process) */
   .sl-nav{display:none;}
   @media (max-width:640px){
-    .ps-grid.msl,.steps.msl{display:flex;grid-template-columns:none;grid-template-rows:none;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin:0 -16px;padding:4px 16px 6px;scroll-padding:0 16px;}
+    .ps-grid.msl,.steps.msl,.work-grid.msl{display:flex;grid-template-columns:none;grid-template-rows:none;grid-auto-flow:row;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin:0 -18px;padding:4px 18px 6px;scroll-padding:0 18px;}
+    #work .leadin{display:none;}
+    #contact{padding-bottom:26px !important;}
+    .site-foot{padding-top:32px;}
     .msl::-webkit-scrollbar{display:none;}
     .msl > *{flex:0 0 86%;scroll-snap-align:start;}
     .ps-grid.msl .ps{display:flex;flex-direction:column;}
@@ -585,6 +588,16 @@ const WOODL = {
     .cta-alt{margin-top:18px !important;padding-top:16px !important;}
     .cta-alt .lbl{font-size:13px;}
     .cta-alt .btn{padding:11px 10px !important;font-size:14px !important;}
+  }
+
+  /* mobile: smaller headings */
+  @media (max-width:640px){
+    h2,.cta h2{font-size:clamp(25px,7.2vw,29px);line-height:1.08;}
+    .hero h1{font-size:clamp(30px,8.6vw,36px);}
+    h3{font-size:clamp(17px,4.8vw,19px);}
+    .sec-head{margin-bottom:22px;}
+    .sec-head p{font-size:15.5px;}
+    section{padding-top:52px;padding-bottom:52px;}
   }
 </style>
 <script src="a.js" defer></script>
@@ -874,7 +887,7 @@ const WOODL = {
   </section>
 
   <!-- 11. FINAL CTA + FORM -->
-  <section id="contact" style="padding-top:0">
+  <section id="contact" style="padding-top:0;padding-bottom:40px">
     <div class="wrap">
       <div class="cta">
         <div class="cta-l">
@@ -1109,7 +1122,7 @@ fit(); addEventListener('resize', fit);
   /* mobile sliders with arrows */
   (function(){
     const arrow = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="${d}"/></svg>`;
-    $$('.ps-grid, .steps').forEach(track => {
+    $$('.ps-grid, .steps, .work-grid').forEach(track => {
       track.classList.add('msl');
       const items = [...track.children];
       const nav = document.createElement('div'); nav.className = 'sl-nav';
@@ -1157,7 +1170,7 @@ fit(); addEventListener('resize', fit);
     let pastHero = false, nearForm = false;
     const upd = () => { const on = pastHero && !nearForm; mbar.classList.toggle('show', on); mbar.setAttribute('aria-hidden', !on); $$('button, a', mbar).forEach(el => el.tabIndex = on ? 0 : -1); };
     new IntersectionObserver(([e]) => { pastHero = !e.isIntersecting && e.boundingClientRect.top < 0; upd(); }).observe($('.hero-ctas'));
-    new IntersectionObserver(([e]) => { nearForm = e.isIntersecting; upd(); }, {rootMargin:'0px 0px -20% 0px'}).observe($('#contact'));
+    new IntersectionObserver(([e]) => { nearForm = e.isIntersecting || e.boundingClientRect.top < 0; upd(); }, {rootMargin:'0px 0px -20% 0px'}).observe($('#contact'));
   }
 
   /* popup */

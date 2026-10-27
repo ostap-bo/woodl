@@ -184,14 +184,31 @@
   .np-h{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-bottom:1px solid var(--line);}
   .np-h b{font-size:15px;}
   .np-h button{border:0;background:none;color:var(--blue);font-weight:700;font-size:12.5px;}
-  .np-l{overflow-y:auto;padding:6px;scrollbar-width:none;}
+  .np-l{overflow-y:auto;padding:8px;scrollbar-width:none;display:grid;gap:6px;}
   .ni{display:grid;grid-template-columns:32px 1fr auto;gap:10px;align-items:start;padding:10px;border-radius:12px;width:100%;border:0;background:none;text-align:left;transition:background-color .3s var(--ease);}
   .ni:hover{background:var(--surface-2);}
-  .ni.unread{background:var(--tint);}
+  .ni.unread{background:var(--tint);box-shadow:inset 3px 0 0 var(--blue);}
   .ni i{width:32px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-style:normal;font-size:15px;background:var(--surface-2);}
   .ni b{display:block;font-size:13.5px;line-height:1.3;}
   .ni span{font-size:12.5px;color:var(--text-2);line-height:1.35;display:block;}
   .ni small{font-size:11px;color:var(--text-3);white-space:nowrap;}
+
+  /* photo lightbox */
+  .thumbs img{cursor:zoom-in;transition:transform .3s var(--ease);}
+  .thumbs img:hover{transform:scale(1.05);}
+  .lb{position:fixed;inset:0;z-index:200;background:#05070F;display:flex;flex-direction:column;opacity:0;visibility:hidden;transition:opacity .25s var(--ease),visibility .25s;}
+  .lb.open{opacity:1;visibility:visible;}
+  .lb-top{display:flex;justify-content:space-between;align-items:center;padding:calc(14px + env(safe-area-inset-top)) 16px 0;color:#fff;font-size:14px;font-weight:600;}
+  .lb-top span{opacity:.8;}
+  .lb button{border:0;background:rgba(255,255,255,.12);color:#fff;width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background-color .3s var(--ease);}
+  .lb button:hover{background:rgba(255,255,255,.22);}
+  .lb button svg{width:20px;height:20px;}
+  .lb-stage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:10px 16px;position:relative;}
+  .lb-stage img{max-width:100%;max-height:100%;object-fit:contain;border-radius:12px;transition:opacity .2s var(--ease);user-select:none;-webkit-user-drag:none;}
+  .lb-nav{position:absolute;top:50%;transform:translateY(-50%);}
+  .lb-prev{left:16px;} .lb-next{right:16px;}
+  .lb-cap{text-align:center;color:rgba(255,255,255,.75);font-size:13.5px;padding:8px 16px calc(18px + env(safe-area-inset-bottom));}
+  @media (max-width:520px){.lb-nav{top:auto;bottom:calc(10px + env(safe-area-inset-bottom));transform:none;}.lb-cap{padding-bottom:calc(68px + env(safe-area-inset-bottom));}}
 
   /* sheet */
   .sheet-bg{position:absolute;z-index:3;inset:0;background:rgba(14,20,48,.38);opacity:0;visibility:hidden;transition:opacity .3s var(--ease),visibility .3s;}
@@ -264,20 +281,28 @@
     .phone{position:relative;top:0;margin:0 auto;}
   }
   @media (max-width:520px){
-    .top{padding:12px 16px;}
+    /* phone: the demo is a full-screen app, the page itself never scrolls */
+    html,body{height:100%;overflow:hidden;overscroll-behavior:none;}
+    body{display:flex;flex-direction:column;height:100dvh;}
+    .top,.stage{width:100%;max-width:100%;min-width:0;}
+    .phone,.screen,.app-h,.tabs{min-width:0;max-width:100%;}
+    .top{flex:none;padding:10px 14px;}
+    .top .btn{padding:10px 14px;}
     .top .btn .lg{display:none;}
     .top .btn .sm{display:inline;}
-    .stage{padding:2px 16px 28px;gap:18px;}
-    .intro .pill{font-size:13px;}
-    .intro h1{font-size:27px;margin-top:14px;}
-    .intro > p{font-size:15px;margin-top:8px;}
-    .tour,.intro-cta,.note{display:none;}
-    .phone{width:100%;height:min(780px,calc(100dvh - 28px));min-height:540px;border-radius:40px;padding:8px;background:#141826;box-shadow:0 30px 60px -30px rgba(14,20,48,.55);}
-    .screen{border-radius:32px;}
-    .app-h{padding:16px 14px 10px;}
-    .kpi b{font-size:16px;}
-    .kpi span{font-size:11px;}
-    .np{top:56px;}
+    .stage{flex:1;min-height:0;display:flex;flex-direction:column;gap:10px;padding:0 10px calc(10px + env(safe-area-inset-bottom));}
+    .intro{flex:none;}
+    .intro .pill{font-size:12.5px;padding:5px 10px 5px 5px;}
+    .intro h1,.intro > p,.tour,.intro-cta,.note{display:none;}
+    .phone{flex:1;width:100%;height:auto;min-height:0;border-radius:38px;padding:7px;background:#141826;box-shadow:0 24px 50px -28px rgba(14,20,48,.55);position:relative;top:0;}
+    .screen{border-radius:31px;}
+    .app-h{padding:14px 12px 10px;}
+    .kpis{margin-top:10px;}
+    .kpi{padding:7px 9px;}
+    .kpi b{font-size:15px;}
+    .kpi span{font-size:10.5px;}
+    .tabs{margin-top:10px;}
+    .np{top:54px;}
   }
 </style>
 <script src="../a.js" defer></script>
@@ -351,13 +376,20 @@
   </div>
 </main>
 
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Customer photos">
+  <div class="lb-top"><span id="lbCount">1 / 3</span><button id="lbClose" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+  <div class="lb-stage"><img id="lbImg" alt=""></div>
+  <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button><button class="lb-nav lb-next" id="lbNext" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+  <div class="lb-cap" id="lbCap"></div>
+</div>
+
 <script>
 (function(){
   const $ = (s, r=document) => r.querySelector(s), $$ = (s, r=document) => [...r.querySelectorAll(s)];
   const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const SRC = {quote:['Instant quote','src-quote'], photo:['Photo quote','src-photo'], book:['Online booking','src-book'], call:['Missed call','src-call']};
   const PH = ['house','driveway','patio','roof','brick','pool'];
-  const pics = (l,n) => { const k = /house/i.test(l.service)?'house':/patio|paver/i.test(l.service)?'patio':/roof/i.test(l.service)?'roof':/drive/i.test(l.service)?'driveway':'brick'; const list = [k, ...PH.filter(x => x !== k)]; return Array.from({length:Math.min(l.photos,n)},(_,i)=>`<img src="../work/img/${list[i]}-sm.webp" alt="Customer photo" loading="lazy">`).join(''); };
+  const pics = (l,n) => { const k = /house/i.test(l.service)?'house':/patio|paver/i.test(l.service)?'patio':/roof/i.test(l.service)?'roof':/drive/i.test(l.service)?'driveway':'brick'; const list = [k, ...PH.filter(x => x !== k)]; return Array.from({length:Math.min(l.photos,n)},(_,i)=>`<img src="../work/img/${list[i]}-sm.webp" data-full="../work/img/${list[i]}.webp" data-lead="${l.id}" alt="Customer photo" loading="lazy">`).join(''); };
   const STAGES = [['new','New'],['quoted','Quoted'],['booked','Booked'],['done','Done'],['reminders','Reminders']];
 
   const seed = () => ([
@@ -483,6 +515,22 @@
       </div>`;
   }
 
+  /* photo lightbox */
+  let lbList = [], lbI = 0, lbName = '';
+  const lbShow = () => { const im = $('#lbImg'); im.style.opacity = 0; const src = lbList[lbI]; const pre = new Image(); pre.onload = pre.onerror = () => { im.src = src; im.style.opacity = 1; }; pre.src = src; $('#lbCount').textContent = `${lbI+1} / ${lbList.length}`; $('#lbCap').textContent = `Photo from ${lbName}`; $('#lbPrev').style.visibility = $('#lbNext').style.visibility = lbList.length > 1 ? 'visible' : 'hidden'; };
+  const lbOpen = img => { const imgs = [...img.closest('.thumbs').querySelectorAll('img')]; lbList = imgs.map(x => x.dataset.full); lbI = imgs.indexOf(img); const l = leads.find(x => x.id === +img.dataset.lead); lbName = l ? l.name : 'the customer'; lbShow(); $('#lb').classList.add('open'); if(window.track) track('demo_action', {action:'open_photo'}); };
+  const lbClose = () => $('#lb').classList.remove('open');
+  const lbGo = d => { lbI = (lbI + d + lbList.length) % lbList.length; lbShow(); };
+  document.addEventListener('click', e => { const img = e.target.closest('.thumbs img'); if(img){ e.preventDefault(); e.stopPropagation(); lbOpen(img); } }, true);
+  $('#lbClose').addEventListener('click', lbClose);
+  $('#lbPrev').addEventListener('click', () => lbGo(-1));
+  $('#lbNext').addEventListener('click', () => lbGo(1));
+  $('.lb-stage').addEventListener('click', e => { if(e.target === e.currentTarget) lbClose(); });
+  document.addEventListener('keydown', e => { if(!$('#lb').classList.contains('open')) return; if(e.key === 'Escape') lbClose(); if(e.key === 'ArrowLeft') lbGo(-1); if(e.key === 'ArrowRight') lbGo(1); });
+  let tx = null;
+  $('#lb').addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, {passive:true});
+  $('#lb').addEventListener('touchend', e => { if(tx === null) return; const d = e.changedTouches[0].clientX - tx; if(Math.abs(d) > 50) lbGo(d < 0 ? 1 : -1); tx = null; }, {passive:true});
+
   /* sheet */
   let cur = null, slot = null;
   function openSheet(id){
@@ -527,7 +575,7 @@
     if(act === 'done'){ cur.stage = 'done'; cur.reviewSent = true; reviews++; closeSheet(); tab = 'done'; render(cur.id); note('⭐', 'Review request sent', `${cur.name} got a link to your Google profile.`, cur.id); render(cur.id); toast('Review request sent ★', ' Reminder set for next year'); return; }
   });
   $('#sheetBg').addEventListener('click', closeSheet);
-  document.addEventListener('keydown', e => { if(e.key === 'Escape') closeSheet(); });
+  document.addEventListener('keydown', e => { if(e.key === 'Escape' && !$('#lb').classList.contains('open')) closeSheet(); });
 
   $('#tabs').addEventListener('click', e => { const t = e.target.closest('[data-tab]'); if(!t) return; tab = t.dataset.tab; render(); $('#list').scrollTop = 0; t.scrollIntoView({inline:'nearest',block:'nearest',behavior:'smooth'}); });
   $('#list').addEventListener('click', e => {
